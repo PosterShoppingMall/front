@@ -1,12 +1,12 @@
 import Header from "./component/common/Header.jsx";
 import { Reset } from "styled-reset";
-import styled from "styled-components";
+import GlobalStyle from "./styles/globalStyle.js";
 
 function App() {
   return (
     <div>
-      {/* reset css  */}
       <Reset />
+      <GlobalStyle />
       <Header />
     </div>
   );
