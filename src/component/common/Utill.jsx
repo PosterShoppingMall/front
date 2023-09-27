@@ -1,8 +1,12 @@
 import { useState } from "react";
+
 import styled from "styled-components";
+
 import iconSearch from "../../images/iconSearch.png";
 import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
+
+import { NavLink } from "react-router-dom";
 
 const Utill = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,6 +22,7 @@ const Utill = () => {
   return (
     <UtillWrap>
       <Search>
+        {/* Link 꼭 걸어야하는지? */}
         <a href="#n" onClick={showModal}>
           검색
         </a>
@@ -32,11 +37,11 @@ const Utill = () => {
       </Search>
 
       <Mypage>
-        <a href="#n">마이페이지</a>
+        <NavLink to="/user">마이페이지</NavLink>
       </Mypage>
 
       <Cart>
-        <a href="#n">장바구니</a>
+        <NavLink to="/cart">장바구니</NavLink>
         <Amount>0</Amount>
       </Cart>
     </UtillWrap>

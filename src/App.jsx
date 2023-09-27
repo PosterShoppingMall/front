@@ -15,6 +15,7 @@ import AllItem from "./page/AllItem.jsx";
 import PhotoItem from "./page/PhotographyItem.jsx";
 import TypographyItem from "./page/TypographyItem.jsx";
 import FamousPainting from "./page/FamousPainting.jsx";
+import Cart from "./page/cart/Cart.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
           element: <User />,
         },
         {
+          path: "/cart",
+          element: <Cart />,
+        },
+        {
           path: "/best",
           element: <BestItem />,
         },
@@ -52,7 +57,7 @@ function App() {
           element: <IllustratorItem />,
         },
         {
-          path: "/famous-item",
+          path: "/famous-painting",
           element: <FamousPainting />,
         },
         {
