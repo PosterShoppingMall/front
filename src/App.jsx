@@ -1,61 +1,77 @@
-import Header from "./component/common/Header.jsx";
+import MainLayout from "./component/common/MainLayout.jsx";
+
 import { Reset } from "styled-reset";
+
 import GlobalStyle from "./styles/globalStyle.js";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./page/home/Home.jsx";
+import Login from "./page/login/Login.jsx";
+import Register from "./page/register/Register.jsx";
+import User from "./page/userPage/User.jsx";
+import BestItem from "./page/BestItem.jsx";
+import IllustratorItem from "./page/IllustratorItem.jsx";
+import AllItem from "./page/AllItem.jsx";
+import PhotoItem from "./page/PhotographyItem.jsx";
+import TypographyItem from "./page/TypographyItem.jsx";
+import FamousPainting from "./page/FamousPainting.jsx";
 
 function App() {
-  const route = createBrowserRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
-      element: <></>,
+      element: <MainLayout />,
       children: [
         {
           // home
           path: "/",
-          element: <></>,
+          element: <Home />,
         },
         {
           path: "/login",
-          element: <></>,
+          element: <Login />,
         },
         {
           path: "/register",
-          element: <></>,
+          element: <Register />,
         },
         {
           path: "/user",
-          element: <></>,
+          element: <User />,
         },
         {
           path: "/best",
-          element: <></>,
+          element: <BestItem />,
         },
         {
           path: "/all",
-          element: <></>,
+          element: <AllItem />,
         },
         {
           path: "/illustrator",
-          element: <></>,
+          element: <IllustratorItem />,
         },
         {
-          path: "/illustrator",
-          element: <></>,
+          path: "/famous-item",
+          element: <FamousPainting />,
         },
         {
-          path: "/illustrator",
-          element: <></>,
+          path: "/photography",
+          element: <PhotoItem />,
+        },
+        {
+          path: "/typography",
+          element: <TypographyItem />,
         },
       ],
     },
   ]);
   return (
-    <div>
+    <>
       <Reset />
       <GlobalStyle />
-      <Header />
-    </div>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
