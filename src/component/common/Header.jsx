@@ -1,16 +1,16 @@
-import React from "react";
 import Nav from "./Nav";
 import Utill from "./Utill";
 import styled from "styled-components";
 // import Images from "../Images.jsx";
 import hLogo from "../../images/hLogo.jpg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <HeaderBox>
       <HeaderWrap>
         <Logo>
-          <a href="#">369로고</a>
+          <Link to="/">369로고</Link>
         </Logo>
         <Nav />
         <Utill />
@@ -36,6 +36,7 @@ const HeaderWrap = styled.div`
 const Logo = styled.div`
   width: 100px;
   height: 100px;
+
   a {
     width: 100%;
     height: 100%;
