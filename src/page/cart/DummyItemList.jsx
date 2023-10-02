@@ -1,6 +1,6 @@
 import { StyledCart } from "./Cart";
 import DummyItem from "./DummyItem";
-const DummyItemList = ({ id }) => {
+const DummyItemList = () => {
   const items = [
     {
       product_id: 3,

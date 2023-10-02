@@ -1,12 +1,19 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { cartActions } from "../../store/cartSlice";
 
 const CartItem = ({
+  product_id,
   product_name,
   product_price,
   cart_cnt,
   cart_product_amount,
   ...rest
 }) => {
+  const dispatch = useDispatch();
+  const deleteButtonHandler = () => {
+    dispatch(cartActions.deleteItemFromCart(product_id));
+  };
   return (
     <StyledCartItems>
       <div className="image-wrapper">
@@ -20,7 +27,7 @@ const CartItem = ({
         <button>-</button>
       </div>
       <div> {cart_product_amount}</div>
-      <button>delete</button>
+      <button onClick={deleteButtonHandler}>delete</button>
     </StyledCartItems>
   );
 };

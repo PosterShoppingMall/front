@@ -51,6 +51,7 @@ const Cart = () => {
                     return (
                       <CartItem
                         key={item.product_id}
+                        product_id={item.product_id}
                         product_name={item.product_name}
                         product_price={item.product_price}
                         cart_cnt={item.cart_cnt}
