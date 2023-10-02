@@ -5,7 +5,12 @@ import {
   numberToFormattedPriceString,
   priceStringToNumber,
 } from "../../utils/price";
+
+import DummyItemList from "./DummyItemList";
+import { useSelector } from "react-redux";
 const Cart = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   const items = [
     {
       product_id: 3,
@@ -22,40 +27,51 @@ const Cart = () => {
       cart_product_amount: "34,000",
     },
   ];
-  const totalAmount = items
-    .map((item) => priceStringToNumber(item.cart_product_amount))
-    .reduce((acc, cur) => {
-      return (acc += cur);
-    });
-  const totalAmountformattedString = numberToFormattedPriceString(totalAmount);
+  let totalAmount = null;
+  let totalAmountformattedString = null;
+  if (cartItems.length !== 0) {
+    totalAmount = cartItems
+      .map((item) => priceStringToNumber(item.cart_product_amount))
+      .reduce((acc, cur) => {
+        return (acc += cur);
+      });
+    totalAmountformattedString = numberToFormattedPriceString(totalAmount);
+  }
   return (
-    <StyledCart>
-      <div className="wrapper">
-        <div className="page-title">장바구니</div>
-        <div className="content">
-          <div className="cart-items">
-            {items.map((item) => {
-              return (
-                <CartItem
-                  key={item.product_id}
-                  name={item.product_name}
-                  price={item.product_price}
-                  count={item.cart_cnt}
-                  total={item.cart_product_amount}
-                />
-              );
-            })}
+    <>
+      <DummyItemList />
+      <StyledCart>
+        <div className="wrapper">
+          <div className="page-title">장바구니</div>
+          <div className="content">
+            <div className="cart-items">
+              {!cartItems
+                ? "장바구니가 비었습니다."
+                : cartItems.map((item) => {
+                    return (
+                      <CartItem
+                        key={item.product_id}
+                        product_name={item.product_name}
+                        product_price={item.product_price}
+                        cart_cnt={item.cart_cnt}
+                        cart_product_amount={item.cart_product_amount}
+                      />
+                    );
+                  })}
+            </div>
+            <CartOrder
+              totalAmount={!cartItems ? "0" : totalAmountformattedString}
+            />
           </div>
-          <CartOrder totalAmount={totalAmountformattedString} />
         </div>
-      </div>
-    </StyledCart>
+      </StyledCart>
+    </>
   );
 };
 
 export default Cart;
 
-const StyledCart = styled.div`
+export const StyledCart = styled.div`
   .wrapper {
     display: flex;
     flex-direction: column;

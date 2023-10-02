@@ -1,26 +1,33 @@
 import styled from "styled-components";
 
-const CartItem = ({ name, price, count, total, ...rest }) => {
+const CartItem = ({
+  product_name,
+  product_price,
+  cart_cnt,
+  cart_product_amount,
+  ...rest
+}) => {
   return (
     <StyledCartItems>
       <div className="image-wrapper">
         <img src="" alt="item-image" />
       </div>
-      <div>{name}</div>
-      <div>{price}</div>
+      <div>{product_name}</div>
+      <div>{product_price}</div>
       <div className="count-btn">
         <button>+</button>
-        <div>{count}</div>
+        <div>{cart_cnt}</div>
         <button>-</button>
       </div>
-      <div> {total}</div>
+      <div> {cart_product_amount}</div>
+      <button>delete</button>
     </StyledCartItems>
   );
 };
 
 export default CartItem;
 
-const StyledCartItems = styled.div`
+export const StyledCartItems = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

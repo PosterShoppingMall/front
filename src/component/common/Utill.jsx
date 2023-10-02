@@ -8,7 +8,10 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
+import { useSelector } from "react-redux";
 const Utill = () => {
+  const cartQuantity = useSelector((state) => state.cart.quantity);
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
@@ -42,7 +45,7 @@ const Utill = () => {
 
       <Cart>
         <NavLink to="/cart">장바구니</NavLink>
-        <Amount>0</Amount>
+        <Amount>{cartQuantity}</Amount>
       </Cart>
     </UtillWrap>
   );
