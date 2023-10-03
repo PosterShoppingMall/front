@@ -23,9 +23,7 @@ const Utill = () => {
     <UtillWrap>
       <Search>
         {/* Link 꼭 걸어야하는지? */}
-        <a href="#n" onClick={showModal}>
-          검색
-        </a>
+        <a onClick={showModal}>검색</a>
         {modalOpen && (
           <Modal setModalOpen={setModalOpen}>
             <form>
@@ -67,6 +65,7 @@ const Search = styled.div`
     color: #333;
     text-indent: -9999px;
     display: block;
+    cursor: pointer;
   }
 `;
 
@@ -78,14 +77,17 @@ const Modal = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
+  z-index: 100;
 
   input[type="search"] {
-    width: 100%;
+    width: 95%;
     border-top: none;
     border-left: none;
     border-right: none;
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: none;
     border-bottom: solid 1px #fff;
     text-align: center;
@@ -95,6 +97,7 @@ const Modal = styled.div`
     font-size: 20px;
     color: #fff;
   }
+
   input[type="search"]::placeholder {
     font-family: "NanumSquare";
     font-weight: 700;
