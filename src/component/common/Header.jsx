@@ -24,6 +24,9 @@ const HeaderBox = styled.div`
   width: 100%;
   background-color: #e5e1dc;
   box-shadow: -2px -5px 19px 11px #b7b5b5;
+  position: fixed;
+  height: 100px;
+  z-index: 9;
 `;
 
 const HeaderWrap = styled.div`
