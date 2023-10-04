@@ -73,7 +73,7 @@ function App() {
           element: <TypographyItem />,
         },
         {
-          path: "/listdetailpage",
+          path: "/product/:product_id",
           element: <ListDeatilPage />,
         },
       ],
