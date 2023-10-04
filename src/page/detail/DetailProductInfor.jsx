@@ -33,4 +33,9 @@ const ProductInforTitle = styled.div`
   border-bottom: solid 2px #333;
 `;
 
-const ProductInforContents = styled.div``;
+const ProductInforContents = styled.div`
+  img {
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
