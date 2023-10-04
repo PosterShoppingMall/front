@@ -131,6 +131,7 @@ const ListPageItem = () => {
       {dummyData.map((item, index) => (
         <ListItemExpensive
           key={index}
+          id={index}
           imgSrc={item.imgSrc}
           title={item.title}
           amount={item.amount}
