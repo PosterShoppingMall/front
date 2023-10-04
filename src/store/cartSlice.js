@@ -8,6 +8,10 @@ const cartSlice = createSlice({
     quantity: 0,
   },
   reducers: {
+    replaceCart: (state, action) => {
+      state.quantity = action.payload.quantity;
+      state.items = action.payload.items;
+    },
     addItemToCart: (state, action) => {
       const newItem = action.payload;
       const existingItem = state.items.find(
