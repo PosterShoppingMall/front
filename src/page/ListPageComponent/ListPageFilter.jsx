@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import "aos/dist/aos.css";
 import selectArrow from "../../images/selectArrow.png";
 
 const ListPageFilter = () => {
   return (
-    <FilterSelect>
+    <FilterSelect data-aos="fade-up">
       <select>
         <option>인기순</option>
         <option>최신순으로정렬</option>
