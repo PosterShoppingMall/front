@@ -63,11 +63,12 @@ export default MainBn;
 
 const MainBanner = styled.div`
   width: 100%;
+  padding-top: 100px;
   .custom-prev-arrow {
     position: absolute;
     top: 43%;
     left: 40px;
-    z-index: 10;
+    z-index: 1;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -85,7 +86,7 @@ const MainBanner = styled.div`
     position: absolute;
     top: 43%;
     right: 20px;
-    z-index: 10;
+    z-index: 1;
     cursor: pointer;
     width: 50px;
     height: 50px;

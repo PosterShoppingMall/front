@@ -8,6 +8,8 @@ import listbn01 from "../../../images/listbn01.jpg";
 import listbn02 from "../../../images/listbn02.jpg";
 import listbn03 from "../../../images/listbn03.jpg";
 import bnArrow from "../../../images/bnArrow.png";
+import morebtnArrow from "../../../images/morebtnArrow.png";
+import { Link } from "react-router-dom";
 
 const MainBestItem = () => {
   const NextArrow = (props) => (
@@ -68,6 +70,12 @@ const MainBestItem = () => {
           <Images imgSrc={listbn03} />
         </BnList>
       </BestItemSlider>
+
+      <MoreBtn data-aos="fade-up">
+        <Link to="/best" className="Link">
+          <span>More</span>
+        </Link>
+      </MoreBtn>
     </ItemContent>
   );
 };
@@ -87,7 +95,7 @@ const ItemContent = styled.div`
     position: absolute;
     top: 43%;
     left: 40px;
-    z-index: 10;
+    z-index: 1;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -105,7 +113,7 @@ const ItemContent = styled.div`
     position: absolute;
     top: 43%;
     right: 20px;
-    z-index: 10;
+    z-index: 1;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -147,5 +155,52 @@ const BnList = styled.div`
   box-sizing: border-box;
   img {
     width: 100%;
+  }
+`;
+
+const MoreBtn = styled.div`
+  font-family: "BMHANNAAir";
+  font-size: 25px;
+  color: #333;
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin: 55px 0 0 0;
+  text-align: center;
+  .Link {
+    text-decoration: none;
+    background-color: #fff;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px #a5a4a4;
+    transition: all ease 1s 0s;
+  }
+
+  .Link:hover {
+    background-color: #3bf234;
+  }
+
+  span {
+    display: inline-block;
+    position: relative;
+    padding-right: 35px;
+    color: #333;
+    transition: all ease 1s 0s;
+  }
+
+  span:hover {
+    color: #fff;
+  }
+
+  span:after {
+    content: "";
+    width: 35px;
+    height: 35px;
+    background: url(${morebtnArrow}) no-repeat right;
+    background-size: 35px;
+    position: absolute;
+    top: -3px;
+    right: 0;
   }
 `;
