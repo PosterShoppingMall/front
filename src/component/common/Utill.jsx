@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 const Utill = () => {
-  const cartQuantity = useSelector((state) => state.cart.quantity);
+  const cartQuantity = useSelector((state) => state.cart.items.length);
 
   const [modalOpen, setModalOpen] = useState(false);
 

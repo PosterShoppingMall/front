@@ -10,7 +10,7 @@ import DummyItemList from "./DummyItemList";
 import { useSelector } from "react-redux";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
   const items = [
     {
       product_id: 3,
@@ -31,7 +31,7 @@ const Cart = () => {
   let totalAmountformattedString = null;
   if (cartItems.length !== 0) {
     totalAmount = cartItems
-      .map((item) => priceStringToNumber(item.cart_product_amount))
+      ?.map((item) => priceStringToNumber(item.cart_product_amount))
       .reduce((acc, cur) => {
         return (acc += cur);
       });
