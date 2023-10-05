@@ -16,6 +16,7 @@ import PhotoItem from "./page/PhotographyItem.jsx";
 import TypographyItem from "./page/TypographyItem.jsx";
 import FamousPainting from "./page/FamousPainting.jsx";
 import Cart from "./page/cart/Cart.jsx";
+import ListDeatilPage from "./page/detail/ListDeatilPage.jsx";
 
 import "slick-carousel/slick/slick.css"; //slick 라이브러리
 import "slick-carousel/slick/slick-theme.css"; //slick 라이브러리
@@ -94,6 +95,10 @@ function App() {
         {
           path: "/typography",
           element: <TypographyItem />,
+        },
+        {
+          path: "/product/:product_id",
+          element: <ListDeatilPage />,
         },
       ],
     },
