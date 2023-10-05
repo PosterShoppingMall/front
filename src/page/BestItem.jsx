@@ -3,6 +3,7 @@ import ListPageFilter from "./ListPageComponent/ListPageFilter";
 import ListPageItem from "./ListPageComponent/ListPageItem";
 import "aos/dist/aos.css";
 import styled from "styled-components";
+import ListPagination from "./ListPageComponent/ListPagination";
 
 const BestItem = () => {
   return (
@@ -10,6 +11,7 @@ const BestItem = () => {
       <H3Title data-aos="fade-up">베스트</H3Title>
       <ListPageFilter />
       <ListPageItem />
+      <ListPagination />
     </ListWrap>
   );
 };
