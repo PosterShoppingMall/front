@@ -2,6 +2,7 @@ import React from "react";
 import ListPageFilter from "./ListPageComponent/ListPageFilter";
 import ListPageItem from "./ListPageComponent/ListPageItem";
 import styled from "styled-components";
+import ListPagination from "./ListPageComponent/ListpageNation";
 
 const BestItem = () => {
   return (
@@ -9,6 +10,7 @@ const BestItem = () => {
       <H3Title>베스트</H3Title>
       <ListPageFilter />
       <ListPageItem />
+      <ListPagination />
     </ListWrap>
   );
 };
