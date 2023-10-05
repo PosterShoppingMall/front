@@ -17,6 +17,8 @@ import TypographyItem from "./page/TypographyItem.jsx";
 import FamousPainting from "./page/FamousPainting.jsx";
 import Cart from "./page/cart/Cart.jsx";
 import ListDeatilPage from "./page/detail/ListDeatilPage.jsx";
+import ProductForm from "./page/admin/ProductForm.jsx";
+import ProductManagement from "./page/admin/ProductManagement.jsx";
 
 import "slick-carousel/slick/slick.css"; //slick 라이브러리
 import "slick-carousel/slick/slick-theme.css"; //slick 라이브러리
@@ -75,6 +77,15 @@ function App() {
         {
           path: "/listdetailpage",
           element: <ListDeatilPage />,
+        },
+        // 추후 Protect Route 기능 추가 예정
+        {
+          path: "/product-management",
+          element: <ProductManagement />,
+        },
+        {
+          path: "/product-form",
+          element: <ProductForm />,
         },
       ],
     },
