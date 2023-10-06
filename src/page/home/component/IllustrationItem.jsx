@@ -4,11 +4,11 @@ import IllustrationSlider from "react-slick";
 import Images from "../../../component/Images";
 import contentLine from "../../../images/contentLine.svg";
 import "aos/dist/aos.css";
-import listbn01 from "../../../images/listbn01.jpg";
-import listbn02 from "../../../images/listbn02.jpg";
-import listbn03 from "../../../images/listbn03.jpg";
 import bnArrow from "../../../images/bnArrow.png";
 import morebtnArrow from "../../../images/morebtnArrow.png";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const IllustrationItem = () => {
@@ -36,6 +36,29 @@ const IllustrationItem = () => {
     prevArrow: <PrevArrow />,
   };
 
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    // Axios를 사용하여 데이터를 가져옵니다.
+    axios
+      .get(
+        "https://shoppingmall-9c992-default-rtdb.firebaseio.com/mainitem.json"
+      )
+      .then((response) => {
+        // API에서 받아온 데이터를 객체에서 배열로 변환
+        const data = response.data;
+
+        const testData = Object.values(data);
+
+        // 변환한 데이터를 상태(state)에 저장
+        setItems(testData);
+        console.log("매핑된 데이터", testData);
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오는데 실패했습니다.", error);
+      });
+  }, []);
+
   return (
     <ItemContent>
       <ContnetLine></ContnetLine>
@@ -46,29 +69,12 @@ const IllustrationItem = () => {
       </H2Title>
 
       <IllustrationSlider {...settings}>
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn01} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn02} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn03} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn01} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn02} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn03} />
-        </BnList>
+        {items &&
+          items.map((item, key) => (
+            <BnList data-aos="fade-up" key={key}>
+              <Images imgSrc={item.imgSrc} />
+            </BnList>
+          ))}
       </IllustrationSlider>
 
       <MoreBtn data-aos="fade-up">
