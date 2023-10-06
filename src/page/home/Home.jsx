@@ -6,7 +6,6 @@ import IllustrationItem from "./component/IllustrationItem";
 import FamousPaintItem from "./component/FamousPaintItem";
 import PhotoGraphyItem from "./component/PhotoGraphyItem";
 import TypoGraphyItem from "./component/TypoGraphyItem";
-import FireBaseDataTest from "./component/FireBaseDataTest";
 
 const Home = () => {
   return (
@@ -18,7 +17,6 @@ const Home = () => {
       <FamousPaintItem />
       <PhotoGraphyItem />
       <TypoGraphyItem />
-      <FireBaseDataTest />
     </>
   );
 };

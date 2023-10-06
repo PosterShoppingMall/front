@@ -2,140 +2,39 @@ import React from "react";
 import styled from "styled-components";
 import "aos/dist/aos.css";
 import ListItemExpensive from "./ListItemExpensive";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const ListPageItem = () => {
-  const dummyData = [
-    {
-      imgSrc: "/src/images/listcataegoryImg01.jpg",
-      title: "(souffle) Monday",
-      amount: "32,000",
-    },
+  const [items, setItems] = useState(null);
 
-    {
-      imgSrc: "/src/images/listcataegoryImg02.jpg",
-      title: "(souffle) Monday2",
-      amount: "53,000",
-    },
+  useEffect(() => {
+    // Axios를 사용하여 데이터를 가져옵니다.
+    axios
+      .get("https://shoppingmall-9c992-default-rtdb.firebaseio.com/items.json")
+      .then((response) => {
+        // API에서 받아온 데이터를 객체에서 배열로 변환
+        const data = response.data;
+        // const itemArray = Object.entries(data).map(([key, value]) => ({
+        //   id: key,
+        //   ...value,
+        // }));
+        const testData = Object.values(data);
 
-    {
-      imgSrc: "/src/images/listcataegoryImg03.jpg",
-      title: "(souffle) Monday2",
-      amount: "43,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg04.jpg",
-      title: "(souffle) Monday2",
-      amount: "63,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg01.jpg",
-      title: "(souffle) Monday",
-      amount: "82,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg02.jpg",
-      title: "(souffle) Monday2",
-      amount: "12,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg03.jpg",
-      title: "(souffle) Monday2",
-      amount: "15,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg04.jpg",
-      title: "(souffle) Monday2",
-      amount: "53,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg01.jpg",
-      title: "(souffle) Monday",
-      amount: "72,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg02.jpg",
-      title: "(souffle) Monday2",
-      amount: "83,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg03.jpg",
-      title: "(souffle) Monday2",
-      amount: "93,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg04.jpg",
-      title: "(souffle) Monday2",
-      amount: "13,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg01.jpg",
-      title: "(souffle) Monday",
-      amount: "22,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg02.jpg",
-      title: "(souffle) Monday2",
-      amount: "73,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg03.jpg",
-      title: "(souffle) Monday2",
-      amount: "93,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg04.jpg",
-      title: "(souffle) Monday2",
-      amount: "23,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg01.jpg",
-      title: "(souffle) Monday",
-      amount: "12,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg02.jpg",
-      title: "(souffle) Monday2",
-      amount: "43,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg03.jpg",
-      title: "(souffle) Monday2",
-      amount: "53,000",
-    },
-
-    {
-      imgSrc: "/src/images/listcataegoryImg04.jpg",
-      title: "(souffle) Monday2",
-      amount: "63,000",
-    },
-  ];
+        // 변환한 데이터를 상태(state)에 저장
+        setItems(testData[0]);
+        console.log("매핑된 데이터", testData);
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오는데 실패했습니다.", error);
+      });
+  }, []);
 
   return (
     <ListFlex>
-      {dummyData.map((item, index) => (
-        <ListItemExpensive
-          key={index}
-          imgSrc={item.imgSrc}
-          title={item.title}
-          amount={item.amount}
-        />
-      ))}
+      {items &&
+        items.map((item, key) => <ListItemExpensive key={key} item={item} />)}
     </ListFlex>
   );
 };

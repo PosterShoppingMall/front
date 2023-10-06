@@ -4,16 +4,16 @@ import Images from "../../component/Images";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
 
-const ListItemExpensive = ({ imgSrc, title, amount }) => {
+const ListItemExpensive = ({ item, key }) => {
   return (
     <ListItem data-aos="fade-up">
       <ListItemBox>
-        <Link to="/listdetailpage" className="Link">
+        <Link to="/listdetailpage" className="Link" key={key}>
           <ImagesWrap>
-            <Images imgSrc={imgSrc} />
+            <Images imgSrc={item.imgSrc} />
           </ImagesWrap>
-          <Title>{title}</Title>
-          <Amount>{amount}원</Amount>
+          <Title>{item.title}</Title>
+          <Amount>{item.amount}원</Amount>
         </Link>
       </ListItemBox>
     </ListItem>

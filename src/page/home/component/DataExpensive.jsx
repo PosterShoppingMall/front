@@ -1,10 +1,11 @@
 import React from "react";
 
-const DataExpensive = ({ id, title, amount }) => {
+const DataExpensive = ({ item, key }) => {
   return (
-    <div key={id}>
-      <h2>Title: {title}</h2>
-      <p>Amount: {amount}</p>
+    <div key={key}>
+      <h2>Title: {item.title}</h2>
+      <h2>Amount: {item.amount}</h2>
+      <h2>imgSrc: {item.imgSrc}</h2>
     </div>
   );
 };
