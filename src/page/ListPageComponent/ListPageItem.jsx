@@ -16,10 +16,7 @@ const ListPageItem = () => {
       .then((response) => {
         // API에서 받아온 데이터를 객체에서 배열로 변환
         const data = response.data;
-        // const itemArray = Object.entries(data).map(([key, value]) => ({
-        //   id: key,
-        //   ...value,
-        // }));
+
         const testData = Object.values(data);
 
         // 변환한 데이터를 상태(state)에 저장
