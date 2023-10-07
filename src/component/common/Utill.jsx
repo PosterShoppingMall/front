@@ -8,15 +8,13 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 import { useFetchCartQuery } from "../../store";
-// import { useSelector } from "react-redux";
 const Utill = () => {
-  const { data, error, isLoading } = useFetchCartQuery({ id: 1 });
+  const { data, error, isLoading } = useFetchCartQuery();
   let totalQuantity = 0;
   if (error) {
     console.log("util fetchcart error");
   } else if (!isLoading) {
     totalQuantity = data.length;
-    // console.log(data.items, error, isLoading);
   }
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -32,7 +30,6 @@ const Utill = () => {
   return (
     <UtillWrap>
       <Search>
-        {/* Link 꼭 걸어야하는지? */}
         <a onClick={showModal}>검색</a>
         {modalOpen && (
           <Modal setModalOpen={setModalOpen}>
