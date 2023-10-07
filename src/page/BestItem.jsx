@@ -3,7 +3,7 @@ import ListPageFilter from "./ListPageComponent/ListPageFilter";
 import ListPageItem from "./ListPageComponent/ListPageItem";
 import "aos/dist/aos.css";
 import styled from "styled-components";
-import ListPagination from "./ListPageComponent/ListPagination";
+import ListPagination from "./ListPageComponent/ListpageNation";
 
 const BestItem = () => {
   return (
