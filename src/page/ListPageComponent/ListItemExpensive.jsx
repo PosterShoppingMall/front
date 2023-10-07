@@ -8,7 +8,7 @@ const ListItemExpensive = ({ item, key }) => {
   return (
     <ListItem data-aos="fade-up">
       <ListItemBox>
-        <Link to="/listdetailpage" className="Link" key={key}>
+        <Link to={`/product/${id}`} className="Link">
           <ImagesWrap>
             <Images imgSrc={item.imgSrc} />
           </ImagesWrap>

@@ -32,6 +32,15 @@ const ListPageItem = () => {
     <ListFlex>
       {items &&
         items.map((item, key) => <ListItemExpensive key={key} item={item} />)}
+      {/* {dummyData.map((item, index) => (
+        <ListItemExpensive
+          key={index}
+          id={index}
+          imgSrc={item.imgSrc}
+          title={item.title}
+          amount={item.amount}
+        />
+      ))} */}
     </ListFlex>
   );
 };
