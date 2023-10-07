@@ -7,10 +7,17 @@ import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
-
-import { useSelector } from "react-redux";
+import { useFetchCartQuery } from "../../store";
+// import { useSelector } from "react-redux";
 const Utill = () => {
-  const cartQuantity = useSelector((state) => state.cart.items.length);
+  const { data, error, isLoading } = useFetchCartQuery({ id: 1 });
+  let totalQuantity = 0;
+  if (error) {
+    console.log("util fetchcart error");
+  } else if (!isLoading) {
+    totalQuantity = data.length;
+    // console.log(data.items, error, isLoading);
+  }
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -43,7 +50,7 @@ const Utill = () => {
 
       <Cart>
         <NavLink to="/cart">장바구니</NavLink>
-        <Amount>{cartQuantity}</Amount>
+        <Amount>{totalQuantity}</Amount>
       </Cart>
     </UtillWrap>
   );

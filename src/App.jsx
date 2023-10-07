@@ -22,32 +22,8 @@ import ProductManagement from "./page/admin/ProductManagement.jsx";
 
 import "slick-carousel/slick/slick.css"; //slick 라이브러리
 import "slick-carousel/slick/slick-theme.css"; //slick 라이브러리
-import { useEffect } from "react";
-import { fetchCartData, sendCartData } from "./store/cartActions.js";
-import { useDispatch, useSelector } from "react-redux";
-
-let isInitial = true;
 
 function App() {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    dispatch(fetchCartData());
-  }, [dispatch]);
-
-  //데이터 보내기 처음 제외
-  useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-
-    if (cart.changed) {
-      dispatch(sendCartData(cart));
-    }
-  }, [cart, dispatch]);
-
   const router = createBrowserRouter([
     {
       path: "/",

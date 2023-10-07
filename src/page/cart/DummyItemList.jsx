@@ -5,16 +5,16 @@ const DummyItemList = () => {
     {
       product_id: 3,
       product_name: "Ritual",
-      product_price: "250,000",
+      product_price: 250000,
       cart_cnt: "2",
-      cart_product_amount: "500,000",
+      cart_product_amount: 500000,
     },
     {
       product_id: 8,
       product_name: "Stephanie Blau",
-      product_price: "34,000",
+      product_price: 34000,
       cart_cnt: "1",
-      cart_product_amount: "34,000",
+      cart_product_amount: 34000,
     },
   ];
   return (
@@ -27,11 +27,11 @@ const DummyItemList = () => {
               return (
                 <DummyItem
                   key={item.product_id}
-                  product_id={item.product_id}
-                  product_name={item.product_name}
-                  product_price={item.product_price}
-                  cart_cnt={item.cart_cnt}
-                  cart_product_amount={item.cart_product_amount}
+                  id={item.product_id}
+                  name={item.product_name}
+                  price={item.product_price}
+                  count={item.cart_cnt}
+                  // cart_product_amount={item.cart_product_amount}
                 />
               );
             })}

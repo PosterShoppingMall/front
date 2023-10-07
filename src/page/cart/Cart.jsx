@@ -7,36 +7,34 @@ import {
 } from "../../utils/price";
 
 import DummyItemList from "./DummyItemList";
-import { useSelector } from "react-redux";
+import { useFetchCartQuery } from "../../store";
+import { transformCartData } from "../../utils/transformCartData";
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart.items);
-  // console.log(cartItems);
-  const items = [
-    {
-      product_id: 3,
-      product_name: "Ritual",
-      product_price: "250,000",
-      cart_cnt: "2",
-      cart_product_amount: "500,000",
-    },
-    {
-      product_id: 8,
-      product_name: "Stephanie Blau",
-      product_price: "34,000",
-      cart_cnt: "1",
-      cart_product_amount: "34,000",
-    },
-  ];
-  let totalAmount = null;
-  let totalAmountformattedString = null;
-  if (cartItems.length !== 0) {
-    totalAmount = cartItems
-      ?.map((item) => priceStringToNumber(item.cart_product_amount))
-      .reduce((acc, cur) => {
-        return (acc += cur);
-      });
-    totalAmountformattedString = numberToFormattedPriceString(totalAmount);
+  const { data, error, isLoading } = useFetchCartQuery();
+  let content = null;
+  if (!isLoading) {
+    console.log(data);
+    const cartData = transformCartData(data);
+    content = cartData.items.map((item) => {
+      return (
+        <CartItem
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          price={item.price}
+          count={item.count}
+        />
+      );
+    });
   }
+  // if (cartItems.length !== 0) {
+  //   totalAmount = cartItems
+  //     ?.map((item) => priceStringToNumber(item.cart_product_amount))
+  //     .reduce((acc, cur) => {
+  //       return (acc += cur);
+  //     });
+  //   totalAmountformattedString = numberToFormattedPriceString(totalAmount);
+  // }
   return (
     <>
       <DummyItemList />
@@ -44,25 +42,7 @@ const Cart = () => {
         <div className="wrapper">
           <div className="page-title">장바구니</div>
           <div className="content">
-            <div className="cart-items">
-              {!cartItems
-                ? "장바구니가 비었습니다."
-                : cartItems.map((item) => {
-                    return (
-                      <CartItem
-                        key={item.product_id}
-                        product_id={item.product_id}
-                        product_name={item.product_name}
-                        product_price={item.product_price}
-                        cart_cnt={item.cart_cnt}
-                        cart_product_amount={item.cart_product_amount}
-                      />
-                    );
-                  })}
-            </div>
-            <CartOrder
-              totalAmount={!cartItems ? "0" : totalAmountformattedString}
-            />
+            <div className="cart-items">{content}</div>
           </div>
         </div>
       </StyledCart>

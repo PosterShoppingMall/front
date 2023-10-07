@@ -1,32 +1,59 @@
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { cartActions } from "../../store/cartSlice";
+import {
+  useDeleteItemFromCartMutation,
+  usePatchItemCountInCartMutation,
+} from "../../store";
 
-const CartItem = ({
-  product_id,
-  product_name,
-  product_price,
-  cart_cnt,
-  cart_product_amount,
-  ...rest
-}) => {
-  const dispatch = useDispatch();
+const CartItem = ({ id, name, price, count }) => {
+  // 수량변경
+  const [patchItemCountInCart, patchResults] =
+    usePatchItemCountInCartMutation();
+  const itemCountButtonHandler = (id, action) => {
+    let change;
+    if (action === "add") {
+      change = 1;
+    } else if (action === "minus") {
+      change = -1;
+    }
+    const params = {
+      id: id,
+      body: {
+        cart_cnt: `${Number(count) + change}`,
+      },
+    };
+    patchItemCountInCart(params);
+  };
+  //카트에석 삭제
+  const [deleteItemFromCart, deleteResults] = useDeleteItemFromCartMutation();
   const deleteButtonHandler = () => {
-    dispatch(cartActions.deleteItemFromCart(product_id));
+    deleteItemFromCart(id);
   };
   return (
     <StyledCartItems>
       <div className="image-wrapper">
         <img src="" alt="item-image" />
       </div>
-      <div>{product_name}</div>
-      <div>{product_price}</div>
+      {/* name, price count amount button handler */}
+      <div>{name}</div>
+      <div>{price}</div>
       <div className="count-btn">
-        <button>+</button>
-        <div>{cart_cnt}</div>
-        <button>-</button>
+        <button
+          onClick={() => {
+            itemCountButtonHandler(id, "add");
+          }}
+        >
+          +
+        </button>
+        <div>{count}</div>
+        <button
+          onClick={() => {
+            itemCountButtonHandler(id, "minus");
+          }}
+        >
+          -
+        </button>
       </div>
-      <div> {cart_product_amount}</div>
+      <div> {price * count}</div>
       <button onClick={deleteButtonHandler}>delete</button>
     </StyledCartItems>
   );
