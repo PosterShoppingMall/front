@@ -4,15 +4,35 @@ import styled from "styled-components";
 // import Images from "../Images.jsx";
 import hLogo from "../../images/hLogo.jpg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
+  const [menuisOpen, menusetIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    menusetIsOpen(!menuisOpen);
+  };
+
+  const handleLinkClick = () => {
+    closeMenu(); // 라우터 링크 클릭 시 메뉴 닫기
+  };
+
+  const closeMenu = () => {
+    menusetIsOpen(false);
+  };
+
   return (
     <HeaderBox>
       <HeaderWrap>
         <Logo>
           <Link to="/">369로고</Link>
         </Logo>
-        <Nav />
+        <Nav
+          menuisOpen={menuisOpen}
+          toggleMenu={toggleMenu}
+          handleLinkClick={handleLinkClick}
+          closeMenu={closeMenu}
+        />
         <Utill />
       </HeaderWrap>
     </HeaderBox>

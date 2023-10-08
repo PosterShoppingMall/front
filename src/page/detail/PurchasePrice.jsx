@@ -14,6 +14,10 @@ export default PurchasePrice;
 const Title = styled.div`
   font-family: "BMHANNAPro";
   font-size: 30px;
+
+  @media all and (max-width: 1000px) {
+    font-size: 25px;
+  }
 `;
 
 const Amount = styled.div`
@@ -22,4 +26,8 @@ const Amount = styled.div`
   font-size: 25px;
   padding: 20px 0 50px 0;
   color: #515050;
+
+  @media all and (max-width: 1000px) {
+    font-size: 20px;
+  }
 `;

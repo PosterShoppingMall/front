@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import "aos/dist/aos.css";
 import ListItemExpensive from "./ListItemExpensive";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import ListFlex from "../listStyledComponent/ListFlex";
 
 const ListPageItem = () => {
   const [items, setItems] = useState(null);
@@ -37,10 +37,3 @@ const ListPageItem = () => {
 };
 
 export default ListPageItem;
-const ListFlex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 50px 0 50px 0;
-  box-sizing: border-box;
-  flex-flow: wrap;
-`;

@@ -64,6 +64,7 @@ export default MainBn;
 const MainBanner = styled.div`
   width: 100%;
   padding-top: 100px;
+
   .custom-prev-arrow {
     position: absolute;
     top: 43%;
@@ -82,12 +83,27 @@ const MainBanner = styled.div`
     overflow: hidden;
   }
 
+  @media all and (max-width: 1000px) {
+    .custom-prev-arrow {
+      width: 30px;
+      height: 30px;
+      background-size: 30px;
+    }
+  }
+
+  @media all and (max-width: 680px) {
+    .custom-prev-arrow {
+      width: 20px;
+      height: 20px;
+      background-size: 20px;
+    }
+  }
+
   .custom-next-arrow {
     position: absolute;
     top: 43%;
     right: 20px;
     z-index: 1;
-    cursor: pointer;
     width: 50px;
     height: 50px;
     text-indent: -9999px;
@@ -97,12 +113,37 @@ const MainBanner = styled.div`
     border-radius: 20px;
     padding: 15px 15px 15px 15px;
     overflow: hidden;
+    cursor: pointer;
+  }
+
+  @media all and (max-width: 1000px) {
+    .custom-next-arrow {
+      width: 30px;
+      height: 30px;
+      background-size: 30px;
+    }
+  }
+
+  @media all and (max-width: 680px) {
+    .custom-next-arrow {
+      width: 20px;
+      height: 20px;
+      background-size: 20px;
+    }
   }
 `;
 
 const MainBnList = styled.div`
   width: 100%;
   height: 700px;
+
+  @media all and (max-width: 1000px) {
+    height: 500px;
+  }
+
+  @media all and (max-width: 680px) {
+    height: 300px;
+  }
 
   img {
     width: 100%;
