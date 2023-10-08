@@ -1,19 +1,21 @@
 import styled from "styled-components";
+
 import CartOrder from "./CartOrder";
 import CartItem from "./CartItem";
+import DummyItemList from "./DummyItemList";
+
 import {
   numberToFormattedPriceString,
   priceStringToNumber,
 } from "../../utils/price";
 
-import DummyItemList from "./DummyItemList";
 import { useFetchCartQuery } from "../../store";
 import { transformCartData } from "../../utils/transformCartData";
 const Cart = () => {
   const { data, error, isLoading } = useFetchCartQuery();
   let content = null;
+  let totalAmount = null;
   if (!isLoading) {
-    console.log(data);
     const cartData = transformCartData(data);
     content = cartData.items.map((item) => {
       return (
@@ -26,15 +28,12 @@ const Cart = () => {
         />
       );
     });
+    // totalAmount = cartData.items.reduce((acc, cur) => {
+    //   console.log(acc);
+    //   return acc + cur.count * cur.price;
+    // });
   }
-  // if (cartItems.length !== 0) {
-  //   totalAmount = cartItems
-  //     ?.map((item) => priceStringToNumber(item.cart_product_amount))
-  //     .reduce((acc, cur) => {
-  //       return (acc += cur);
-  //     });
-  //   totalAmountformattedString = numberToFormattedPriceString(totalAmount);
-  // }
+
   return (
     <>
       <DummyItemList />
@@ -43,6 +42,7 @@ const Cart = () => {
           <div className="page-title">장바구니</div>
           <div className="content">
             <div className="cart-items">{content}</div>
+            <CartOrder totalAmount={totalAmount} />
           </div>
         </div>
       </StyledCart>
