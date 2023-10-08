@@ -17,17 +17,22 @@ const CartItem = ({ id, name, price, count }) => {
       <CartItemImage>
         <img src={DetailBn01} alt="item-image" />
       </CartItemImage>
-      {/* name, price count amount button handler */}
       <CartItemInfo>
         <CartItemTitle>{name}</CartItemTitle>
         <CartItemPrice>{numberToFormattedPriceString(price)}</CartItemPrice>
 
-        <CartItemSelect id={id} count={count} />
-
-        <CartItemPrice>
-          {numberToFormattedPriceString(price * count)}
-        </CartItemPrice>
-        <button onClick={deleteButtonHandler}>delete</button>
+        <CartItemInfoFooter>
+          <CartItemSelect className="element" id={id} count={count} />
+          <CartDeleteItemButton
+            className="element"
+            onClick={deleteButtonHandler}
+          >
+            delete
+          </CartDeleteItemButton>
+          <CartItemTotalPrice className="element">
+            {numberToFormattedPriceString(price * count)}
+          </CartItemTotalPrice>
+        </CartItemInfoFooter>
       </CartItemInfo>
     </StyledCartItems>
   );
@@ -36,7 +41,7 @@ const CartItem = ({ id, name, price, count }) => {
 export default CartItem;
 
 export const StyledCartItems = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,15 +49,14 @@ export const StyledCartItems = styled.div`
   gap: 3rem;
 `;
 
-const CartItemInfo = styled.div`
-  width: 40%;
-`;
-
 const CartItemImage = styled.div`
   width: 15%;
   img {
     width: 100%;
   }
+`;
+const CartItemInfo = styled.div`
+  width: 40%;
 `;
 
 const CartItemTitle = styled.div`
@@ -65,4 +69,31 @@ const CartItemPrice = styled.div`
   font-size: 16px;
   padding: 20px 0 50px 0;
   color: #515050;
+`;
+const CartItemTotalPrice = styled(CartItemPrice)`
+  color: #000000;
+  font-weight: 700;
+`;
+
+const CartDeleteItemButton = styled.div`
+  cursor: pointer;
+  color: #515050;
+  font-family: "NanumSquare";
+  font-weight: 400;
+  font-size: 12px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const CartItemInfoFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  .element {
+    flex: 1;
+  }
 `;
