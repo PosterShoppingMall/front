@@ -17,7 +17,7 @@ const PurchaseComponent = () => {
 
   return (
     <PurchaseWrap>
-      <PosterSizeOption>
+      {/* <PosterSizeOption>
         <span className="title">포스터 사이즈</span>
         <select>
           <option value="옵션을 선택하세요">옵션을 선택하세요</option>
@@ -41,7 +41,7 @@ const PurchaseComponent = () => {
             A4 골드알루미늄(+9만원)
           </option>
         </select>
-      </PosterOption>
+      </PosterOption> */}
 
       <PurChaseBox>
         <ItemCounter>
