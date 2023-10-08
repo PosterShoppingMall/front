@@ -34,6 +34,9 @@ const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+  @media all and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 const Logo = styled.div`

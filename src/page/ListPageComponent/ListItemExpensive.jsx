@@ -4,7 +4,7 @@ import Images from "../../component/Images";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
 
-const ListItemExpensive = ({ imgSrc, title, amount, id }) => {
+const ListItemExpensive = ({ item, id }) => {
   return (
     <ListItem data-aos="fade-up">
       <ListItemBox>

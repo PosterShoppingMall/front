@@ -53,6 +53,10 @@ const UtillWrap = styled.div`
   justify-content: space-between;
   padding: 35px 0 0 50px;
   box-sizing: border-box;
+
+  @media all and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const Search = styled.div`

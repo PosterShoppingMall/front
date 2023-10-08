@@ -82,4 +82,10 @@ const NavWrap = styled.div`
   ul li a:hover:before {
     transform: scaleY(1);
   }
+
+  @media all and (max-width: 1000px) {
+    ul {
+      display: none;
+    }
+  }
 `;
