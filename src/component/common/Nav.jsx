@@ -1,34 +1,57 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import mbMenu from "../../images/mbMenu.png";
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <NavWrap>
-      <ul>
+      <ul className={`mobile-menu ${props.menuisOpen ? "open" : ""}`}>
         <li>
-          <NavLink to="/best">베스트</NavLink>
+          <NavLink to="/best" onClick={props.handleLinkClick}>
+            베스트
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/all">전체상품</NavLink>
+          <NavLink to="/all" onClick={props.handleLinkClick}>
+            전체상품
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/illustrator">일러스트</NavLink>
+          <NavLink to="/illustrator" onClick={props.handleLinkClick}>
+            일러스트
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/famous-painting">명화</NavLink>
+          <NavLink to="/famous-painting" onClick={props.handleLinkClick}>
+            명화
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/photography">포토그래피</NavLink>
+          <NavLink to="/photography" onClick={props.handleLinkClick}>
+            포토그래피
+          </NavLink>
         </li>
 
         <li>
-          <NavLink to="/typography">타이포그래피</NavLink>
+          <NavLink to="/typography" onClick={props.handleLinkClick}>
+            타이포그래피
+          </NavLink>
         </li>
+
+        <button className="toggle-button closeBtn" onClick={props.toggleMenu}>
+          {props.menuisOpen ? "X" : ""}
+        </button>
       </ul>
+
+      <MobileMenu>
+        <button className="mbBtn" onClick={props.toggleMenu}>
+          모바일메뉴
+        </button>
+      </MobileMenu>
     </NavWrap>
   );
 };
@@ -58,6 +81,13 @@ const NavWrap = styled.div`
     display: block;
     transition: all 2s;
     text-align: center;
+    box-sizing: border-box;
+  }
+
+  @media all and (max-width: 680px) {
+    ul li a {
+      padding: 20px 0px;
+    }
   }
 
   ul li a:hover {
@@ -83,9 +113,89 @@ const NavWrap = styled.div`
     transform: scaleY(1);
   }
 
+  .toggle-button.closeBtn {
+    display: none;
+  }
+
   @media all and (max-width: 1000px) {
-    ul {
-      display: none;
+    ul.mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgb(51, 51, 51, 0.9);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 10;
+      flex-flow: wrap;
+      padding: 80px 0 0 0;
+    }
+
+    ul.mobile-menu li {
+      width: 100%;
+    }
+    ul.mobile-menu li a {
+      color: #fff;
+    }
+    ul.mobile-menu li a:hover {
+      color: #333;
+    }
+
+    ul li a:before {
+      background: #fff;
+    }
+
+    ul.mobile-menu.open {
+      transform: translateY(0);
+      height: auto;
+      top: 0px;
+    }
+
+    .toggle-button.closeBtn {
+      display: block;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-family: "BMHANNAAir";
+      font-size: 50px;
+      color: #fff;
+      border: none;
+      background: none;
+    }
+  }
+
+  @media all and (max-width: 680px) {
+    .toggle-button.closeBtn {
+      font-size: 40px;
+    }
+  }
+`;
+
+const MobileMenu = styled.div`
+  .mbBtn {
+    display: none;
+    text-indent: -9999px;
+    border: none;
+  }
+
+  @media all and (max-width: 1000px) {
+    .mbBtn {
+      display: block;
+      width: 80px;
+      height: 100px;
+      background: url(${mbMenu}) no-repeat center #d2d2d2;
+      background-size: 45px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+
+    @media all and (max-width: 680px) {
+      .mbBtn {
+        width: 70px;
+        background-size: 40px;
+      }
     }
   }
 `;
