@@ -2,13 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import IllustrationSlider from "react-slick";
 import Images from "../../../component/Images";
-import contentLine from "../../../images/contentLine.svg";
 import "aos/dist/aos.css";
-import bnArrow from "../../../images/bnArrow.png";
-import morebtnArrow from "../../../images/morebtnArrow.png";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import ItemContent from "./mainStyledComponent/ItemContent";
+import ContnetLine from "./mainStyledComponent/ContnetLine";
+import H2Title from "./mainStyledComponent/H2Title";
+import H2SubText from "./mainStyledComponent/H2SubText";
+import BnList from "./mainStyledComponent/BnList";
+import MoreBtn from "./mainStyledComponent/MoreBtn";
 import { Link } from "react-router-dom";
 
 const IllustrationItem = () => {
@@ -34,6 +37,23 @@ const IllustrationItem = () => {
     autoplaySpeed: 3000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+
+      {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const [items, setItems] = useState(null);
@@ -87,126 +107,3 @@ const IllustrationItem = () => {
 };
 
 export default IllustrationItem;
-
-const ItemContent = styled.div`
-  width: 1600px;
-  margin: 0 auto;
-  padding: 100px 0 0 0;
-
-  .slick-slider {
-    margin-left: -20px;
-  }
-
-  .custom-prev-arrow {
-    position: absolute;
-    top: 43%;
-    left: 40px;
-    z-index: 1;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    text-indent: -9999px;
-    background: url(${bnArrow}) center no-repeat;
-    background-size: 30px;
-    transform: rotate(180deg);
-    background-color: #cbcbcb;
-    border-radius: 20px;
-    padding: 10px 10px;
-    overflow: hidden;
-  }
-
-  .custom-next-arrow {
-    position: absolute;
-    top: 43%;
-    right: 20px;
-    z-index: 1;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    text-indent: -9999px;
-    background: url(${bnArrow}) center no-repeat;
-    background-size: 30px;
-    background-color: #cbcbcb;
-    border-radius: 20px;
-    padding: 10px 10px;
-    overflow: hidden;
-  }
-`;
-
-const ContnetLine = styled.div`
-  display: block;
-  background: url(${contentLine});
-  width: 100%;
-  height: 30px;
-  background-size: 30px;
-`;
-
-const H2Title = styled.div`
-  font-family: "BMHANNAPro";
-  font-size: 40px;
-  text-align: center;
-  padding: 50px 0;
-  box-sizing: border-box;
-`;
-
-const H2SubText = styled.div`
-  font-family: "BMHANNAAir";
-  font-size: 20px;
-  display: block;
-  padding: 10px 0 0 0;
-`;
-
-const BnList = styled.div`
-  padding: 0 0 0 20px;
-  box-sizing: border-box;
-  img {
-    width: 100%;
-  }
-`;
-
-const MoreBtn = styled.div`
-  font-family: "BMHANNAAir";
-  font-size: 25px;
-  color: #333;
-  position: relative;
-  z-index: 2;
-  display: block;
-  margin: 55px 0 0 0;
-  text-align: center;
-  .Link {
-    text-decoration: none;
-    background-color: #fff;
-    display: inline-block;
-    padding: 15px;
-    border-radius: 20px;
-    box-shadow: 2px 2px 2px #a5a4a4;
-    transition: all ease 1s 0s;
-  }
-
-  .Link:hover {
-    background-color: #3bf234;
-  }
-
-  span {
-    display: inline-block;
-    position: relative;
-    padding-right: 35px;
-    color: #333;
-    transition: all ease 1s 0s;
-  }
-
-  span:hover {
-    color: #fff;
-  }
-
-  span:after {
-    content: "";
-    width: 35px;
-    height: 35px;
-    background: url(${morebtnArrow}) no-repeat right;
-    background-size: 35px;
-    position: absolute;
-    top: -3px;
-    right: 0;
-  }
-`;

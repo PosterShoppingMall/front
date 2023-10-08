@@ -90,7 +90,7 @@ const PictureContents = styled.div`
   img {
     width: 100%;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
@@ -118,6 +118,12 @@ const PictureContents = styled.div`
     height: auto;
     margin: 0 0px;
     padding: 0 15px 0 0;
+  }
+
+  @media all and (max-width: 1600px) {
+    .slick-dots li {
+      width: 70px;
+    }
   }
 
   .slick-dots li button {

@@ -31,6 +31,11 @@ const ProductInforTitle = styled.div`
   text-align: center;
   box-sizing: border-box;
   border-bottom: solid 2px #333;
+
+  @media all and (max-width: 1000px) {
+    font-size: 25px;
+    border-bottom: solid 1px #333;
+  }
 `;
 
 const ProductInforContents = styled.div`

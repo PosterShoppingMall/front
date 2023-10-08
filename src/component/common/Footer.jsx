@@ -31,6 +31,7 @@ const FooterBox = styled.div`
   border-top: solid 2px #333;
   padding: 50px 0;
   box-sizing: border-box;
+  margin-top: 50px;
 `;
 
 const FooterWrap = styled.div`
@@ -38,6 +39,13 @@ const FooterWrap = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
+
+  @media all and (max-width: 1600px) {
+    width: 100%;
+    display: block;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
 `;
 
 const FooterLogo = styled.div`
@@ -52,9 +60,14 @@ const CopyRight = styled.div`
   width: 90%;
   padding: 20px 0 0 20px;
   box-sizing: border-box;
-
   font-family: "NanumSquare";
   font-size: 17px;
   font-weight: 400;
   line-height: 150%;
+
+  @media all and (max-width: 1600px) {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0 0 0px;
+  }
 `;

@@ -8,7 +8,7 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
-const Utill = () => {
+const Utill = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
@@ -48,14 +48,20 @@ const Utill = () => {
 
 export default Utill;
 const UtillWrap = styled.div`
-  width: 25%;
+  width: 20%;
   display: flex;
   justify-content: space-between;
   padding: 35px 0 0 50px;
   box-sizing: border-box;
 
   @media all and (max-width: 1000px) {
-    display: none;
+    position: absolute;
+    top: 0;
+    right: 170px;
+  }
+
+  @media all and (max-width: 680px) {
+    right: 205px;
   }
 `;
 
@@ -70,6 +76,14 @@ const Search = styled.div`
     text-indent: -9999px;
     display: block;
     cursor: pointer;
+  }
+
+  @media all and (max-width: 1000px) {
+    a {
+      height: 100%;
+      padding: 0 30px;
+      box-sizing: border-box;
+    }
   }
 `;
 
@@ -131,6 +145,14 @@ const Mypage = styled.div`
     color: #333;
     text-indent: -9999px;
     display: block;
+  }
+
+  @media all and (max-width: 1000px) {
+    a {
+      height: 100%;
+      padding: 0 30px;
+      box-sizing: border-box;
+    }
   }
 `;
 
