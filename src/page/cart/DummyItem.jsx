@@ -9,7 +9,7 @@ const DummyItem = ({ id, name, price, count, ...rest }) => {
     product_id: id,
     product_name: name,
     product_price: price,
-    cart_cnt: count,
+    cart_cnt: 1,
     cart_product_amount: price * count,
   };
 

@@ -6,6 +6,7 @@ const cartApi = createApi({
   endpoints(builder) {
     return {
       fetchCart: builder.query({
+        providesTags: ["Cart"],
         query: () => {
           return {
             url: "cart",
@@ -14,6 +15,7 @@ const cartApi = createApi({
         },
       }),
       addItemToCart: builder.mutation({
+        invalidatesTags: ["Cart"],
         query: (body) => {
           return {
             url: "cart",
@@ -23,6 +25,7 @@ const cartApi = createApi({
         },
       }),
       deleteItemFromCart: builder.mutation({
+        invalidatesTags: ["Cart"],
         query: (id) => {
           return {
             url: `cart/${id}`,
@@ -31,6 +34,7 @@ const cartApi = createApi({
         },
       }),
       patchItemCountInCart: builder.mutation({
+        invalidatesTags: ["Cart"],
         query: (params) => {
           return {
             url: `cart/${params.id}`,

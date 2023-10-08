@@ -1,20 +1,3 @@
 {
-  "cart": [
-    {
-      "id": 8,
-      "product_id": 8,
-      "product_name": "Stephanie Blau",
-      "product_price": 34000,
-      "cart_cnt": "10",
-      "cart_product_amount": 34000
-    },
-    {
-      "id": 3,
-      "product_id": 3,
-      "product_name": "Ritual",
-      "product_price": 250000,
-      "cart_cnt": "8",
-      "cart_product_amount": 500000
-    }
-  ]
+  "cart": []
 }
