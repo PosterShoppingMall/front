@@ -37,15 +37,15 @@ const Cart = () => {
   return (
     <>
       <DummyItemList />
-      <StyledCart>
+      <ListWrap>
         <div className="wrapper">
-          <div className="page-title">장바구니</div>
+          <H3Title>장바구니</H3Title>
           <div className="content">
             <div className="cart-items">{content}</div>
             <CartOrder totalAmount={totalAmount} />
           </div>
         </div>
-      </StyledCart>
+      </ListWrap>
     </>
   );
 };
@@ -58,18 +58,11 @@ export const StyledCart = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80vw;
+    width: 1600px;
     height: 100vh;
     margin: auto;
   }
 
-  .page-title {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    width: 20vw;
-    height: 20vh;
-  }
   .content {
     display: flex;
     align-items: center;
@@ -84,4 +77,20 @@ export const StyledCart = styled.div`
     flex-direction: column;
     gap: 3rem;
   }
+`;
+const ListWrap = styled.div`
+  padding: 200px 0 0 0;
+  width: 1600px;
+  margin: 0 auto;
+`;
+
+const H3Title = styled.div`
+  font-family: "BMHANNAPro";
+  font-size: 40px;
+  text-align: center;
+  padding: 50px 0 50px 0;
+  box-sizing: border-box;
+  border-top: solid 2px #333;
+  border-bottom: solid 2px #333;
+  margin-bottom: 30px;
 `;

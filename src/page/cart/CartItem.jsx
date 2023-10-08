@@ -1,28 +1,12 @@
 import styled from "styled-components";
-import {
-  useDeleteItemFromCartMutation,
-  usePatchItemCountInCartMutation,
-} from "../../store";
 
+import { useDeleteItemFromCartMutation } from "../../store";
+
+import { numberToFormattedPriceString } from "../../utils/price";
+
+import DetailBn01 from "../../images/DetailBn01.jpg";
+import CartItemSelect from "./CartItemSelect";
 const CartItem = ({ id, name, price, count }) => {
-  // 수량변경
-  const [patchItemCountInCart, patchResults] =
-    usePatchItemCountInCartMutation();
-  const itemCountButtonHandler = (id, action) => {
-    let change;
-    if (action === "add") {
-      change = 1;
-    } else if (action === "minus") {
-      change = -1;
-    }
-    const params = {
-      id: id,
-      body: {
-        cart_cnt: `${Number(count) + change}`,
-      },
-    };
-    patchItemCountInCart(params);
-  };
   //카트에석 삭제
   const [deleteItemFromCart, deleteResults] = useDeleteItemFromCartMutation();
   const deleteButtonHandler = () => {
@@ -30,31 +14,21 @@ const CartItem = ({ id, name, price, count }) => {
   };
   return (
     <StyledCartItems>
-      <div className="image-wrapper">
-        <img src="" alt="item-image" />
-      </div>
+      <CartItemImage>
+        <img src={DetailBn01} alt="item-image" />
+      </CartItemImage>
       {/* name, price count amount button handler */}
-      <div>{name}</div>
-      <div>{price}</div>
-      <div className="count-btn">
-        <button
-          onClick={() => {
-            itemCountButtonHandler(id, "add");
-          }}
-        >
-          +
-        </button>
-        <div>{count}</div>
-        <button
-          onClick={() => {
-            itemCountButtonHandler(id, "minus");
-          }}
-        >
-          -
-        </button>
-      </div>
-      <div> {price * count}</div>
-      <button onClick={deleteButtonHandler}>delete</button>
+      <CartItemInfo>
+        <CartItemTitle>{name}</CartItemTitle>
+        <CartItemPrice>{numberToFormattedPriceString(price)}</CartItemPrice>
+
+        <CartItemSelect id={id} count={count} />
+
+        <CartItemPrice>
+          {numberToFormattedPriceString(price * count)}
+        </CartItemPrice>
+        <button onClick={deleteButtonHandler}>delete</button>
+      </CartItemInfo>
     </StyledCartItems>
   );
 };
@@ -62,13 +36,33 @@ const CartItem = ({ id, name, price, count }) => {
 export default CartItem;
 
 export const StyledCartItems = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
   gap: 3rem;
-  .count-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+`;
+
+const CartItemInfo = styled.div`
+  width: 40%;
+`;
+
+const CartItemImage = styled.div`
+  width: 15%;
+  img {
+    width: 100%;
   }
+`;
+
+const CartItemTitle = styled.div`
+  font-family: "BMHANNAPro";
+  font-size: 20px;
+`;
+const CartItemPrice = styled.div`
+  font-family: "NanumSquare";
+  font-weight: 400;
+  font-size: 16px;
+  padding: 20px 0 50px 0;
+  color: #515050;
 `;
