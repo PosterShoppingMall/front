@@ -8,7 +8,18 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
-const Utill = (props) => {
+const Utill = () => {
+import { useFetchCartQuery } from "../../store";
+const Utill = () => {
+  const { data, error, isLoading } = useFetchCartQuery();
+  let totalQuantity = 0;
+  if (error) {
+    console.log("util fetchcart error");
+  } else if (!isLoading) {
+    totalQuantity = data.length;
+  }
+
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
@@ -22,7 +33,6 @@ const Utill = (props) => {
   return (
     <UtillWrap>
       <Search>
-        {/* Link 꼭 걸어야하는지? */}
         <a onClick={showModal}>검색</a>
         {modalOpen && (
           <Modal setModalOpen={setModalOpen}>
@@ -40,7 +50,7 @@ const Utill = (props) => {
 
       <Cart>
         <NavLink to="/cart">장바구니</NavLink>
-        <Amount>0</Amount>
+        <Amount>{totalQuantity}</Amount>
       </Cart>
     </UtillWrap>
   );
