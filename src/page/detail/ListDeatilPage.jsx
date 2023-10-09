@@ -25,7 +25,7 @@ const DeTailWrap = styled.div`
   padding-top: 150px;
   margin-bottom: 150px;
 
-  @media all and (max-width: 1200px) {
+  @media all and (max-width: 1600px) {
     width: 100%;
 
     div.payPurchaseBox {
@@ -80,7 +80,7 @@ const DeTailWrap = styled.div`
     justify-content: space-between;
   }
 
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     .deTailPageFlex {
       flex-flow: wrap;
     }
