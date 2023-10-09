@@ -43,6 +43,16 @@ const cartApi = createApi({
           };
         },
       }),
+      patchEmptyCart: builder.mutation({
+        invalidatesTags: ["Cart"],
+        query: () => {
+          return {
+            url: `cart/`, //json server용 // 실제는 `cart/${id}`
+            method: "PATCH",
+            body: [],
+          };
+        },
+      }),
     };
   },
 });
@@ -52,5 +62,6 @@ export const {
   useAddItemToCartMutation,
   useDeleteItemFromCartMutation,
   usePatchItemCountInCartMutation,
+  usePatchEmptyCartMutation,
 } = cartApi;
 export { cartApi };
