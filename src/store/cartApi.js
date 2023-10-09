@@ -48,8 +48,8 @@ const cartApi = createApi({
         query: () => {
           return {
             url: `cart/`, //json server용 // 실제는 `cart/${id}`
-            method: "PATCH",
-            body: [],
+            method: "PUT",
+            body: "",
           };
         },
       }),
