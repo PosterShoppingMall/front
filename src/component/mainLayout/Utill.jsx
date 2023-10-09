@@ -8,7 +8,6 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
-const Utill = () => {
 import { useFetchCartQuery } from "../../store";
 const Utill = () => {
   const { data, error, isLoading } = useFetchCartQuery();
@@ -18,7 +17,6 @@ const Utill = () => {
   } else if (!isLoading) {
     totalQuantity = data.length;
   }
-
 
   const [modalOpen, setModalOpen] = useState(false);
 
