@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 200px;
 `;
 
 const Title = styled.h1`
@@ -50,7 +59,7 @@ const Login = () => {
     // 로그인 요청 및 처리
     // ...
 
-    // 예시로 2초 후에 로그인 성공 메시지를 표시하는 코드
+    // 2초 후에 로그인 성공 메시지를 표시
     setTimeout(() => {
       alert('로그인 성공');
     }, 2000);
@@ -60,6 +69,7 @@ const Login = () => {
     <Container>
       <Title>로그인</Title>
       <form onSubmit={handleLogin}>
+        <InputContainer>
         <InputField
           type="text"
           placeholder="아이디"
@@ -72,6 +82,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        </InputContainer>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <LoginButton type="submit">로그인</LoginButton>
       </form>
