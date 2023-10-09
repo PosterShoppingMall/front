@@ -5,10 +5,12 @@ import styled from "styled-components";
 import iconSearch from "../../images/iconSearch.png";
 import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
-
 import { NavLink } from "react-router-dom";
+import { useFetchCartQuery } from "../../store/cartApi";
+
 const Utill = () => {
   const { data, error, isLoading } = useFetchCartQuery();
+
   let totalQuantity = 0;
   if (error) {
     console.log("util fetchcart error");
