@@ -1,10 +1,10 @@
 export const transformCartData = (getCartResponse) => {
   const newItems = getCartResponse.map((item) => {
     return {
-      id: item.product_id,
-      name: item.product_name,
-      price: item.product_price,
-      count: item.cart_cnt,
+      id: item.productId,
+      name: item.productName,
+      price: item.productPrice,
+      count: item.cartCnt,
     };
   });
 
