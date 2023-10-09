@@ -3,6 +3,7 @@ import FileInput from "./FileInput";
 import styled from "styled-components";
 import Input from "../../component/common/input";
 import Select from "../../component/common/Select";
+import axios from "axios";
 
 const ProductFormStyle = styled.form`
   padding: 110px 0 10px 0;
@@ -30,15 +31,16 @@ const DetailTextArea = styled.div`
 
 const INITIAL_VALUES = {
   category: "",
-  name: "",
-  price: "",
+  productName: "",
+  productSize: "",
+  productPrice: "",
   imgFile1: null,
   imgFile2: null,
   imgFile3: null,
   imgFile4: null,
   imgFile5: null,
-  quantity: "",
-  salesStatus: "",
+  stockAmount: "",
+  saleStatus: "",
   content: "",
 };
 
@@ -62,24 +64,34 @@ function ProductForm({
     // 폼 데이터 객체 생성, append(필드이름, 필드값)
     const formData = new FormData();
     formData.append("category", values.category);
-    formData.append("name", values.name);
-    formData.append("price", values.price);
+    formData.append("productName", values.productName);
+    formData.append("productSize", values.productSize);
+    formData.append("productPrice", values.productPrice);
     formData.append("imgFile1", values.imgFile1);
     formData.append("imgFile2", values.imgFile2);
     formData.append("imgFile3", values.imgFile3);
     formData.append("imgFile4", values.imgFile4);
     formData.append("imgFile5", values.imgFile5);
-    formData.append("quantity", values.quantity);
-    formData.append("salesStatus", values.salesStatus);
+    formData.append("stockAmount", values.stockAmount);
+    formData.append("saleStatus", values.saleStatus);
     formData.append("content", values.content);
 
     let result;
 
     try {
+      // 엑시오스
+      const jsonData = JSON.stringify(values);
+
+      await axios.post("http://localhost:3000/product", jsonData, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      alert("Data submitted successfully");
+      setValues(INITIAL_VALUES);
       // 에러 처리
       setSubmittingError(null);
       setIsSubmitting(true);
-      result = await onSubmit(formData);
+      // result = await onSubmit(formData);
     } catch (error) {
       setSubmittingError(error);
       return;
@@ -117,6 +129,7 @@ function ProductForm({
           title="카테고리"
           name="category"
           value={values.category}
+          multiple="multiple"
           onChange={handleInputChange}
         >
           <option value="">선택</option>
@@ -130,8 +143,19 @@ function ProductForm({
       <div>
         <Input
           title="상품명"
-          name="name"
-          value={values.name}
+          name="productName"
+          multiple="multiple"
+          value={values.productName}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div>
+        <Input
+          title="사이즈"
+          name="productSize"
+          multiple="multiple"
+          value={values.productSize}
           onChange={handleInputChange}
         />
       </div>
@@ -140,8 +164,9 @@ function ProductForm({
         <Input
           title="가격"
           type="number"
-          name="price"
-          value={values.price}
+          name="productPrice"
+          multiple="multiple"
+          value={values.productPrice}
           onChange={handleInputChange}
         />
       </div>
@@ -150,6 +175,7 @@ function ProductForm({
         <label>이미지1</label>
         <FileInput
           name="imgFile1"
+          multiple="multiple"
           initialPreview={initialPreview}
           value={values.imgFile1 || []}
           onChange={handleChange}
@@ -160,6 +186,7 @@ function ProductForm({
         <label>이미지2</label>
         <FileInput
           name="imgFile2"
+          multiple="multiple"
           initialPreview={initialPreview}
           value={values.imgFile2 || []}
           onChange={handleChange}
@@ -170,6 +197,7 @@ function ProductForm({
         <label>이미지3</label>
         <FileInput
           name="imgFile3"
+          multiple="multiple"
           initialPreview={initialPreview}
           value={values.imgFile3 || []}
           onChange={handleChange}
@@ -180,6 +208,7 @@ function ProductForm({
         <label>이미지4</label>
         <FileInput
           name="imgFile4"
+          multiple="multiple"
           initialPreview={initialPreview}
           value={values.imgFile4 || []}
           onChange={handleChange}
@@ -190,6 +219,7 @@ function ProductForm({
         <label>이미지5</label>
         <FileInput
           name="imgFile5"
+          multiple="multiple"
           initialPreview={initialPreview}
           value={values.imgFile5 || []}
           onChange={handleChange}
@@ -200,8 +230,8 @@ function ProductForm({
         <Input
           title="재고량"
           type="number"
-          name="quantity"
-          value={values.quantity}
+          name="stockAmount"
+          value={values.stockAmount}
           onChange={handleInputChange}
         />
       </div>
@@ -209,8 +239,9 @@ function ProductForm({
       <div>
         <Select
           title="판매상태"
-          name="salesStatus"
-          value={values.salesStatus}
+          name="saleStatus"
+          multiple="multiple"
+          value={values.saleStatus}
           onChange={handleInputChange}
         >
           <option value="">선택</option>
@@ -222,7 +253,14 @@ function ProductForm({
       <div>
         <DetailTextArea>
           <label>상세설명</label>
-          <textarea name="content" rows={4} cols={40} />
+          <textarea
+            name="content"
+            rows={4}
+            cols={40}
+            multiple="multiple"
+            value={values.content}
+            onChange={handleInputChange}
+          />
         </DetailTextArea>
       </div>
 
@@ -232,9 +270,8 @@ function ProductForm({
         </button>
       )}
       <button type="submit" disabled={isSubmitting}>
-        확인
+        등록
       </button>
-
       {submittingError && <p>{submittingError.message}</p>}
     </ProductFormStyle>
   );

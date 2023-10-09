@@ -1,3 +1,20 @@
 {
-  "cart": []
+  "cart": [],
+  "product": [
+    {
+      "category": "명화",
+      "productName": "aae",
+      "productSize": "a3",
+      "productPrice": "20000",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "120",
+      "saleStatus": "판매중",
+      "content": "ㅁㅇㄴ",
+      "id": 6
+    }
+  ]
 }
