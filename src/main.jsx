@@ -13,8 +13,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>
 );
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Login />
-  </React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode></React.StrictMode>
 );
