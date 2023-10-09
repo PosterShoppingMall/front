@@ -1,9 +1,5 @@
 export const COLUMNS = [
   {
-    Header: "id",
-    accessor: "id",
-  },
-  {
     Header: "카테고리",
     accessor: "category",
   },
@@ -47,7 +43,9 @@ export const COLUMNS = [
     accessor: "updatedAt",
   },
   {
-    Header: "수정",
-    accessor: "수정",
+    accessor: "id",
+    Cell: ({ value }) => (
+      <button onClick={() => handleEdit(value)}>수정</button>
+    ),
   },
 ];

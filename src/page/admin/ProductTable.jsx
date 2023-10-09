@@ -2,29 +2,34 @@ import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useTable } from "react-table";
 import styled from "styled-components";
 import { COLUMNS } from "./columns";
+import axios from "axios";
 
 export const ProductTable = () => {
   const columns = useMemo(() => COLUMNS, []);
+  // 훅 만들어야 하는데 자꾸 오류나서 일단 여기에 넣음
   const [data, setData] = useState([]);
-
   useEffect(() => {
-    // Axios를 사용하여 데이터를 가져옵니다.
-    axios
-      .get("https://shoppingmall-9c992-default-rtdb.firebaseio.com/items.json")
-      .then((response) => {
-        // API에서 받아온 데이터를 객체에서 배열로 변환
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:3001/product");
         const data = response.data;
 
         const testData = Object.values(data);
 
         // 변환한 데이터를 상태(state)에 저장
-        setItems(testData[0]);
+        setData(testData);
         console.log("매핑된 데이터", testData);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("데이터를 가져오는데 실패했습니다.", error);
-      });
+      }
+    }
+    fetchData();
   }, []);
+
+  // data가 없는 경우 예외 처리
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   const {
     getTableProps,

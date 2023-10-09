@@ -82,7 +82,7 @@ function ProductForm({
       // 엑시오스
       const jsonData = JSON.stringify(values);
 
-      await axios.post("http://localhost:3000/product", jsonData, {
+      await axios.post("http://localhost:3001/product", jsonData, {
         headers: { "Content-Type": "application/json" },
       });
 

@@ -15,6 +15,40 @@
       "saleStatus": "판매중",
       "content": "ㅁㅇㄴ",
       "id": 6
+    },
+    {
+      "category": "포토그래피",
+      "productName": "x",
+      "productSize": "a3",
+      "productPrice": "400000",
+      "imgFile1": [
+        {}
+      ],
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "123",
+      "saleStatus": "판매중",
+      "content": "dd",
+      "id": 7
+    },
+    {
+      "category": "명화",
+      "productName": "ㅋㅋ",
+      "productSize": "123",
+      "productPrice": "346000",
+      "imgFile1": [
+        {}
+      ],
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "12",
+      "saleStatus": "판매중",
+      "content": "ㅁㅁ",
+      "id": 8
     }
   ]
 }
