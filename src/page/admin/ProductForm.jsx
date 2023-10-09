@@ -5,8 +5,15 @@ import Input from "../../component/common/input";
 import Select from "../../component/common/Select";
 import axios from "axios";
 
-const ProductFormStyle = styled.form`
-  padding: 110px 0 10px 0;
+const ProductFormStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
+  justify-content: center;
+  width: 1600px;
+  margin: auto;
 `;
 
 const DetailTextArea = styled.div`
@@ -61,6 +68,22 @@ function ProductForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // // 유효성 검사
+    // const requiredFields = [
+    //   "category",
+    //   "productName",
+    //   "productSize",
+    //   "productPrice",
+    //   "stockAmount",
+    //   "saleStatus",
+    // ];
+    // for (const field of requiredFields) {
+    //   if (!values[field]) {
+    //     alert(`${field} 값을 채워주세요.`);
+    //     return;
+    //   }
+    // }
     // 폼 데이터 객체 생성, append(필드이름, 필드값)
     const formData = new FormData();
     formData.append("category", values.category);
@@ -123,157 +146,159 @@ function ProductForm({
   };
 
   return (
-    <ProductFormStyle onSubmit={handleSubmit}>
-      <div>
-        <Select
-          title="카테고리"
-          name="category"
-          value={values.category}
-          multiple="multiple"
-          onChange={handleInputChange}
-        >
-          <option value="">선택</option>
-          <option value="일러스트">일러스트</option>
-          <option value="명화">명화</option>
-          <option value="포토그래피">포토그래피</option>
-          <option value="타이포그래피">타이포그래피</option>
-        </Select>
-      </div>
-
-      <div>
-        <Input
-          title="상품명"
-          name="productName"
-          multiple="multiple"
-          value={values.productName}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div>
-        <Input
-          title="사이즈"
-          name="productSize"
-          multiple="multiple"
-          value={values.productSize}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div>
-        <Input
-          title="가격"
-          type="number"
-          name="productPrice"
-          multiple="multiple"
-          value={values.productPrice}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div>
-        <label>이미지1</label>
-        <FileInput
-          name="imgFile1"
-          multiple="multiple"
-          initialPreview={initialPreview}
-          value={values.imgFile1 || []}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label>이미지2</label>
-        <FileInput
-          name="imgFile2"
-          multiple="multiple"
-          initialPreview={initialPreview}
-          value={values.imgFile2 || []}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label>이미지3</label>
-        <FileInput
-          name="imgFile3"
-          multiple="multiple"
-          initialPreview={initialPreview}
-          value={values.imgFile3 || []}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label>이미지4</label>
-        <FileInput
-          name="imgFile4"
-          multiple="multiple"
-          initialPreview={initialPreview}
-          value={values.imgFile4 || []}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label>이미지5</label>
-        <FileInput
-          name="imgFile5"
-          multiple="multiple"
-          initialPreview={initialPreview}
-          value={values.imgFile5 || []}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <Input
-          title="재고량"
-          type="number"
-          name="stockAmount"
-          value={values.stockAmount}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div>
-        <Select
-          title="판매상태"
-          name="saleStatus"
-          multiple="multiple"
-          value={values.saleStatus}
-          onChange={handleInputChange}
-        >
-          <option value="">선택</option>
-          <option value="판매중">판매중</option>
-          <option value="판매완료">판매완료</option>
-        </Select>
-      </div>
-
-      <div>
-        <DetailTextArea>
-          <label>상세설명</label>
-          <textarea
-            name="content"
-            rows={4}
-            cols={40}
+    <form onSubmit={handleSubmit}>
+      <ProductFormStyle>
+        <div>
+          <Select
+            title="카테고리"
+            name="category"
+            value={values.category}
             multiple="multiple"
-            value={values.content}
+            onChange={handleInputChange}
+          >
+            <option value="">선택</option>
+            <option value="일러스트">일러스트</option>
+            <option value="명화">명화</option>
+            <option value="포토그래피">포토그래피</option>
+            <option value="타이포그래피">타이포그래피</option>
+          </Select>
+        </div>
+
+        <div>
+          <Input
+            title="상품명"
+            name="productName"
+            multiple="multiple"
+            value={values.productName}
             onChange={handleInputChange}
           />
-        </DetailTextArea>
-      </div>
+        </div>
 
-      {onCancel && (
-        <button type="button" onClick={onCancel}>
-          취소
+        <div>
+          <Input
+            title="사이즈"
+            name="productSize"
+            multiple="multiple"
+            value={values.productSize}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <Input
+            title="가격"
+            type="number"
+            name="productPrice"
+            multiple="multiple"
+            value={values.productPrice}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <div className="title">이미지1</div>
+          <FileInput
+            name="imgFile1"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile1 || []}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <div className="title">이미지2</div>
+          <FileInput
+            name="imgFile2"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile2 || []}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <div className="title">이미지3</div>
+          <FileInput
+            name="imgFile3"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile3 || []}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <div className="title">이미지4</div>
+          <FileInput
+            name="imgFile4"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile4 || []}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <div className="title">이미지5</div>
+          <FileInput
+            name="imgFile5"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile5 || []}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <Input
+            title="재고량"
+            type="number"
+            name="stockAmount"
+            value={values.stockAmount}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <Select
+            title="판매상태"
+            name="saleStatus"
+            multiple="multiple"
+            value={values.saleStatus}
+            onChange={handleInputChange}
+          >
+            <option value="">선택</option>
+            <option value="판매중">판매중</option>
+            <option value="판매완료">판매완료</option>
+          </Select>
+        </div>
+
+        <div>
+          <DetailTextArea>
+            <label>상세설명</label>
+            <textarea
+              name="content"
+              rows={4}
+              cols={40}
+              multiple="multiple"
+              value={values.content}
+              onChange={handleInputChange}
+            />
+          </DetailTextArea>
+        </div>
+
+        {onCancel && (
+          <button type="button" onClick={onCancel}>
+            취소
+          </button>
+        )}
+        <button type="submit" disabled={isSubmitting}>
+          등록
         </button>
-      )}
-      <button type="submit" disabled={isSubmitting}>
-        등록
-      </button>
-      {submittingError && <p>{submittingError.message}</p>}
-    </ProductFormStyle>
+        {submittingError && <p>{submittingError.message}</p>}
+      </ProductFormStyle>
+    </form>
   );
 }
 

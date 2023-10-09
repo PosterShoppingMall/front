@@ -2,10 +2,31 @@ import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useTable } from "react-table";
 import styled from "styled-components";
 import { COLUMNS } from "./columns";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const ProductTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
+  const navigate = useNavigate();
+
+  const handleEdit = (id) => {
+    navigate(`/product-modification/${id}`);
+  };
+
+  // columns 배열 중 일부 수정(id값으로 받아오기)
+  const columns = useMemo(
+    () => [
+      ...COLUMNS,
+      {
+        id: "edit",
+        accessor: "id",
+        Cell: ({ row }) => (
+          <button onClick={() => handleEdit(row.original.id)}>수정</button>
+        ),
+      },
+    ],
+    []
+  );
+
   // 훅 만들어야 하는데 자꾸 오류나서 일단 여기에 넣음
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -115,7 +136,7 @@ export const ProductTable = () => {
 };
 
 const ProductTableStyle = styled.div`
-  padding-top: 100px;
+  padding-top: 50px;
   table {
     border-collapse: collapse;
     width: 100%;
