@@ -8,7 +8,7 @@ import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
-const Utill = (props) => {
+const Utill = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
