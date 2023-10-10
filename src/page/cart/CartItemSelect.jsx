@@ -8,7 +8,7 @@ const CartItemSelect = ({ id, count }) => {
     const params = {
       id: id,
       body: {
-        cart_cnt: event.target.value,
+        cartCnt: event.target.value,
       },
     };
     patchItemCountInCart(params);

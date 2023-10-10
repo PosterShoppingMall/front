@@ -3,3 +3,5 @@ const User = () => {
 };
 
 export default User;
+
+// 정보 조회  axios get
