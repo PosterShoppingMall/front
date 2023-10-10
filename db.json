@@ -108,5 +108,18 @@
       "content": "",
       "id": 6
     }
+  ],
+  "user": [
+    {
+      "id": 3,
+      "name": "김찬미",
+      "email": "test3@naver.com",
+      "password": "12345678@",
+      "phoneNumber": "01088883333",
+      "postcode": "15234",
+      "roadAddress": "강원도원주시단구동",
+      "detailAddress": "412",
+      "userimg": " 이미지url"
+    }
   ]
 }

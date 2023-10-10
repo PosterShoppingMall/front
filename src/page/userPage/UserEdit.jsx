@@ -1,5 +1,12 @@
 import { useState } from "react";
 import useAxios from "./useAxios";
+import styled from "styled-components";
+
+const EditStyle = styled.div`
+  padding: 200px 0 0 0;
+  width: 1600px;
+  margin: 0 auto;
+`;
 
 const UserEdit = () => {
   const url = "http://localhost:3001/user/3";
@@ -9,20 +16,25 @@ const UserEdit = () => {
   console.log(data);
 
   const [userObjectState, setUserObjectState] = useState({
-    name: data.name,
-    password: data.password,
-    phoneNumber: data.phoneNumber,
-    postcode: data.postcode,
-    roadAddress: data.roadAddress,
-    detailAddress: data.detailAddress,
-    userimg: data.userimg,
+    name: data?.name || "",
+    password: data?.password || "",
+    phoneNumber: data?.phoneNumber || "",
+    postcode: data?.postcode || "",
+    roadAddress: data?.roadAddress || "",
+    detailAddress: data?.detailAddress || "",
+    userimg: data?.userimg || "",
   });
+
+  // 로딩 상태 확인 후 조건부 렌더링
+  if (!loaded) {
+    return <div>Loading...</div>;
+  }
 
   const onChangeHandler = (e, property) => {
     setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
   };
   return (
-    <div>
+    <EditStyle>
       <input
         type="text"
         onChange={(event) => {
@@ -66,7 +78,7 @@ const UserEdit = () => {
         }}
       />
       UserEdit
-    </div>
+    </EditStyle>
   );
 };
 
