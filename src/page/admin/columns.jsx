@@ -1,45 +1,48 @@
 export const COLUMNS = [
   {
-    Header: "",
-    accessor: "product_id",
+    accessor: "id",
   },
   {
     Header: "카테고리",
-    accessor: "category_name",
+    accessor: "category",
   },
   {
     Header: "이미지",
-    accessor: "image1",
+    accessor: "imgFile1",
     Cell: ({ value }) => (
       <img src={value} alt="preview" width="50" height="50" />
     ),
   },
   {
     Header: "상품명",
-    accessor: "product_name",
+    accessor: "productName",
   },
   {
     Header: "사이즈",
-    accessor: "product_size",
+    accessor: "productSize",
   },
   {
     Header: "가격",
-    accessor: "product_price",
+    accessor: "productPrice",
   },
   {
     Header: "재고량",
-    accessor: "stock_amount",
+    accessor: "stockAmount",
   },
   {
     Header: "판매량",
-    accessor: "sales_volume",
+    accessor: "sellAmount",
   },
   {
-    Header: "상세설명",
-    accessor: "product_contents",
+    Header: "판매상태",
+    accessor: "saleStatus",
   },
   {
-    Header: "수정",
-    accessor: "수정",
+    Header: "상품등록일자",
+    accessor: "createdAt",
+  },
+  {
+    Header: "상품수정일자",
+    accessor: "updatedAt",
   },
 ];

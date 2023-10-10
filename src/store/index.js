@@ -18,4 +18,5 @@ export {
   useAddItemToCartMutation,
   useDeleteItemFromCartMutation,
   usePatchItemCountInCartMutation,
+  usePatchEmptyCartMutation,
 } from "./cartApi";

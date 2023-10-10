@@ -3,9 +3,17 @@ import FileInput from "./FileInput";
 import styled from "styled-components";
 import Input from "../../component/common/input";
 import Select from "../../component/common/Select";
+import axios from "axios";
 
-const ProductFormStyle = styled.form`
-  padding: 110px 0 10px 0;
+const ProductFormStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
+  justify-content: center;
+  width: 1600px;
+  margin: auto;
 `;
 
 const DetailTextArea = styled.div`
@@ -30,15 +38,16 @@ const DetailTextArea = styled.div`
 
 const INITIAL_VALUES = {
   category: "",
-  name: "",
-  price: "",
+  productName: "",
+  productSize: "",
+  productPrice: "",
   imgFile1: null,
   imgFile2: null,
   imgFile3: null,
   imgFile4: null,
   imgFile5: null,
-  quantity: "",
-  salesStatus: "",
+  stockAmount: "",
+  saleStatus: "",
   content: "",
 };
 
@@ -59,27 +68,53 @@ function ProductForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // // 유효성 검사
+    // const requiredFields = [
+    //   "category",
+    //   "productName",
+    //   "productSize",
+    //   "productPrice",
+    //   "stockAmount",
+    //   "saleStatus",
+    // ];
+    // for (const field of requiredFields) {
+    //   if (!values[field]) {
+    //     alert(`${field} 값을 채워주세요.`);
+    //     return;
+    //   }
+    // }
     // 폼 데이터 객체 생성, append(필드이름, 필드값)
     const formData = new FormData();
     formData.append("category", values.category);
-    formData.append("name", values.name);
-    formData.append("price", values.price);
+    formData.append("productName", values.productName);
+    formData.append("productSize", values.productSize);
+    formData.append("productPrice", values.productPrice);
     formData.append("imgFile1", values.imgFile1);
     formData.append("imgFile2", values.imgFile2);
     formData.append("imgFile3", values.imgFile3);
     formData.append("imgFile4", values.imgFile4);
     formData.append("imgFile5", values.imgFile5);
-    formData.append("quantity", values.quantity);
-    formData.append("salesStatus", values.salesStatus);
+    formData.append("stockAmount", values.stockAmount);
+    formData.append("saleStatus", values.saleStatus);
     formData.append("content", values.content);
 
     let result;
 
     try {
+      // 엑시오스
+      const jsonData = JSON.stringify(values);
+
+      await axios.post("http://localhost:3001/product", jsonData, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      alert("Data submitted successfully");
+      setValues(INITIAL_VALUES);
       // 에러 처리
       setSubmittingError(null);
       setIsSubmitting(true);
-      result = await onSubmit(formData);
+      // result = await onSubmit(formData);
     } catch (error) {
       setSubmittingError(error);
       return;
@@ -111,132 +146,159 @@ function ProductForm({
   };
 
   return (
-    <ProductFormStyle onSubmit={handleSubmit}>
-      <div>
-        <Select
-          title="카테고리"
-          name="category"
-          value={values.category}
-          onChange={handleInputChange}
-        >
-          <option value="">선택</option>
-          <option value="일러스트">일러스트</option>
-          <option value="명화">명화</option>
-          <option value="포토그래피">포토그래피</option>
-          <option value="타이포그래피">타이포그래피</option>
-        </Select>
-      </div>
+    <form onSubmit={handleSubmit}>
+      <ProductFormStyle>
+        <div>
+          <Select
+            title="카테고리"
+            name="category"
+            value={values.category}
+            multiple="multiple"
+            onChange={handleInputChange}
+          >
+            <option value="">선택</option>
+            <option value="일러스트">일러스트</option>
+            <option value="명화">명화</option>
+            <option value="포토그래피">포토그래피</option>
+            <option value="타이포그래피">타이포그래피</option>
+          </Select>
+        </div>
 
-      <div>
-        <Input
-          title="상품명"
-          name="name"
-          value={values.name}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <Input
+            title="상품명"
+            name="productName"
+            multiple="multiple"
+            value={values.productName}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <Input
-          title="가격"
-          type="number"
-          name="price"
-          value={values.price}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <Input
+            title="사이즈"
+            name="productSize"
+            multiple="multiple"
+            value={values.productSize}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <label>이미지1</label>
-        <FileInput
-          name="imgFile1"
-          initialPreview={initialPreview}
-          value={values.imgFile1 || []}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          <Input
+            title="가격"
+            type="number"
+            name="productPrice"
+            multiple="multiple"
+            value={values.productPrice}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <label>이미지2</label>
-        <FileInput
-          name="imgFile2"
-          initialPreview={initialPreview}
-          value={values.imgFile2 || []}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          <div className="title">이미지1</div>
+          <FileInput
+            name="imgFile1"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile1 || []}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <label>이미지3</label>
-        <FileInput
-          name="imgFile3"
-          initialPreview={initialPreview}
-          value={values.imgFile3 || []}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          <div className="title">이미지2</div>
+          <FileInput
+            name="imgFile2"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile2 || []}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <label>이미지4</label>
-        <FileInput
-          name="imgFile4"
-          initialPreview={initialPreview}
-          value={values.imgFile4 || []}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          <div className="title">이미지3</div>
+          <FileInput
+            name="imgFile3"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile3 || []}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <label>이미지5</label>
-        <FileInput
-          name="imgFile5"
-          initialPreview={initialPreview}
-          value={values.imgFile5 || []}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          <div className="title">이미지4</div>
+          <FileInput
+            name="imgFile4"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile4 || []}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <Input
-          title="재고량"
-          type="number"
-          name="quantity"
-          value={values.quantity}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <div className="title">이미지5</div>
+          <FileInput
+            name="imgFile5"
+            multiple="multiple"
+            initialPreview={initialPreview}
+            value={values.imgFile5 || []}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <Select
-          title="판매상태"
-          name="salesStatus"
-          value={values.salesStatus}
-          onChange={handleInputChange}
-        >
-          <option value="">선택</option>
-          <option value="판매중">판매중</option>
-          <option value="판매완료">판매완료</option>
-        </Select>
-      </div>
+        <div>
+          <Input
+            title="재고량"
+            type="number"
+            name="stockAmount"
+            value={values.stockAmount}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <DetailTextArea>
-          <label>상세설명</label>
-          <textarea name="content" rows={4} cols={40} />
-        </DetailTextArea>
-      </div>
+        <div>
+          <Select
+            title="판매상태"
+            name="saleStatus"
+            multiple="multiple"
+            value={values.saleStatus}
+            onChange={handleInputChange}
+          >
+            <option value="">선택</option>
+            <option value="판매중">판매중</option>
+            <option value="판매완료">판매완료</option>
+          </Select>
+        </div>
 
-      {onCancel && (
-        <button type="button" onClick={onCancel}>
-          취소
+        <div>
+          <DetailTextArea>
+            <label>상세설명</label>
+            <textarea
+              name="content"
+              rows={4}
+              cols={40}
+              multiple="multiple"
+              value={values.content}
+              onChange={handleInputChange}
+            />
+          </DetailTextArea>
+        </div>
+
+        {onCancel && (
+          <button type="button" onClick={onCancel}>
+            취소
+          </button>
+        )}
+        <button type="submit" disabled={isSubmitting}>
+          등록
         </button>
-      )}
-      <button type="submit" disabled={isSubmitting}>
-        확인
-      </button>
-
-      {submittingError && <p>{submittingError.message}</p>}
-    </ProductFormStyle>
+        {submittingError && <p>{submittingError.message}</p>}
+      </ProductFormStyle>
+    </form>
   );
 }
 

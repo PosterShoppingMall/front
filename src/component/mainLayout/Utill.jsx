@@ -5,7 +5,9 @@ import styled from "styled-components";
 import iconSearch from "../../images/iconSearch.png";
 import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
+
 import { NavLink } from "react-router-dom";
+
 import { useFetchCartQuery } from "../../store/cartApi";
 
 const Utill = () => {
