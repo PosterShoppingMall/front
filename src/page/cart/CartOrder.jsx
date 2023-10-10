@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CartOrder = ({ totalAmount }) => {
@@ -5,7 +6,9 @@ const CartOrder = ({ totalAmount }) => {
     <div className="order-info">
       <div>{totalAmount}</div>
       <div>
-        <CommonButton>주문하기</CommonButton>
+        <Link to="/order">
+          <CommonButton>주문하기</CommonButton>
+        </Link>
       </div>
     </div>
   );

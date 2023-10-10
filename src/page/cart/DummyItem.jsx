@@ -6,11 +6,11 @@ const DummyItem = ({ id, name, price, count, ...rest }) => {
   const user = { id: 1 };
   const body = {
     id: id,
-    product_id: id,
-    product_name: name,
-    product_price: price,
-    cart_cnt: 1,
-    cart_product_amount: price * count,
+    productId: id,
+    productName: name,
+    productPrice: price,
+    cartCnt: 1,
+    cartProductAmount: price * count,
   };
 
   const addItemHandler = () => {
