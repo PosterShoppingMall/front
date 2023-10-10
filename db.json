@@ -1,3 +1,112 @@
 {
-  "cart": []
+  "cart": [
+    {
+      "id": 3,
+      "product_id": 3,
+      "product_name": "Ritual",
+      "product_price": 250000,
+      "cart_cnt": "1",
+      "cart_product_amount": 500000
+    },
+    {
+      "id": 8,
+      "product_id": 8,
+      "product_name": "Stephanie Blau",
+      "product_price": 34000,
+      "cart_cnt": "10",
+      "cart_product_amount": 34000
+    }
+  ],
+  "product": [
+    {
+      "category": "타이포그래피",
+      "productName": "asdf",
+      "productSize": "a3",
+      "productPrice": "20000",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "12",
+      "saleStatus": "판매중",
+      "content": "adsf",
+      "id": 1
+    },
+    {
+      "category": "명화",
+      "productName": "x",
+      "productSize": "a3",
+      "productPrice": "600000",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "29",
+      "saleStatus": "판매중",
+      "content": "asdf",
+      "id": 2
+    },
+    {
+      "category": "",
+      "productName": "",
+      "productSize": "",
+      "productPrice": "",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "",
+      "saleStatus": "",
+      "content": "",
+      "id": 3
+    },
+    {
+      "category": "",
+      "productName": "",
+      "productSize": "",
+      "productPrice": "",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "",
+      "saleStatus": "",
+      "content": "",
+      "id": 4
+    },
+    {
+      "category": "일러스트",
+      "productName": "x",
+      "productSize": "a3",
+      "productPrice": "12000",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "5",
+      "saleStatus": "판매중",
+      "content": "",
+      "id": 5
+    },
+    {
+      "category": "",
+      "productName": "",
+      "productSize": "",
+      "productPrice": "",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "",
+      "saleStatus": "",
+      "content": "",
+      "id": 6
+    }
+  ]
 }

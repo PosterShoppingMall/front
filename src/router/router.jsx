@@ -16,6 +16,8 @@ import Cart from "../page/cart/Cart";
 import ListDeatilPage from "../page/detail/ListDeatilPage";
 import ProductForm from "../page/admin/ProductForm";
 import ProductManagement from "../page/admin/ProductManagement";
+import ProductModification from "../page/admin/ProductModification";
+import ProductRegistration from "../page/admin/ProductRegistration";
 import Order from "../page/order/Order";
 
 const router = createBrowserRouter([
@@ -79,7 +81,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/product-form",
-        element: <ProductForm />,
+        element: <ProductRegistration />,
+      },
+      {
+        path: "/product-modification/:id",
+        element: <ProductModification />,
       },
       {
         path: "/order",

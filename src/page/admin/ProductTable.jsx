@@ -1,12 +1,56 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useTable } from "react-table";
-import MOCK_DATA from "./MOCK_DATA.json";
-import { COLUMNS } from "./columns";
 import styled from "styled-components";
+import { COLUMNS } from "./columns";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const ProductTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+  const navigate = useNavigate();
+
+  const handleEdit = (id) => {
+    navigate(`/product-modification/${id}`);
+  };
+
+  // columns 배열 중 일부 수정(id값으로 받아오기)
+  const columns = useMemo(
+    () => [
+      ...COLUMNS,
+      {
+        id: "edit",
+        accessor: "id",
+        Cell: ({ row }) => (
+          <button onClick={() => handleEdit(row.original.id)}>수정</button>
+        ),
+      },
+    ],
+    []
+  );
+
+  // 훅 만들어야 하는데 자꾸 오류나서 일단 여기에 넣음
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:3001/product");
+        const data = response.data;
+
+        const testData = Object.values(data);
+
+        // 변환한 데이터를 상태(state)에 저장
+        setData(testData);
+        console.log("매핑된 데이터", testData);
+      } catch (error) {
+        console.error("데이터를 가져오는데 실패했습니다.", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // data가 없는 경우 예외 처리
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   const {
     getTableProps,
@@ -92,7 +136,7 @@ export const ProductTable = () => {
 };
 
 const ProductTableStyle = styled.div`
-  padding-top: 100px;
+  padding-top: 50px;
   table {
     border-collapse: collapse;
     width: 100%;

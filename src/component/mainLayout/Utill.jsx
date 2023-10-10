@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import iconSearch from "../../images/iconSearch.png";
-import iconProfile from "../../images/iconProfile.png";
-import iconShoppingCart from "../../images/iconShoppingCart.png";
+import iconSearch from '../../images/iconSearch.png';
+import iconProfile from '../../images/iconProfile.png';
+import iconShoppingCart from '../../images/iconShoppingCart.png';
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import { useFetchCartQuery } from "../../store";
+import { useFetchCartQuery } from '../../store/cartApi';
+
 const Utill = () => {
   const { data, error, isLoading } = useFetchCartQuery();
   let totalQuantity = 0;
   if (error) {
-    console.log("util fetchcart error");
+    console.log('util fetchcart error');
   } else if (!isLoading) {
     totalQuantity = data.length;
   }
@@ -105,7 +106,7 @@ const Modal = styled.div`
   left: 50%;
   z-index: 100;
 
-  input[type="search"] {
+  input[type='search'] {
     width: 95%;
     border-top: none;
     border-left: none;
@@ -118,14 +119,14 @@ const Modal = styled.div`
     border-bottom: solid 1px #fff;
     text-align: center;
     padding: 20px 20px;
-    font-family: "NanumSquare";
+    font-family: 'NanumSquare';
     font-weight: 700;
     font-size: 20px;
     color: #fff;
   }
 
-  input[type="search"]::placeholder {
-    font-family: "NanumSquare";
+  input[type='search']::placeholder {
+    font-family: 'NanumSquare';
     font-weight: 700;
     font-size: 20px;
     color: #fff;
@@ -133,7 +134,7 @@ const Modal = styled.div`
 `;
 
 const CloseBtn = styled.div`
-  font-family: "NanumSquare";
+  font-family: 'NanumSquare';
   font-weight: 700;
   font-size: 50px;
   position: absolute;
