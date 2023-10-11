@@ -88,7 +88,6 @@ const handleSubmit = (e) => {
 
   let newErrorState = {
     user: formData.user === '',
-    email: !formData.email.includes('@'),
     password: formData.password.length < 8,
     confirmPassword: formData.password !== formData.confirmPassword,
     email: !formData.email.includes('@'),

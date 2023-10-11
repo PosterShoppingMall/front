@@ -9,15 +9,20 @@ const UserEdit = () => {
   console.log(data);
 
   const [userObjectState, setUserObjectState] = useState({
-    name: data.name,
-    password: data.password,
-    phoneNumber: data.phoneNumber,
-    postcode: data.postcode,
-    roadAddress: data.roadAddress,
-    detailAddress: data.detailAddress,
-    userimg: data.userimg,
+    name: data?.name || "",
+    password: data?.password || "",
+    phoneNumber: data?.phoneNumber || "",
+    postcode: data?.postcode || "",
+    roadAddress: data?.roadAddress || "",
+    detailAddress: data?.detailAddress || "",
+    userimg: data?.userimg || ""
   });
-
+  
+  // 로딩 상태 확인 후 조건부 렌더링
+  if (!loaded) {
+    return <div>Loading...</div>;
+  }
+  
   const onChangeHandler = (e, property) => {
     setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
   };
