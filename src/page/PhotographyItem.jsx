@@ -12,7 +12,6 @@ const PhotoItem = () => {
       <H3Title data-aos="fade-up">포토그래피</H3Title>
       <ListPageFilter />
       <ListPageItem />
-      <ListPagination />
     </ListWrap>
   );
 };

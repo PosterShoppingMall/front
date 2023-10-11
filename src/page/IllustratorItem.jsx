@@ -13,7 +13,6 @@ const IllustratorItem = () => {
       <H3Title data-aos="fade-up">일러스트</H3Title>
       <ListPageFilter />
       <ListPageItem />
-      <ListPagination />
     </ListWrap>
   );
 };
