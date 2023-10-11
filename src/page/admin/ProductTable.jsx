@@ -20,7 +20,9 @@ export const ProductTable = () => {
         id: "edit",
         accessor: "id",
         Cell: ({ row }) => (
-          <button onClick={() => handleEdit(row.original.id)}>수정</button>
+          <TableButton onClick={() => handleEdit(row.original.id)}>
+            수정
+          </TableButton>
         ),
       },
     ],
@@ -107,36 +109,39 @@ export const ProductTable = () => {
       {/* 페이지네이션 */}
       <div className="pagination">
         {/* 이전 페이지 그룹 버튼 */}
-        <button
+        <TableButton
           onClick={() => movePageGroup("prev")}
           disabled={pageRangeStartIndex === 0}
         >
           {"<"}
-        </button>
+        </TableButton>
 
         {/* 페이징 숫자 목록, 최대 5개의 페이지 번호 생성, 마지막 페이지 그룹에서는 남은 페이지 수만큼만 버튼 생성 */}
         {[...Array(Math.min(5, pageCount - pageRangeStartIndex))].map(
           (x, i) => (
-            <button key={i} onClick={() => gotoPage(pageRangeStartIndex + i)}>
+            <TableButton
+              key={i}
+              onClick={() => gotoPage(pageRangeStartIndex + i)}
+            >
               {pageRangeStartIndex + i + 1}
-            </button>
+            </TableButton>
           )
         )}
 
         {/* 다음 페이지 그룹 버튼 */}
-        <button
+        <TableButton
           onClick={() => movePageGroup("next")}
           disabled={pageRangeStartIndex >= pageCount - 5}
         >
           {">"}
-        </button>
+        </TableButton>
       </div>
     </ProductTableStyle>
   );
 };
 
 const ProductTableStyle = styled.div`
-  padding-top: 50px;
+  padding: 50px 0 50px 0;
   table {
     border-collapse: collapse;
     width: 100%;
@@ -153,8 +158,16 @@ const ProductTableStyle = styled.div`
     background-color: rgba(51, 51, 51, 0.5);
   }
   th {
-    background-color: #04aa6d;
+    background-color: #02c75a;
     color: white;
     text-align: center;
   }
+`;
+
+const TableButton = styled.button`
+  background: #919191;
+  color: #fff;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
 `;

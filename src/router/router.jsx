@@ -75,11 +75,11 @@ const router = createBrowserRouter([
       },
       // 추후 Protect Route 기능 추가 예정
       {
-        path: "/product-management",
+        path: "/admin/product-management",
         element: <ProductManagement />,
       },
       {
-        path: "/product-form",
+        path: "/admin/product-form",
         element: <ProductRegistration />,
       },
       {
