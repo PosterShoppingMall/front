@@ -12,16 +12,73 @@ const ProductFormStyle = styled.div`
   align-content: center;
   align-items: flex-start;
   justify-content: center;
-  width: 1600px;
+  width: 600px;
   margin: auto;
 `;
 
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 18px;
+    margin-top: 30px;
+  }
+
+  button.submitBtn {
+    background: #333;
+    color: #fff;
+    margin-right: 10px;
+  }
+`;
+
+const FormListBox = styled.div`
+  width: 100%;
+  padding-bottom: 10px;
+  div.title {
+    width: 15%;
+  }
+
+  input[type="file"] {
+    width: 80%;
+  }
+`;
+
+const FormFileListBox = styled.div`
+  width: 100%;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+
+  div.title {
+    width: 15%;
+    font-size: 18px;
+  }
+
+  input[type="file"] {
+    padding: 0 0 0 8px;
+  }
+`;
+
 const DetailTextArea = styled.div`
+  padding: 20px 0 0 0;
+
   label {
     font-family: "NanumSquare";
     font-weight: 700;
     font-size: 18px;
     padding: 7px 10px 0 0;
+    display: inline-block;
+    width: 15%;
+  }
+
+  textarea {
+    width: 80%;
+    vertical-align: middle;
   }
 `;
 
@@ -148,7 +205,7 @@ function ProductForm({
   return (
     <form onSubmit={handleSubmit}>
       <ProductFormStyle>
-        <div>
+        <FormListBox>
           <Select
             title="카테고리"
             name="category"
@@ -162,9 +219,9 @@ function ProductForm({
             <option value="포토그래피">포토그래피</option>
             <option value="타이포그래피">타이포그래피</option>
           </Select>
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormListBox>
           <Input
             title="상품명"
             name="productName"
@@ -172,9 +229,9 @@ function ProductForm({
             value={values.productName}
             onChange={handleInputChange}
           />
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormListBox>
           <Input
             title="사이즈"
             name="productSize"
@@ -182,9 +239,9 @@ function ProductForm({
             value={values.productSize}
             onChange={handleInputChange}
           />
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormListBox>
           <Input
             title="가격"
             type="number"
@@ -193,9 +250,9 @@ function ProductForm({
             value={values.productPrice}
             onChange={handleInputChange}
           />
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormFileListBox>
           <div className="title">이미지1</div>
           <FileInput
             name="imgFile1"
@@ -204,9 +261,9 @@ function ProductForm({
             value={values.imgFile1 || []}
             onChange={handleChange}
           />
-        </div>
+        </FormFileListBox>
 
-        <div>
+        <FormFileListBox>
           <div className="title">이미지2</div>
           <FileInput
             name="imgFile2"
@@ -215,9 +272,9 @@ function ProductForm({
             value={values.imgFile2 || []}
             onChange={handleChange}
           />
-        </div>
+        </FormFileListBox>
 
-        <div>
+        <FormFileListBox>
           <div className="title">이미지3</div>
           <FileInput
             name="imgFile3"
@@ -226,9 +283,9 @@ function ProductForm({
             value={values.imgFile3 || []}
             onChange={handleChange}
           />
-        </div>
+        </FormFileListBox>
 
-        <div>
+        <FormFileListBox>
           <div className="title">이미지4</div>
           <FileInput
             name="imgFile4"
@@ -237,9 +294,9 @@ function ProductForm({
             value={values.imgFile4 || []}
             onChange={handleChange}
           />
-        </div>
+        </FormFileListBox>
 
-        <div>
+        <FormFileListBox>
           <div className="title">이미지5</div>
           <FileInput
             name="imgFile5"
@@ -248,9 +305,9 @@ function ProductForm({
             value={values.imgFile5 || []}
             onChange={handleChange}
           />
-        </div>
+        </FormFileListBox>
 
-        <div>
+        <FormListBox>
           <Input
             title="재고량"
             type="number"
@@ -258,9 +315,9 @@ function ProductForm({
             value={values.stockAmount}
             onChange={handleInputChange}
           />
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormListBox>
           <Select
             title="판매상태"
             name="saleStatus"
@@ -272,9 +329,9 @@ function ProductForm({
             <option value="판매중">판매중</option>
             <option value="판매완료">판매완료</option>
           </Select>
-        </div>
+        </FormListBox>
 
-        <div>
+        <FormListBox>
           <DetailTextArea>
             <label>상세설명</label>
             <textarea
@@ -286,17 +343,19 @@ function ProductForm({
               onChange={handleInputChange}
             />
           </DetailTextArea>
-        </div>
+        </FormListBox>
 
-        {onCancel && (
-          <button type="button" onClick={onCancel}>
-            취소
+        <BtnWrap>
+          {onCancel && (
+            <button className="cancelBtn" type="button" onClick={onCancel}>
+              취소
+            </button>
+          )}
+          <button className="submitBtn" type="submit" disabled={isSubmitting}>
+            등록
           </button>
-        )}
-        <button type="submit" disabled={isSubmitting}>
-          등록
-        </button>
-        {submittingError && <p>{submittingError.message}</p>}
+          {submittingError && <p>{submittingError.message}</p>}
+        </BtnWrap>
       </ProductFormStyle>
     </form>
   );

@@ -12,7 +12,6 @@ const TypographyItem = () => {
       <H3Title data-aos="fade-up">타이포그래피</H3Title>
       <ListPageFilter />
       <ListPageItem />
-      <ListPagination />
     </ListWrap>
   );
 };
