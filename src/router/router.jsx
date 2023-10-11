@@ -19,6 +19,7 @@ import ProductManagement from "../page/admin/ProductManagement";
 import ProductModification from "../page/admin/ProductModification";
 import ProductRegistration from "../page/admin/ProductRegistration";
 import Order from "../page/order/Order";
+import OrderHistory from "../page/userPage/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element:<Login /> ,
+        element: <Login />,
       },
       {
         path: "/register",
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: "/order",
         element: <Order />,
+      },
+      {
+        path: "/order-history",
+        element: <OrderHistory />,
       },
     ],
   },

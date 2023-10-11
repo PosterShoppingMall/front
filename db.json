@@ -5,7 +5,7 @@
       "product_id": 3,
       "product_name": "Ritual",
       "product_price": 250000,
-      "cart_cnt": "8",
+      "cart_cnt": "1",
       "cart_product_amount": 500000
     },
     {
@@ -13,7 +13,7 @@
       "product_id": 8,
       "product_name": "Stephanie Blau",
       "product_price": 34000,
-      "cart_cnt": "10",
+      "cart_cnt": 1,
       "cart_product_amount": 34000
     }
   ],
@@ -109,17 +109,16 @@
       "id": 6
     }
   ],
-  "user": [
+  "orders": [
     {
-      "userId": 3,
-      "name": "김찬미",
-      "email": "test3@naver.com",
-      "password": "12345678@",
-      "phoneNumber": "01088883333",
-      "postcode": "15234",
-      "roadAddress": "강원도원주시단구동",
-      "detailAddress": "412",
-      "userimg": " 이미지url"
+      "orderId": 1,
+      "itemList": [
+        {
+          "itemId": "a1",
+          "itemName": "Item A",
+          "quantity": 2
+        }
+      ]
     }
   ]
 }
