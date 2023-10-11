@@ -6,12 +6,14 @@ const SelectBox = styled.div`
   display: flex;
   justify-content: flex-start;
   span.title {
+    width: 15%;
     font-family: "NanumSquare";
     font-weight: 700;
     font-size: 18px;
     padding: 7px 10px 0 0;
   }
   select {
+    width: 80%;
     padding: 7px 5px;
     box-sizing: border-box;
   }

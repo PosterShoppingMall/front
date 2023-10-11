@@ -12,7 +12,6 @@ const AllItem = () => {
       <H3Title data-aos="fade-up">전체상품</H3Title>
       <ListPageFilter />
       <ListPageItem />
-      <ListPagination />
     </ListWrap>
   );
 };

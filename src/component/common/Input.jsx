@@ -4,13 +4,15 @@ const InputBox = styled.div`
   padding: 12px 7px 0 0;
   border-radius: 4px;
   span.title {
+    width: 15%;
     font-family: "NanumSquare";
     font-weight: 700;
     font-size: 18px;
     padding: 7px 10px 0 0;
+    display: inline-block;
   }
   input {
-    width: 5rem;
+    width: 80%;
     height: 1.5rem;
   }
 `;

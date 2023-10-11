@@ -13,7 +13,6 @@ const FamousPainting = () => {
       <H3Title data-aos="fade-up">명화</H3Title>
       <ListPageFilter />
       <ListPageItem />
-      <ListPagination />
     </ListWrap>
   );
 };
