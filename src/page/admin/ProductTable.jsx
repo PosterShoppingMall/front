@@ -34,7 +34,9 @@ export const ProductTable = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:3001/product");
+        const response = await axios.get(
+          "http://52.78.184.121:8080/369/products"
+        );
         const data = response.data;
 
         const testData = Object.values(data);

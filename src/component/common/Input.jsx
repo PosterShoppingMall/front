@@ -14,12 +14,13 @@ const InputBox = styled.div`
   input {
     width: 80%;
     height: 1.5rem;
+    border: ${({ error }) => (error ? "1px solid red" : "1px solid #ced4da")};
   }
 `;
 
-const Input = ({ title, type = "text", name, value, onChange }) => {
+const Input = ({ title, type = "text", name, value, onChange, error }) => {
   return (
-    <InputBox>
+    <InputBox error={error}>
       <span className="title">{title}</span>
       <input type={type} name={name} value={value} onChange={onChange} />
     </InputBox>

@@ -1,5 +1,4 @@
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useMatch, Link } from "react-router-dom";
 import styled from "styled-components";
 import AdminSidebarItem from "./AdminSidebarItem";
 
@@ -10,6 +9,7 @@ const Sidebar = styled.div`
   align-items: flex-end;
   width: 20%;
 `;
+
 const Menu = styled.div`
   margin-top: 30px;
   width: 200px;
@@ -18,7 +18,7 @@ const Menu = styled.div`
   gap: 20px;
 `;
 
-const StyledLink = styled(NavLink)`
+const StyledLink = styled(Link)`
   color: gray;
   text-decoration: none;
 
@@ -27,9 +27,7 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const AdminSidebar = () => {
-  const pathName = useLocation().pathname;
-
+function AdminSidebar() {
   const menus = [
     { name: "상품관리", path: "/admin/product-management" },
     { name: "상품등록", path: "/admin/product-form" },
@@ -38,19 +36,21 @@ const AdminSidebar = () => {
   return (
     <Sidebar>
       <Menu>
-        {menus.map((menu, index) => {
+        {menus.map((menu) => {
+          const match = useMatch(menu.path);
           return (
-            <StyledLink to={menu.path} exact activeClassName="active">
-              <AdminSidebarItem
-                menu={menu}
-                isActive={pathName === menu.path ? true : false}
-              />
+            <StyledLink
+              to={menu.path}
+              className={match ? "active" : ""}
+              key={menu.name}
+            >
+              <AdminSidebarItem menu={menu} />
             </StyledLink>
           );
         })}
       </Menu>
     </Sidebar>
   );
-};
+}
 
 export default AdminSidebar;
