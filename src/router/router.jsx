@@ -19,6 +19,7 @@ import ProductModification from "../page/admin/ProductModification";
 import ProductRegistration from "../page/admin/ProductRegistration";
 import Order from "../page/order/Order";
 import OrderHistory from "../page/OrderHistory/OrderHistory";
+import Admin from "../page/admin/Admin";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
         element: <ListDeatilPage />,
       },
       // 추후 Protect Route 기능 추가 예정
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
       {
         path: "/admin/product-management",
         element: <ProductManagement />,

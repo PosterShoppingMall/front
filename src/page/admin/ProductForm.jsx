@@ -150,6 +150,7 @@ function ProductForm({
 
     setError(newErrorState);
 
+    // 에러 발생 시 폼 제출을 막음
     if (Object.values(newErrorState).some((isError) => isError)) return;
 
     const formData = new FormData();
@@ -170,10 +171,9 @@ function ProductForm({
 
     try {
       // 엑시오스
-      const jsonData = JSON.stringify(values);
 
-      await axios.post("http://52.78.184.121:8080/369/admin", jsonData, {
-        headers: { "Content-Type": "application/json" },
+      await axios.post("http://52.78.184.121:8080/369/admin/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       alert("Data submitted successfully");
