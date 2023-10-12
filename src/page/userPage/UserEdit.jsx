@@ -36,20 +36,17 @@ const UserEdit = () => {
 
   console.log("data:", data);
 
-  useEffect(
-    setUserObjectState(
-      {
-        name: data?.name,
-        password: data?.password,
-        phoneNumber: data?.phoneNumber,
-        postCode: data?.postCode,
-        roadAddress: data?.roadAddress,
-        detailAddress: data?.detailAddress,
-        userImg: data?.userImg,
-      },
-      [data]
-    )
-  );
+  useEffect(() => {
+    setUserObjectState({
+      name: data?.name || "",
+      password: data?.password || "",
+      phoneNumber: data?.phoneNumber || "",
+      postCode: data?.postCode || "",
+      roadAddress: data?.roadAddress || "",
+      detailAddress: data?.detailAddress || "",
+      userImg: data?.userImg || "",
+    });
+  }, [data]);
 
   // 로딩 상태 확인 후 조건부 렌더링
   if (!loaded) {
