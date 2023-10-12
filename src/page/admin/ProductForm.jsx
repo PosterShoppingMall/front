@@ -352,7 +352,7 @@ function ProductForm({
             </button>
           )}
           <button className="submitBtn" type="submit" disabled={isSubmitting}>
-            등록
+            확인
           </button>
           {submittingError && <p>{submittingError.message}</p>}
         </BtnWrap>
