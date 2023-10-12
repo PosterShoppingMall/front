@@ -5,7 +5,7 @@
       "productId": 3,
       "productName": "Ritual",
       "productPrice": 250000,
-      "cartCnt": "8",
+      "cartCnt": "1",
       "cartProductAmount": 500000
     },
     {
@@ -332,6 +332,33 @@
       "productId": "21",
       "productName": "(souffle) Monday",
       "productPrice": "52,000",
+      "imageUrl": "/src/images/listcataegoryImg03.jpg"
+    }
+  ],
+  "priceDesc": [
+    {
+      "id": "1",
+      "productId": "1",
+      "productName": "priceDesc",
+      "productPrice": "32,000",
+      "imageUrl": "/src/images/listcataegoryImg01.jpg"
+    }
+  ],
+  "priceAsc": [
+    {
+      "id": "1",
+      "productId": "1",
+      "productName": "priceAsc",
+      "productPrice": "32,000",
+      "imageUrl": "/src/images/listcataegoryImg02.jpg"
+    }
+  ],
+  "best": [
+    {
+      "id": "1",
+      "productId": "1",
+      "productName": "best",
+      "productPrice": "32,000",
       "imageUrl": "/src/images/listcataegoryImg03.jpg"
     }
   ]

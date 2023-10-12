@@ -12,7 +12,7 @@ const ListDeatilPage = () => {
           <DetailPicture />
           <DetailPurchase />
         </div>
-        <DetailProductInfor />
+        {/* <DetailProductInfor /> */}
       </div>
     </DeTailWrap>
   );

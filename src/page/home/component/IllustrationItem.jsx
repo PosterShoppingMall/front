@@ -14,7 +14,7 @@ import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
 import { Link } from "react-router-dom";
 
-const IllustrationItem = () => {
+const IllustrationItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
       Next
@@ -89,10 +89,10 @@ const IllustrationItem = () => {
       </H2Title>
 
       <IllustrationSlider {...settings}>
-        {items &&
-          items.map((item, key) => (
+        {props.Illustratitems &&
+          props.Illustratitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imgSrc} />
+              <Images imgSrc={item.imageUrl} />
             </BnList>
           ))}
       </IllustrationSlider>

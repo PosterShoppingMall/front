@@ -56,18 +56,17 @@ const DetailPicture = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/content/${productId}`)
+      .get(`http://52.78.184.121:8080/369/product/${productId}`)
       .then((response) => {
         const data = response.data;
-        const imageUrl = data.imageUrl;
+        const imageUrl = data.productImages[0].imagePath;
         setItemImageUrl(imageUrl);
+        console.log("매핑된 데이터", data);
       })
       .catch((error) => {
         console.error("데이터를 가져오는데 실패했습니다.", error);
       });
   }, [productId]);
-
-  console.log(itemImageUrl);
 
   return (
     <PictureContents imageUrl={itemImageUrl}>

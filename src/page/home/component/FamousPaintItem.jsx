@@ -14,7 +14,7 @@ import H2SubText from "./mainStyledComponent/H2SubText";
 import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
 
-const FamousPaintItem = () => {
+const FamousPaintItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
       Next
@@ -89,10 +89,10 @@ const FamousPaintItem = () => {
       </H2Title>
 
       <FamousPaintSlider {...settings}>
-        {items &&
-          items.map((item, key) => (
+        {props.FamousPaintitems &&
+          props.FamousPaintitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imgSrc} />
+              <Images imgSrc={item.imageUrl} />
             </BnList>
           ))}
       </FamousPaintSlider>
