@@ -19,7 +19,9 @@ function ProductModification({ history }) {
   const loadProduct = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3001/product/" + id);
+      const response = await axios.get(
+        "http://52.78.184.121:8080/369/product/" + id
+      );
       setProduct(response.data);
     } catch (error) {
       setError(error);
@@ -32,11 +34,10 @@ function ProductModification({ history }) {
   const handleSubmit = async (formData) => {
     try {
       setLoading(true);
-      await axios.put("http://localhost:3001/product/" + id, formData, {
-        headers: { "Content-Type": "application/json" },
-        // headers: { "Content-Type": "multipart/form-data" },
+      await axios.put("http://52.78.184.121:8080/369/product/" + id, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      history.push(Navigate("/ProductManagement"));
+      return <Navigate to="/ProductManagement" replace />;
     } catch (error) {
       setError(error);
     } finally {

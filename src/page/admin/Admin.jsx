@@ -1,7 +1,8 @@
 import React from "react";
+import ProductManagement from "./ProductManagement";
 
 const Admin = () => {
-  return <h1>Admin</h1>;
+  return <ProductManagement />;
 };
 
 export default Admin;

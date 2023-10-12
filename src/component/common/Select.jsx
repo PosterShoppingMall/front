@@ -16,12 +16,13 @@ const SelectBox = styled.div`
     width: 80%;
     padding: 7px 5px;
     box-sizing: border-box;
+    border: ${({ error }) => (error ? "1px solid red" : "1px solid #ced4da")};
   }
 `;
 
-const Select = ({ title, name, value, onChange, children }) => {
+const Select = ({ title, name, value, onChange, children, error }) => {
   return (
-    <SelectBox>
+    <SelectBox error={error}>
       <span className="title">{title}</span>
       <select name={name} value={value} onChange={onChange}>
         {children}

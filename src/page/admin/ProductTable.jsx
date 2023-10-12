@@ -34,14 +34,15 @@ export const ProductTable = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:3001/product");
+        const response = await axios.get(
+          "http://52.78.184.121:8080/369/admin/"
+        );
         const data = response.data;
+        // data가 이미 배열인 경우 그대로 사용하고, 그렇지 않은 경우 빈 배열로 설정
+        const arrayData = Object.values(data);
 
-        const testData = Object.values(data);
-
-        // 변환한 데이터를 상태(state)에 저장
-        setData(testData);
-        console.log("매핑된 데이터", testData);
+        setData(arrayData);
+        console.log("매핑된 데이터", data);
       } catch (error) {
         console.error("데이터를 가져오는데 실패했습니다.", error);
       }
