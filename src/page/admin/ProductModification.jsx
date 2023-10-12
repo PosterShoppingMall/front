@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductForm from "./ProductForm";
 import { Navigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import H3Title from "../listStyledComponent/H3Title";
+import AdminSidebar from "../../component/adminLayout/AdminSidebar";
 
 function ProductModification({ history }) {
   // url에서 상품 id 가져옴
@@ -50,14 +53,27 @@ function ProductModification({ history }) {
       {loading && <div>Loading...</div>}
       {error && <div>Error loading product: {error.message}</div>}
       {product && (
-        <ProductForm
-          initialValues={product}
-          initialPreview={product.preview} // 이미지 미리보기
-          onSubmit={handleSubmit}
-        />
+        <ListWrap>
+          <AdminSidebar />
+          <div>
+            <H3Title data-aos="fade-up">상품수정</H3Title>
+            <ProductForm
+              initialValues={product}
+              initialPreview={product.preview} // 이미지 미리보기
+              onSubmit={handleSubmit}
+            />
+          </div>
+        </ListWrap>
       )}
     </>
   );
 }
 
 export default ProductModification;
+
+const ListWrap = styled.div`
+  display: flex;
+  padding: 200px 0 0 0;
+  width: 1600px;
+  margin: 0 auto;
+`;

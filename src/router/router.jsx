@@ -1,5 +1,4 @@
 import MainLayout from "../component/mainLayout/MainLayout";
-
 import { createBrowserRouter } from "react-router-dom";
 
 import Home from "../page/home/Home";
@@ -14,12 +13,11 @@ import TypographyItem from "../page/TypographyItem";
 import FamousPainting from "../page/FamousPainting";
 import Cart from "../page/cart/Cart";
 import ListDeatilPage from "../page/detail/ListDeatilPage";
-import ProductForm from "../page/admin/ProductForm";
 import ProductManagement from "../page/admin/ProductManagement";
 import ProductModification from "../page/admin/ProductModification";
 import ProductRegistration from "../page/admin/ProductRegistration";
 import Order from "../page/order/Order";
-import OrderHistory from "../page/userPage/OrderHistory";
+import OrderHistory from "../page/OrderHistory/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -77,11 +75,11 @@ const router = createBrowserRouter([
       },
       // 추후 Protect Route 기능 추가 예정
       {
-        path: "/product-management",
+        path: "/admin/product-management",
         element: <ProductManagement />,
       },
       {
-        path: "/product-form",
+        path: "/admin/product-form",
         element: <ProductRegistration />,
       },
       {
