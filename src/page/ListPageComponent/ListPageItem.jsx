@@ -1,42 +1,43 @@
 import React from "react";
 import "aos/dist/aos.css";
 import ListItemExpensive from "./ListItemExpensive";
-import axios from "axios";
-import { useEffect } from "react";
 import { useState } from "react";
 import ListFlex from "../listStyledComponent/ListFlex";
-import { Link } from "react-router-dom";
 import bnArrow from "../../images/bnArrow.png";
 import styled from "styled-components";
+import ListPagination from "./ListPagination";
 
 const ListPageItem = (props) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
   // 페이지당 데이터 개수에 따른 페이지 수 계산
   const totalPages = props.items
-    ? Math.ceil(props.items.length / props.itemsPerPage)
+    ? Math.ceil(props.items.length / itemsPerPage)
     : 0;
 
   // 현재 페이지에 해당하는 데이터 필터링
-  const startIndex = (props.currentPage - 1) * props.itemsPerPage;
-  const endIndex = props.currentPage * props.itemsPerPage;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = currentPage * itemsPerPage;
   const currentData = props.items
     ? props.items.slice(startIndex, endIndex)
     : [];
 
   const handlePageChange = (newPage) => {
-    props.setCurrentPage(newPage);
+    setCurrentPage(newPage);
   };
 
   // 이전 페이지로 이동
   const goToPrevPage = () => {
-    if (props.currentPage > 1) {
-      handlePageChange(props.currentPage - 1);
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
     }
   };
 
   // 다음 페이지로 이동
   const goToNextPage = () => {
-    if (props.currentPage < totalPages) {
-      handlePageChange(props.currentPage + 1);
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
     }
   };
 
@@ -60,7 +61,7 @@ const ListPageItem = (props) => {
           <Number key={pageNumber}>
             <button
               className={`NumberLink ${
-                props.currentPage === pageNumber ? "active" : ""
+                currentPage === pageNumber ? "active" : ""
               }`}
               onClick={() => handlePageChange(pageNumber)}
             >

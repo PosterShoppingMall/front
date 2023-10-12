@@ -7,18 +7,15 @@ import "aos/dist/aos.css";
 import ListWrap from "./listStyledComponent/ListWrap";
 import H3Title from "./listStyledComponent/H3Title";
 import axios from "axios";
+import ListPagination from "./ListPageComponent/ListPagination";
 
 const BestItem = () => {
   const [items, setItems] = useState(null);
-  const itemsPerPage = 20;
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const componentProps = {
     items: items,
-    itemsPerPage: itemsPerPage,
     data: data,
-    currentPage: currentPage,
   };
 
   useEffect(() => {
