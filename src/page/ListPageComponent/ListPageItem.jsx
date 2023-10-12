@@ -9,52 +9,34 @@ import { Link } from "react-router-dom";
 import bnArrow from "../../images/bnArrow.png";
 import styled from "styled-components";
 
-const ListPageItem = () => {
-  const [items, setItems] = useState(null);
-  const itemsPerPage = 20;
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    // Axios를 사용하여 데이터를 가져옵니다.
-    axios
-      .get("http://localhost:3001/content")
-      .then((response) => {
-        // API에서 받아온 데이터를 객체에서 배열로 변환
-        const data = response.data;
-        const testData = Object.values(data);
-        // 변환한 데이터를 상태(state)에 저장
-        setItems(testData);
-        console.log("매핑된 데이터", testData);
-      })
-      .catch((error) => {
-        console.error("데이터를 가져오는데 실패했습니다.", error);
-      });
-  }, []);
-
+const ListPageItem = (props) => {
   // 페이지당 데이터 개수에 따른 페이지 수 계산
-  const totalPages = items ? Math.ceil(items.length / itemsPerPage) : 0;
+  const totalPages = props.items
+    ? Math.ceil(props.items.length / props.itemsPerPage)
+    : 0;
 
   // 현재 페이지에 해당하는 데이터 필터링
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = currentPage * itemsPerPage;
-  const currentData = items ? items.slice(startIndex, endIndex) : [];
+  const startIndex = (props.currentPage - 1) * props.itemsPerPage;
+  const endIndex = props.currentPage * props.itemsPerPage;
+  const currentData = props.items
+    ? props.items.slice(startIndex, endIndex)
+    : [];
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    props.setCurrentPage(newPage);
   };
 
   // 이전 페이지로 이동
   const goToPrevPage = () => {
-    if (currentPage > 1) {
-      handlePageChange(currentPage - 1);
+    if (props.currentPage > 1) {
+      handlePageChange(props.currentPage - 1);
     }
   };
 
   // 다음 페이지로 이동
   const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      handlePageChange(currentPage + 1);
+    if (props.currentPage < totalPages) {
+      handlePageChange(props.currentPage + 1);
     }
   };
 
@@ -78,7 +60,7 @@ const ListPageItem = () => {
           <Number key={pageNumber}>
             <button
               className={`NumberLink ${
-                currentPage === pageNumber ? "active" : ""
+                props.currentPage === pageNumber ? "active" : ""
               }`}
               onClick={() => handlePageChange(pageNumber)}
             >

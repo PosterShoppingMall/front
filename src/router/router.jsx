@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         element: <TypographyItem />,
       },
       {
-        path: "/product/:product_id",
+        path: "/product/:productId",
         element: <ListDeatilPage />,
       },
       // 추후 Protect Route 기능 추가 예정
