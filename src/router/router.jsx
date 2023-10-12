@@ -5,6 +5,7 @@ import Home from "../page/home/Home";
 import Login from "../page/login/Login";
 import Register from "../page/register/Register";
 import User from "../page/userPage/User";
+import UserEdit from "../page/userPage/UserEdit";
 import BestItem from "../page/BestItem";
 import IllustratorItem from "../page/IllustratorItem";
 import AllItem from "../page/AllItem";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />,
+      },
+      {
+        path: "/user/edit",
+        element: <UserEdit />,
       },
       {
         path: "/cart",
