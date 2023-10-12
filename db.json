@@ -99,6 +99,21 @@
       "saleStatus": "",
       "content": "",
       "id": 6
+    },
+    {
+      "category": "명화",
+      "productName": "",
+      "productSize": "",
+      "productPrice": "",
+      "imgFile1": null,
+      "imgFile2": null,
+      "imgFile3": null,
+      "imgFile4": null,
+      "imgFile5": null,
+      "stockAmount": "",
+      "saleStatus": "",
+      "content": "",
+      "id": 7
     }
   ],
   "orders": [
