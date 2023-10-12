@@ -18,7 +18,7 @@ const ListPageItem = () => {
   useEffect(() => {
     // Axios를 사용하여 데이터를 가져옵니다.
     axios
-      .get("https://shoppingmall-9c992-default-rtdb.firebaseio.com/items.json")
+      .get("http://localhost:3001/content")
       .then((response) => {
         // API에서 받아온 데이터를 객체에서 배열로 변환
         const data = response.data;

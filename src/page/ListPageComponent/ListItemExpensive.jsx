@@ -15,10 +15,10 @@ const ListItemExpensive = ({ item, id }) => {
       <ListItemBox>
         <Link to={`/product/${id}`} className="Link">
           <ImagesWrap>
-            <Images imgSrc={item.imgSrc} />
+            <Images imgSrc={item.imageUrl} />
           </ImagesWrap>
-          <Title>{item.title}</Title>
-          <Amount>{item.amount}원</Amount>
+          <Title>{item.productName}</Title>
+          <Amount>{item.productPrice}원</Amount>
         </Link>
       </ListItemBox>
     </ListItem>

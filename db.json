@@ -259,6 +259,12 @@
       "productName": "(souffle) Monday",
       "productPrice": "42,000",
       "imageUrl": "/src/images/listcataegoryImg03.jpg"
+    },
+    {
+      "productId": "24",
+      "productName": "(souffle) Monday",
+      "productPrice": "52,000",
+      "imageUrl": "/src/images/listcataegoryImg01.jpg"
     }
   ]
 }
