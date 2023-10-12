@@ -1,6 +1,7 @@
 import React from "react";
 import OrderHistoryList from "./OrderHistoryList";
 import styled from "styled-components";
+import UserSidebar from "../userPage/UserSidebar";
 
 const OrderHistory = () => {
   return (
@@ -8,6 +9,7 @@ const OrderHistory = () => {
       <ListWrap>
         <div className="wrapper">
           <H3Title>주문내역</H3Title>
+          <UserSidebar />
         </div>
       </ListWrap>
       <OrderHistoryList />
