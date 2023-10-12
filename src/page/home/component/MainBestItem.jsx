@@ -4,14 +4,13 @@ import Images from "../../../component/Images";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import ItemContent from "./mainStyledComponent/ItemContent";
 import ContnetLine from "./mainStyledComponent/ContnetLine";
 import H2Title from "./mainStyledComponent/H2Title";
 import H2SubText from "./mainStyledComponent/H2SubText";
 import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
-
+import { useNavigate, Link } from "react-router-dom";
 const MainBestItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
@@ -74,7 +73,8 @@ const MainBestItem = (props) => {
   //       console.error("데이터를 가져오는데 실패했습니다.", error);
   //     });
   // }, []);
-
+  const navigate = useNavigate();
+  console.log(1);
   return (
     <ItemContent>
       <ContnetLine></ContnetLine>
@@ -88,7 +88,9 @@ const MainBestItem = (props) => {
         {props.Bestitems &&
           props.Bestitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imageUrl} />
+              <Link to={`product/${item.productId}`}>
+                <Images imgSrc={item.imageUrl} />
+              </Link>
             </BnList>
           ))}
       </BestItemSlider>
