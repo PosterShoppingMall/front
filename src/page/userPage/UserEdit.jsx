@@ -1,24 +1,65 @@
 import { useState } from "react";
+import { useEffect } from "react";
+
 import useAxios from "./useAxios";
+
 import styled from "styled-components";
 import H3Title from "../listStyledComponent/H3Title";
 
+import UserEditBtn from "./UserEditBtn";
+let isInitial = true;
 const UserEdit = () => {
-  const url = "http://localhost:3001/user/3";
+  // const [userObjectState, setUserObjectState] = useState({
+  //   name: data?.name || "",
+  //   password: data?.password || "",
+  //   phoneNumber: data?.phoneNumber || "",
+  //   postcode: data?.postcode || "",
+  //   roadAddress: data?.roadAddress || "",
+  //   detailAddress: data?.detailAddress || "",
+  //   userimg: data?.userimg || "",
+  // });
+
+  const [userObjectState, setUserObjectState] = useState({
+    name: "",
+    password: "",
+    phoneNumber: "",
+    postCode: "",
+    roadAddress: "",
+    detailAddress: "",
+    userImg: "",
+  });
+  const user = { id: 29 };
+  const url = `http://localhost:3001/user/${user.id}`;
   const method = "GET";
   const payload = null;
   const { data, error, loaded } = useAxios(url, method, payload);
-  console.log(data);
 
-  const [userObjectState, setUserObjectState] = useState({
-    name: data?.name || "",
-    password: data?.password || "",
-    phoneNumber: data?.phoneNumber || "",
-    postcode: data?.postcode || "",
-    roadAddress: data?.roadAddress || "",
-    detailAddress: data?.detailAddress || "",
-    userimg: data?.userimg || "",
-  });
+  console.log("data:", data);
+
+  useEffect(() => {
+    setUserObjectState({
+      name: data?.name || "",
+      password: data?.password || "",
+      phoneNumber: data?.phoneNumber || "",
+      postCode: data?.postCode || "",
+      roadAddress: data?.roadAddress || "",
+      detailAddress: data?.detailAddress || "",
+      userImg: data?.userImg || "",
+    });
+  }, [data]);
+  // if (loaded && isInitial) {
+  //   console.log(data.name);
+  //   setUserObjectState({
+  //     name: data.name,
+  //     password: data.password,
+  //     phoneNumber: data.phoneNumber,
+  //     postCode: data.postCode,
+  //     roadAddress: data.roadAddress,
+  //     detailAddress: data.detailAddress,
+  //     userImg: data.userImg,
+  //   });
+  //   isInitial = false;
+  // }
 
   // 로딩 상태 확인 후 조건부 렌더링
   if (!loaded) {
@@ -26,82 +67,91 @@ const UserEdit = () => {
   }
 
   const onChangeHandler = (e, property) => {
-    setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
+    const newUserState = {
+      ...userObjectState,
+    };
+    newUserState[property] = e.target.value;
+    setUserObjectState(newUserState);
+    console.log("onChange state:", userObjectState);
   };
   return (
     <UserEditWrap>
       <H3Title>회원정보 수정</H3Title>
       <UserLayout>
-        <form>
-          <InputBox>
-            <label>이름</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "name");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>비밀번호</label>
-            <input
-              type="password"
-              onChange={(event) => {
-                onChangeHandler(event, "password");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>휴대전화</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "phoneNumber");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>우편번호</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "postcode");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>주소</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "roadAddress");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>상세주소</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "detailAddress");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>상세주소</label>
-            <input
-              type="imges"
-              onChange={(event) => {
-                onChangeHandler(event, "userimg");
-              }}
-            />
-          </InputBox>
+        {/* <form> */}
+        <InputBox>
+          <label>이름</label>
+          <input
+            type="text"
+            value={userObjectState.name}
+            onChange={(event) => {
+              onChangeHandler(event, "name");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>비밀번호</label>
+          <input
+            type="password"
+            value={userObjectState.password}
+            onChange={(event) => {
+              onChangeHandler(event, "password");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>휴대전화</label>
+          <input
+            type="text"
+            value={userObjectState.phoneNumber}
+            onChange={(event) => {
+              onChangeHandler(event, "phoneNumber");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>우편번호</label>
+          <input
+            type="text"
+            value={userObjectState.postCode}
+            onChange={(event) => {
+              onChangeHandler(event, "postCode");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>주소</label>
+          <input
+            type="text"
+            value={userObjectState.roadAddress}
+            onChange={(event) => {
+              onChangeHandler(event, "roadAddress");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>상세주소</label>
+          <input
+            type="text"
+            value={userObjectState.detailAddress}
+            onChange={(event) => {
+              onChangeHandler(event, "detailAddress");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>이미지</label>
+          <input
+            type="imges"
+            value={userObjectState.userImg}
+            onChange={(event) => {
+              onChangeHandler(event, "userImg");
+            }}
+          />
+        </InputBox>
 
-          <UserEditBtnWrap>
-            <button>저장</button>
-            <button>취소</button>
-          </UserEditBtnWrap>
-        </form>
+        <UserEditBtn payload={userObjectState} />
+        {/* </form> */}
       </UserLayout>
     </UserEditWrap>
   );
