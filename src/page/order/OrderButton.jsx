@@ -7,7 +7,7 @@ const OrderButton = () => {
     patchEmptyCart();
     console.log("click");
   };
-  return <CommonButton onClick={buttonClickHandler}>결제하기</CommonButton>;
+  return <CommonButton onClick={buttonClickHandler}>주문완료</CommonButton>;
 };
 
 const CommonButton = styled.button`

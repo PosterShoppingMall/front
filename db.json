@@ -7,6 +7,14 @@
       "productPrice": 250000,
       "cartCnt": "8",
       "cartProductAmount": 500000
+    },
+    {
+      "id": 8,
+      "productId": 8,
+      "productName": "Stephanie Blau",
+      "productPrice": 34000,
+      "cartCnt": 1,
+      "cartProductAmount": 34000
     }
   ],
   "user": [
