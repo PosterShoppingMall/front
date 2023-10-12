@@ -5,7 +5,6 @@ import useAxios from "./useAxios";
 
 import axios from "axios";
 import styled from "styled-components";
-import H3Title from "../listStyledComponent/H3Title";
 
 import UserEditBtn from "./UserEditBtn";
 let isInitial = true;
@@ -36,6 +35,21 @@ const UserEdit = () => {
   const { data, error, loaded } = useAxios(url, method, payload);
 
   console.log("data:", data);
+
+  useEffect(
+    setUserObjectState(
+      {
+        name: data?.name,
+        password: data?.password,
+        phoneNumber: data?.phoneNumber,
+        postCode: data?.postCode,
+        roadAddress: data?.roadAddress,
+        detailAddress: data?.detailAddress,
+        userImg: data?.userImg,
+      },
+      [data]
+    )
+  );
 
   // 로딩 상태 확인 후 조건부 렌더링
   if (!loaded) {
