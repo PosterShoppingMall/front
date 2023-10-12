@@ -1,27 +1,52 @@
 import { useState } from "react";
-import useAxios from "./useAxios";
-import axios from "axios";
-import styled from 'styled-components';
+import { useEffect } from "react";
 
+import useAxios from "./useAxios";
+
+import axios from "axios";
+import styled from "styled-components";
+
+import UserEditBtn from "./UserEditBtn";
+let isInitial = true;
 const UserEdit = () => {
-  const url = "http://localhost:3001/user/3";
+  // const [userObjectState, setUserObjectState] = useState({
+  //   name: data?.name || "",
+  //   password: data?.password || "",
+  //   phoneNumber: data?.phoneNumber || "",
+  //   postcode: data?.postcode || "",
+  //   roadAddress: data?.roadAddress || "",
+  //   detailAddress: data?.detailAddress || "",
+  //   userimg: data?.userimg || "",
+  // });
+
+  const [userObjectState, setUserObjectState] = useState({
+    name: "",
+    password: "",
+    phoneNumber: "",
+    postCode: "",
+    roadAddress: "",
+    detailAddress: "",
+    userImg: "",
+  });
+  const user = { id: 29 };
+  const url = `http://localhost:3001/user/${user.id}`;
   const method = "GET";
   const payload = null;
   const { data, error, loaded } = useAxios(url, method, payload);
-  console.log(data);
 
-  const [userObjectState, setUserObjectState] = useState({
-    name: data?.name || "",
-    password: data?.password || "",
-    phoneNumber: data?.phoneNumber || "",
-    postcode: data?.postcode || "",
-    roadAddress: data?.roadAddress || "",
-    detailAddress: data?.detailAddress || "",
-    userimg: data?.userimg || "",
-  });
+  console.log("data:", data);
 
-  //회원탈퇴부분
-  const [deletePassword, setDeletePassword] = useState("");
+  useEffect(() => {
+    setUserObjectState({
+      name: data?.name || "",
+      password: data?.password || "",
+      phoneNumber: data?.phoneNumber || "",
+      postCode: data?.postCode || "",
+      roadAddress: data?.roadAddress || "",
+      detailAddress: data?.detailAddress || "",
+      userImg: data?.userImg || "",
+    });
+  }, [data]);
 
   // 로딩 상태 확인 후 조건부 렌더링
   if (!loaded) {
@@ -29,16 +54,21 @@ const UserEdit = () => {
   }
 
   const onChangeHandler = (e, property) => {
-    setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
+    const newUserState = {
+      ...userObjectState,
+    };
+    newUserState[property] = e.target.value;
+    setUserObjectState(newUserState);
+    console.log("onChange state:", userObjectState);
   };
 
-   const handleDeleteAccount = async () => {
+  const handleDeleteAccount = async () => {
     const isConfirmed = window.confirm("정말 탈퇴하시겠습니까?");
-  
+
     if (!isConfirmed) return;
-  
+
     try {
-      const response = await axios.post("/api/users/delete"); 
+      const response = await axios.post("/api/users/delete");
       if (response.status === 200) {
         alert("계정이 성공적으로 삭제되었습니다.");
       } else {
@@ -53,69 +83,74 @@ const UserEdit = () => {
     <UserEditWrap>
       <H3Title>회원정보 수정</H3Title>
       <UserLayout>
-        <form>
-          <InputBox>
-            <label>이름</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "name");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>비밀번호</label>
-            <input
-              type="password"
-              onChange={(event) => {
-                onChangeHandler(event, "password");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>휴대전화</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "phoneNumber");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>우편번호</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "postcode");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>주소</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "roadAddress");
-              }}
-            />
-          </InputBox>
-          <InputBox>
-            <label>상세주소</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                onChangeHandler(event, "detailAddress");
-              }}
-            />
-          </InputBox>
-          </form>
-         <DeleteAccountWrap>
-         <UserEditBtnWrap>
-          <button onClick={handleDeleteAccount}>회원 탈퇴</button>
-
-        </UserEditBtnWrap>
+        {/* <form> */}
+        <InputBox>
+          <label>이름</label>
+          <input
+            type="text"
+            value={userObjectState.name}
+            onChange={(event) => {
+              onChangeHandler(event, "name");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>비밀번호</label>
+          <input
+            type="password"
+            value={userObjectState.password}
+            onChange={(event) => {
+              onChangeHandler(event, "password");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>휴대전화</label>
+          <input
+            type="text"
+            value={userObjectState.phoneNumber}
+            onChange={(event) => {
+              onChangeHandler(event, "phoneNumber");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>우편번호</label>
+          <input
+            type="text"
+            value={userObjectState.postCode}
+            onChange={(event) => {
+              onChangeHandler(event, "postCode");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>주소</label>
+          <input
+            type="text"
+            value={userObjectState.roadAddress}
+            onChange={(event) => {
+              onChangeHandler(event, "roadAddress");
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <label>상세주소</label>
+          <input
+            type="text"
+            value={userObjectState.detailAddress}
+            onChange={(event) => {
+              onChangeHandler(event, "detailAddress");
+            }}
+          />
+        </InputBox>
+        <UserEditBtn payload={userObjectState} />
+        <DeleteAccountWrap>
+          <UserEditBtnWrap>
+            <button onClick={handleDeleteAccount}>회원 탈퇴</button>
+          </UserEditBtnWrap>
         </DeleteAccountWrap>
-    </UserLayout>
+      </UserLayout>
     </UserEditWrap>
   );
 };
@@ -199,7 +234,7 @@ const UserEditBtnWrap = styled.div`
     background: #333;
     color: #fff;
   }
-  `;
+`;
 
 // {
 //   "name": "김찬미",
