@@ -9,16 +9,16 @@ import ImagesWrap from "../listStyledComponent/ImagesWrap";
 import Title from "../listStyledComponent/Title";
 import Amount from "../listStyledComponent/Amount";
 
-const ListItemExpensive = ({ item, id }) => {
+const ListItemExpensive = ({ item, key }) => {
   return (
     <ListItem data-aos="fade-up">
       <ListItemBox>
-        <Link to={`/product/${id}`} className="Link">
+        <Link key={key} to={`/product/${item.productId}`} className="Link">
           <ImagesWrap>
-            <Images imgSrc={item.imgSrc} />
+            <Images imgSrc={item.imageUrl} />
           </ImagesWrap>
-          <Title>{item.title}</Title>
-          <Amount>{item.amount}원</Amount>
+          <Title>{item.productName}</Title>
+          <Amount>{item.productPrice}원</Amount>
         </Link>
       </ListItemBox>
     </ListItem>

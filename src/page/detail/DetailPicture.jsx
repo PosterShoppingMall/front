@@ -12,23 +12,24 @@ import DetailBn02 from "../../images/DetailBn02.jpg";
 import DetailBn03 from "../../images/DetailBn03.jpg";
 import DetailBn04 from "../../images/DetailBn04.jpg";
 import DetailBn05 from "../../images/DetailBn05.jpg";
+import { useParams } from "react-router-dom";
 
-const dynamicStyles = (items) => {
-  if (items) {
+const dynamicStyles = (itemImageUrl) => {
+  if (itemImageUrl) {
     return css`
       .slick-dots li button:before {
         width: 100px;
         height: 100px;
         background-size: 100px !important;
-        background: url(${DetailBn01});
+        /* background: url(${items.imageUrl}); */
         font-size: 0px;
         opacity: 0.35;
       }
 
-      ${items.map(
+      ${itemImageUrl.map(
         (item, index) => css`
           .slick-dots li:nth-child(${index + 1}) button:before {
-            background: url(${item.imgSrc});
+            background: url(${item.imageUrl});
           }
         `
       )}
@@ -50,33 +51,32 @@ const DetailPicture = () => {
     autoplaySpeed: 3000,
   };
 
-  const [items, setItems] = useState(null);
+  const [itemImageUrl, setItemImageUrl] = useState(null);
+  let { productId } = useParams();
 
   useEffect(() => {
     axios
-      .get(
-        "https://shoppingmall-9c992-default-rtdb.firebaseio.com/detailitem.json"
-      )
+      .get(`http://52.78.184.121:8080/369/product/${productId}`)
       .then((response) => {
         const data = response.data;
-        const testData = Object.values(data);
-        setItems(testData);
+        const imageUrl = data.productImages[0].imagePath;
+        setItemImageUrl(imageUrl);
+        console.log("매핑된 데이터", data);
       })
       .catch((error) => {
         console.error("데이터를 가져오는데 실패했습니다.", error);
       });
-  }, []);
+  }, [productId]);
 
   return (
-    <PictureContents items={items}>
+    <PictureContents imageUrl={itemImageUrl}>
       <div>
         <DetailBanner {...Settings}>
-          {items &&
-            items.map((item, key) => (
-              <div key={key}>
-                <Images imgSrc={item.imgSrc} />
-              </div>
-            ))}
+          {itemImageUrl && (
+            <div>
+              <Images imgSrc={itemImageUrl} />
+            </div>
+          )}
         </DetailBanner>
       </div>
     </PictureContents>
