@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAxios from "./useAxios";
-import styled from "styled-components";
-import H3Title from "../listStyledComponent/H3Title";
+import axios from "axios";
+import styled from 'styled-components';
 
 const UserEdit = () => {
   const url = "http://localhost:3001/user/3";
@@ -20,6 +20,9 @@ const UserEdit = () => {
     userimg: data?.userimg || "",
   });
 
+  //회원탈퇴부분
+  const [deletePassword, setDeletePassword] = useState("");
+
   // 로딩 상태 확인 후 조건부 렌더링
   if (!loaded) {
     return <div>Loading...</div>;
@@ -28,6 +31,24 @@ const UserEdit = () => {
   const onChangeHandler = (e, property) => {
     setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
   };
+
+   const handleDeleteAccount = async () => {
+    const isConfirmed = window.confirm("정말 탈퇴하시겠습니까?");
+  
+    if (!isConfirmed) return;
+  
+    try {
+      const response = await axios.post("/api/users/delete"); 
+      if (response.status === 200) {
+        alert("계정이 성공적으로 삭제되었습니다.");
+      } else {
+        alert("계정 삭제 실패");
+      }
+    } catch (error) {
+      alert("계정 삭제 실패");
+    }
+  };
+
   return (
     <UserEditWrap>
       <H3Title>회원정보 수정</H3Title>
@@ -87,27 +108,38 @@ const UserEdit = () => {
               }}
             />
           </InputBox>
-          <InputBox>
-            <label>상세주소</label>
-            <input
-              type="imges"
-              onChange={(event) => {
-                onChangeHandler(event, "userimg");
-              }}
-            />
-          </InputBox>
+          </form>
+         <DeleteAccountWrap>
+         <UserEditBtnWrap>
+          <button onClick={handleDeleteAccount}>회원 탈퇴</button>
 
-          <UserEditBtnWrap>
-            <button>저장</button>
-            <button>취소</button>
-          </UserEditBtnWrap>
-        </form>
-      </UserLayout>
+        </UserEditBtnWrap>
+        </DeleteAccountWrap>
+    </UserLayout>
     </UserEditWrap>
   );
 };
 
 export default UserEdit;
+
+const H3Title = styled.h3`
+  //추가함
+  font-size: 24px;
+  margin-bottom: 20px;
+`;
+
+const DeleteAccountWrap = styled.div`
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+  display: block;
+  font-family: "NanumSquare";
+  font-weight: 400;
+  font-size: 18px;
+  padding: 5px 20px 0 0;
+  text-align: left;
+`;
+
 const UserEditWrap = styled.div`
   width: 100%;
   padding: 150px 0 0 0;
@@ -120,7 +152,6 @@ const UserLayout = styled.div`
   display: flex;
   justify-content: center;
   flex-flow: wrap;
-
   form {
     width: 100%;
   }
@@ -168,7 +199,7 @@ const UserEditBtnWrap = styled.div`
     background: #333;
     color: #fff;
   }
-`;
+  `;
 
 // {
 //   "name": "김찬미",
