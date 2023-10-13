@@ -99,11 +99,7 @@ const INITIAL_VALUES = {
   productName: "",
   productSize: "",
   productPrice: "",
-  imgFile1: null,
-  imgFile2: null,
-  imgFile3: null,
-  imgFile4: null,
-  imgFile5: null,
+  imgFiles: [null, null, null, null, null],
   stockAmount: "",
   saleStatus: "",
   content: "",
@@ -158,14 +154,20 @@ function ProductForm({
     formData.append("productName", values.productName);
     formData.append("productSize", values.productSize);
     formData.append("productPrice", values.productPrice);
-    formData.append("imgFile1", values.imgFile1);
-    formData.append("imgFile2", values.imgFile2);
-    formData.append("imgFile3", values.imgFile3);
-    formData.append("imgFile4", values.imgFile4);
-    formData.append("imgFile5", values.imgFile5);
     formData.append("stockAmount", values.stockAmount);
     formData.append("saleStatus", values.saleStatus);
     formData.append("content", values.content);
+    values.imgFiles.forEach((file, index) => {
+      if (file) {
+        formData.append(`imgFile${index + 1}`, file);
+      }
+    });
+
+    // formData.append("imgFile1", values.imgFile1);
+    // formData.append("imgFile2", values.imgFile2);
+    // formData.append("imgFile3", values.imgFile3);
+    // formData.append("imgFile4", values.imgFile4);
+    // formData.append("imgFile5", values.imgFile5);
 
     let result;
 
@@ -197,13 +199,34 @@ function ProductForm({
     onSubmitSuccess(item);
   };
 
-  const handleChange = (name, value) => {
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (name, value) => {
+  //   setValues((prevValues) => ({
+  //     ...prevValues,
+  //     [name]: value,
+  //   }));
+  // };
 
+  const handleChange = (name, value) => {
+    if (
+      name === "imgFile1" ||
+      name === "imgFile2" ||
+      name === "imgFile3" ||
+      name === "imgFile4" ||
+      name === "imgFile5"
+    ) {
+      const index = parseInt(name.slice(-1)) - 1;
+      setValues((prevValues) => ({
+        ...prevValues,
+        imgFiles: [
+          ...prevValues.imgFiles.slice(0, index),
+          value,
+          ...prevValues.imgFiles.slice(index + 1),
+        ],
+      }));
+    } else {
+      setValues((prevValues) => ({ ...prevValues, [name]: value }));
+    }
+  };
   // 이벤트 처리하여 상태 업뎃
   const handleInputChange = (e) => {
     //     const { name, value, type } = e.target;
@@ -272,7 +295,7 @@ function ProductForm({
             name="imgFile1"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile1 || []}
+            value={values.imgFiles[0]}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -283,7 +306,7 @@ function ProductForm({
             name="imgFile2"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile2 || []}
+            value={values.imgFiles[1]}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -294,7 +317,7 @@ function ProductForm({
             name="imgFile3"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile3 || []}
+            value={values.imgFiles[2]}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -305,7 +328,7 @@ function ProductForm({
             name="imgFile4"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile4 || []}
+            value={values.imgFiles[3]}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -316,7 +339,7 @@ function ProductForm({
             name="imgFile5"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile5 || []}
+            value={values.imgFiles[4]}
             onChange={handleChange}
           />
         </FormFileListBox>
