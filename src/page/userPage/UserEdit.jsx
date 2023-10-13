@@ -32,6 +32,7 @@ const UserEdit = () => {
     setUserObjectState((prev) => ({ ...prev, property: e.target.value }));
   };
 
+   //회원탈퇴부분
    const handleDeleteAccount = async () => {
     const isConfirmed = window.confirm("정말 탈퇴하시겠습니까?");
   

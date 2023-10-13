@@ -52,25 +52,29 @@ const SignupButton = styled.button`
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    user: "",
+    username: "",
     password: "",
-    confirmPassword: "",
+    passwordConfirm: "",
     email: "",
     name: "",
     phoneNumber: "",
-    address: "",
-    profilePicture: null,
+    postCode: "",
+    roadAddress: "",
+    detailAddress: "",
+    userImg: null,
   });
 
   const [error, setError] = useState({
-    user: false,
-    password: false,
-    confirmPassword: false,
     email: false,
+    password: false,
+    passwordConfirm: false,
+    username: false,
     name: false,
     phoneNumber: false,
-    address: false,
-    profilePicture: false,
+    postCode: false,
+    roadAddress: false,
+    detailAddress: false,
+    userImg: false,
   });
 
   const handleChange = (e) => {
@@ -79,127 +83,136 @@ const RegisterPage = () => {
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, profilePicture: e.target.files[0] });
+    setFormData({ ...formData, userImg: e.target.files[0] });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let newErrorState = {
-      user: formData.user === "",
-      password: formData.password.length < 4,
-      confirmPassword: formData.password !== formData.confirmPassword,
-      email: !formData.email.includes("@"),
-      name: formData.name === "",
-      phoneNumber: formData.phoneNumber === "",
-      address: formData.address === "",
-      profilePicture: !formData.profilePicture
-    };
+    if (formData.password !== formData.passwordConfirm) {
+      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setError((prev) => ({ ...prev, passwordConfirm: true }));
+      return;
+    }
 
-    setError(newErrorState);
-
-    if (Object.values(newErrorState).some((isError) => isError)) return;
-
-    const form = new FormData();
+    const userPayload = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      form.append(key, value);
+      userPayload.append(key, value);
     });
 
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
     axios
-      .post("/api/signup", form)
+      .post("/369/user/signup", userPayload, config)
       .then((response) => {
-        alert("회원가입이 성공적으로 완료되었습니다");
+        if (response.status === 200) {
+          alert("회원가입이 성공적으로 완료되었습니다");
+        }
       })
       .catch((error) => {
-        alert("회원가입 도중 오류가 발생했습니다");
+        if (error.response && error.response.status === 400) {
+          alert("회원가입 도중 오류가 발생했습니다. 입력한 정보를 확인해주세요.");
+        } else {
+          alert("회원가입 도중 오류가 발생했습니다");
+        }
       });
   };
 
- 
   return (
     <SignupContainer>
-      <title>회원가입</title>
-      
       <SignupForm onSubmit={handleSubmit}>
-        <Label htmlFor="user">아이디</Label>
-        <Input 
-          type="text" 
-          id="user" 
-          name="user" 
-          placeholder="아이디를 입력하세요." 
-          error={error.name} 
-          onChange={handleChange} 
+        <Label htmlFor="username">아이디</Label>
+        <Input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="아이디를 입력하세요."
+          error={error.username}
+          onChange={handleChange}
         />
-  
         <Label htmlFor="password">비밀번호</Label>
-        <Input 
-          type="password" 
-          id="password" 
-          name="password" 
-          placeholder="비밀번호 입력해주세요." 
-          error={error.password} 
-          onChange={handleChange} 
+        <Input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="비밀번호 입력해주세요."
+          error={error.password}
+          onChange={handleChange}
         />
-  
-        <Label htmlFor="confirmPassword">비밀번호 확인</Label>
-        <Input 
-          type="password" 
-          id="confirmPassword" 
-          name="confirmPassword" 
-          placeholder="비밀번호 확인을 입력해주세요." 
-          error={error.confirmPassword} 
-          onChange={handleChange} 
+        <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
+        <Input
+          type="password"
+          id="passwordConfirm"
+          name="passwordConfirm"
+          placeholder="비밀번호 확인을 입력해주세요."
+          error={error.passwordConfirm}
+          onChange={handleChange}
         />
-  
         <Label htmlFor="email">이메일</Label>
-        <Input 
-          type="text" 
-          id="email" 
-          name="email" 
-          placeholder="ex) suj2n.k@email.com" 
-          error={error.email} 
-          onChange={handleChange} 
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="이메일을 입력하세요."
+          error={error.email}
+          onChange={handleChange}
         />
-  
         <Label htmlFor="name">이름</Label>
-        <Input 
-          type="text" 
-          id="name" 
-          name="name" 
-          placeholder="이름을 입력해주세요." 
-          error={error.name} 
-          onChange={handleChange} 
+        <Input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="이름을 입력해주세요."
+          error={error.name}
+          onChange={handleChange}
         />
-  
         <Label htmlFor="phoneNumber">전화번호</Label>
-        <Input 
-          type="tel" 
-          id="phoneNumber" 
-          name="phoneNumber" 
-          error={error.phoneNumber} 
-          onChange={handleChange} 
+        <Input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          error={error.phoneNumber}
+          onChange={handleChange}
         />
-  
-        <Label htmlFor="address">주소</Label>
-        <Input 
-          type="text" 
-          id="address" 
-          name="address" 
-          error={error.address} 
-          onChange={handleChange} 
+        <Label htmlFor="postCode">우편번호</Label>
+        <Input
+          type="text"
+          id="postCode"
+          name="postCode"
+          error={error.postCode}
+          onChange={handleChange}
         />
-  
-        <Label htmlFor="profilePicture">프로필 사진</Label>
-        <Input 
-          type="file" 
-          id="profilePicture" 
-          name="profilePicture" 
-          error={error.profilePicture} 
-          onChange={handleFileChange} 
+        <Label htmlFor="roadAddress">도로명 주소</Label>
+        <Input
+          type="text"
+          id="roadAddress"
+          name="roadAddress"
+          error={error.roadAddress}
+          onChange={handleChange}
         />
-        
-        {error.profilePicture && <p style={{ color: "red" }}>프로필 사진을 업로드해주세요.</p>}
-  
+        <Label htmlFor="detailAddress">상세 주소</Label>
+        <Input
+          type="text"
+          id="detailAddress"
+          name="detailAddress"
+          error={error.detailAddress}
+          onChange={handleChange}
+        />
+        <Label htmlFor="userImg">프로필 사진</Label>
+        <Input
+          type="file"
+          id="userImg"
+          name="userImg"
+          error={error.userImg}
+          onChange={handleFileChange}
+        />
+        {error.userImg && (
+          <p style={{ color: "red" }}>프로필 사진을 업로드해주세요.</p>
+        )}
         <SignupButton type="submit">회원가입</SignupButton>
       </SignupForm>
     </SignupContainer>

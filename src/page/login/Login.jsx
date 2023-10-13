@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState , useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,14 +24,14 @@ const Title = styled.h1`
 `;
 
 const InputField = styled.input`
-  width: 350px;
-  height: 35px;
+  width: 350px; 
+  height: 35px; 
   margin-bottom: 20px;
   padding-left: 10px;
-  border: 1px solid transparent;
-  background-color: #f7f7f7;
+  border: 1px solid transparent; 
+  background-color: #f7f7f7; 
   &:focus {
-    border-color: #a5a5a5;
+    border-color: #a5a5a5; 
   }
   &::placeholder {
     color: #a5a5a5;
@@ -50,14 +50,13 @@ const LoginButton = styled.button`
   border: none;
   margin-top: 15px;
   cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto;  
+  margin-right: auto; 
 `;
-
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; 
 `;
 
 const SignupLink = styled.div`
@@ -76,7 +75,7 @@ const SignupLink = styled.div`
 `;
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -104,13 +103,20 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (username.trim() === '' || password.trim() === '') {
-      setErrorMessage('아이디와 비밀번호를 입력해주세요.');
+    
+    if (email.trim() === '' || password.trim() === '') {
+      setErrorMessage('이메일과 비밀번호를 입력해주세요.');
       return;
     }
+  
     try {
-      const response = await axios.post('/api/login', { username, password });
-      if (response.data.success) {
+      const response = await axios.post('369/user/login', { email, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response.status === 200) {
         alert('로그인 성공');
         localStorage.setItem('token', response.data.token);
         dispatch(loginSuccess(response.data.token));
@@ -118,7 +124,11 @@ const Login = () => {
         setErrorMessage(response.data.message || '로그인 실패');
       }
     } catch (error) {
-      setErrorMessage('서버 오류');
+      if (error.response && error.response.status === 401) {
+        setErrorMessage('로그인에 실패했습니다.');
+      } else {
+        setErrorMessage('서버 오류');
+      }
     }
   };
 
@@ -137,12 +147,12 @@ const Login = () => {
         <>
           <LoginForm onSubmit={handleLogin}>
             <InputContainer>
-              <InputField
-                type="text"
-                placeholder="아이디"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+            <InputField
+             type="text"
+             placeholder="이메일"
+             value={email}
+             onChange={(e) => setEmail(e.target.value)}
+                  />
               <InputField
                 type="password"
                 placeholder="비밀번호"
@@ -153,13 +163,13 @@ const Login = () => {
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <LoginButton type="submit">로그인</LoginButton>
             <SignupLink>
-              아직 회원이 아니세요? <Link to='/register'>회원가입</Link>
+            아직 회원이 아니세요? <Link to='/register'>회원가입</Link>
             </SignupLink>
           </LoginForm>
         </>
       )}
     </Container>
-  );
+);
 };
 
 export default Login;
