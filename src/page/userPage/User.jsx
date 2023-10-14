@@ -6,6 +6,7 @@ import styled from "styled-components";
 import H3Title from "../listStyledComponent/H3Title";
 
 import UserEditBtn from "./UserEditBtn";
+import UserSidebar from "./UserSidebar";
 const User = () => {
   // const [userObjectState, setUserObjectState] = useState({
   //   name: data?.name || "",
@@ -33,6 +34,7 @@ const User = () => {
   return (
     <UserEditWrap>
       <H3Title>회원정보</H3Title>
+      <UserSidebar />
       <UserLayout>
         <form>
           <DivBox>

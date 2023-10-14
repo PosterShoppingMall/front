@@ -1,6 +1,6 @@
 export const COLUMNS = [
   {
-    accessor: "id",
+    accessor: "productId",
   },
   {
     Header: "카테고리",
@@ -8,9 +8,9 @@ export const COLUMNS = [
   },
   {
     Header: "이미지",
-    accessor: "imgFile1",
+    accessor: "productImages[0].imagePath",
     Cell: ({ value }) => (
-      <img src={value} alt="preview" width="50" height="50" />
+      <img src={value} alt="preview" width="30" height="30" />
     ),
   },
   {
@@ -27,11 +27,11 @@ export const COLUMNS = [
   },
   {
     Header: "재고량",
-    accessor: "stockAmount",
+    accessor: "stockDTO.stockAmount",
   },
   {
     Header: "판매량",
-    accessor: "sellAmount",
+    accessor: "stockDTO.sellAmount",
   },
   {
     Header: "판매상태",

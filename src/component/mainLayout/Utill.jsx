@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// import { useSelector } from "react-redux";
+
 import styled from "styled-components";
 
 import iconSearch from "../../images/iconSearch.png";
@@ -12,6 +14,9 @@ import { useFetchCartQuery } from "../../store/cartApi";
 
 const Utill = () => {
   const { data, error, isLoading } = useFetchCartQuery();
+
+  // 유저 권한
+  // const user = useSelector((state) => state.auth.user);
 
   let totalQuantity = 0;
   if (error) {
@@ -44,6 +49,7 @@ const Utill = () => {
       </Search>
 
       <Mypage>
+        {/* <NavLink to={user.role === 'admin' ? '/admin' : '/user'}>마이페이지</NavLink> */}
         <NavLink to="/user">마이페이지</NavLink>
       </Mypage>
 

@@ -79,6 +79,7 @@ const DetailTextArea = styled.div`
   textarea {
     width: 80%;
     vertical-align: middle;
+    border: ${({ error }) => (error ? "1px solid red" : "1px solid #ced4da")};
   }
 `;
 
@@ -123,25 +124,35 @@ function ProductForm({
 
   const [values, setValues] = useState(initialValues);
 
+  const [error, setError] = useState({
+    category: false,
+    productName: false,
+    productSize: false,
+    productPrice: false,
+    stockAmount: false,
+    saleStatus: false,
+    content: false,
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // // 유효성 검사
-    // const requiredFields = [
-    //   "category",
-    //   "productName",
-    //   "productSize",
-    //   "productPrice",
-    //   "stockAmount",
-    //   "saleStatus",
-    // ];
-    // for (const field of requiredFields) {
-    //   if (!values[field]) {
-    //     alert(`${field} 값을 채워주세요.`);
-    //     return;
-    //   }
-    // }
-    // 폼 데이터 객체 생성, append(필드이름, 필드값)
+    // 유효성 검사
+    let newErrorState = {
+      category: values.category === "",
+      productName: values.productName === "",
+      productSize: values.productSize === "",
+      productPrice: values.productPrice === "",
+      stockAmount: values.stockAmount === "",
+      saleStatus: values.saleStatus === "",
+      content: values.content === "",
+    };
+
+    setError(newErrorState);
+
+    // 에러 발생 시 폼 제출을 막음
+    if (Object.values(newErrorState).some((isError) => isError)) return;
+
     const formData = new FormData();
     formData.append("category", values.category);
     formData.append("productName", values.productName);
@@ -160,10 +171,9 @@ function ProductForm({
 
     try {
       // 엑시오스
-      const jsonData = JSON.stringify(values);
 
-      await axios.post("http://localhost:3001/product", jsonData, {
-        headers: { "Content-Type": "application/json" },
+      await axios.post("http://52.78.184.121:8080/369/admin/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       alert("Data submitted successfully");
@@ -212,6 +222,7 @@ function ProductForm({
             value={values.category}
             multiple="multiple"
             onChange={handleInputChange}
+            error={error.category}
           >
             <option value="">선택</option>
             <option value="일러스트">일러스트</option>
@@ -228,6 +239,7 @@ function ProductForm({
             multiple="multiple"
             value={values.productName}
             onChange={handleInputChange}
+            error={error.productName}
           />
         </FormListBox>
 
@@ -238,6 +250,7 @@ function ProductForm({
             multiple="multiple"
             value={values.productSize}
             onChange={handleInputChange}
+            error={error.productSize}
           />
         </FormListBox>
 
@@ -249,6 +262,7 @@ function ProductForm({
             multiple="multiple"
             value={values.productPrice}
             onChange={handleInputChange}
+            error={error.productPrice}
           />
         </FormListBox>
 
@@ -314,6 +328,7 @@ function ProductForm({
             name="stockAmount"
             value={values.stockAmount}
             onChange={handleInputChange}
+            error={error.stockAmount}
           />
         </FormListBox>
 
@@ -324,6 +339,7 @@ function ProductForm({
             multiple="multiple"
             value={values.saleStatus}
             onChange={handleInputChange}
+            error={error.saleStatus}
           >
             <option value="">선택</option>
             <option value="판매중">판매중</option>
@@ -332,7 +348,7 @@ function ProductForm({
         </FormListBox>
 
         <FormListBox>
-          <DetailTextArea>
+          <DetailTextArea error={error.content}>
             <label>상세설명</label>
             <textarea
               name="content"
@@ -341,6 +357,7 @@ function ProductForm({
               multiple="multiple"
               value={values.content}
               onChange={handleInputChange}
+              error={error.content}
             />
           </DetailTextArea>
         </FormListBox>

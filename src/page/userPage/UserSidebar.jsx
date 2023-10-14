@@ -1,6 +1,7 @@
+import React from "react";
 import { useMatch, Link } from "react-router-dom";
 import styled from "styled-components";
-import AdminSidebarItem from "./AdminSidebarItem";
+import UserSidebarItem from "./UserSidebarItem";
 
 const Sidebar = styled.div`
   display: flex;
@@ -9,7 +10,6 @@ const Sidebar = styled.div`
   align-items: flex-end;
   width: 20%;
 `;
-
 const Menu = styled.div`
   margin-top: 30px;
   width: 200px;
@@ -27,10 +27,10 @@ const StyledLink = styled(Link)`
   }
 `;
 
-function AdminSidebar() {
+const UserSidebar = () => {
   const menus = [
-    { name: "상품관리", path: "/admin/product-management" },
-    { name: "상품등록", path: "/admin/product-form" },
+    { name: "회원정보", path: "/user" },
+    { name: "구매목록", path: "/order-history" },
   ];
 
   return (
@@ -44,13 +44,13 @@ function AdminSidebar() {
               className={match ? "active" : ""}
               key={menu.name}
             >
-              <AdminSidebarItem menu={menu} />
+              <UserSidebarItem menu={menu} />
             </StyledLink>
           );
         })}
       </Menu>
     </Sidebar>
   );
-}
+};
 
-export default AdminSidebar;
+export default UserSidebar;

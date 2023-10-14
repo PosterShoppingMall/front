@@ -68,7 +68,9 @@ const AllProductItem = (props) => {
         {props.Allitems &&
           props.Allitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imageUrl} />
+              <Link to={`product/${item.productId}`}>
+                <Images imgSrc={item.imageUrl} />
+              </Link>
             </BnList>
           ))}
       </AllProductSlider>
