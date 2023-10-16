@@ -99,14 +99,14 @@ const INITIAL_VALUES = {
   productName: "",
   productSize: "",
   productPrice: "",
-  imgFile1: null,
-  imgFile2: null,
-  imgFile3: null,
-  imgFile4: null,
-  imgFile5: null,
+  file: null,
+  // imgFile2: null,
+  // imgFile3: null,
+  // imgFile4: null,
+  // imgFile5: null,
   stockAmount: "",
   saleStatus: "",
-  content: "",
+  productContents: "",
 };
 
 function ProductForm({
@@ -131,7 +131,7 @@ function ProductForm({
     productPrice: false,
     stockAmount: false,
     saleStatus: false,
-    content: false,
+    productContents: false,
   });
 
   const handleSubmit = async (e) => {
@@ -145,7 +145,7 @@ function ProductForm({
       productPrice: values.productPrice === "",
       stockAmount: values.stockAmount === "",
       saleStatus: values.saleStatus === "",
-      content: values.content === "",
+      productContents: values.productContents === "",
     };
 
     setError(newErrorState);
@@ -153,49 +153,72 @@ function ProductForm({
     // 에러 발생 시 폼 제출을 막음
     if (Object.values(newErrorState).some((isError) => isError)) return;
 
-    const formData = new FormData();
-    formData.append("category", values.category);
-    formData.append("productName", values.productName);
-    formData.append("productSize", values.productSize);
-    formData.append("productPrice", values.productPrice);
-    formData.append("imgFile1", values.imgFile1);
-    formData.append("imgFile2", values.imgFile2);
-    formData.append("imgFile3", values.imgFile3);
-    formData.append("imgFile4", values.imgFile4);
-    formData.append("imgFile5", values.imgFile5);
-    formData.append("stockAmount", values.stockAmount);
-    formData.append("saleStatus", values.saleStatus);
-    formData.append("content", values.content);
-
-    let result;
-
     try {
-      // 엑시오스
+      const formData = new FormData();
 
-      await axios.post("http://52.78.184.121:8080/369/admin/", formData, {
+      if (values.file) {
+        for (let i = 0; i < values.file.length; i++) {
+          formData.append(`file`, values.file[i]);
+        }
+      }
+
+      const productData = {
+        productName: values.productName,
+        productSize: values.productSize,
+        productContents: values.productContents,
+        productPrice: parseInt(values.productPrice),
+        category: values.category,
+        saleStatus: values.saleStatus,
+        stockDTO: {
+          stockAmount: parseInt(values.stockAmount),
+          sellAmount: 0, // 판매 수량 정보가 없으므로 초기값으로 설정합니다.
+        },
+      };
+
+      // formData.append("data", JSON.stringify(productData));
+
+      const json = JSON.stringify(productData);
+      const blob = new Blob([json], { type: "application/json" });
+      formData.append("data", blob);
+
+      await axios.post("http://52.78.184.121:8080/369/admin", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       alert("Data submitted successfully");
       setValues(INITIAL_VALUES);
-      // 에러 처리
-      setSubmittingError(null);
-      setIsSubmitting(true);
-      // result = await onSubmit(formData);
     } catch (error) {
-      setSubmittingError(error);
-      return;
-    } finally {
-      setIsSubmitting(false);
+      console.error(error); // 에러 출력
+      alert("An error occurred while submitting the form."); // 사용자에게 알림 전달
     }
-
-    const { item } = result;
-
-    // 폼 값을 초기값으로 설정
-    setValues(initialValues);
-
-    onSubmitSuccess(item);
   };
+
+  // try {
+  //   // 엑시오스
+  //   await axios.post("http://52.78.184.121:8080/369/admin", formData, {
+  //     headers: { "Content-Type": "multipart/form-data" },
+  //   });
+
+  //   alert("Data submitted successfully");
+  //   setValues(INITIAL_VALUES);
+  //   // 에러 처리
+  //   setSubmittingError(null);
+  //   setIsSubmitting(true);
+  //   // result = await onSubmit(formData);
+  // } catch (error) {
+  //   setSubmittingError(error);
+  //   return;
+  // } finally {
+  //   setIsSubmitting(false);
+  // }
+
+  //   const { item } = result;
+
+  //   // 폼 값을 초기값으로 설정
+  //   setValues(initialValues);
+
+  //   onSubmitSuccess(item);
+  // };
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({
@@ -225,10 +248,10 @@ function ProductForm({
             error={error.category}
           >
             <option value="">선택</option>
-            <option value="일러스트">일러스트</option>
-            <option value="명화">명화</option>
-            <option value="포토그래피">포토그래피</option>
-            <option value="타이포그래피">타이포그래피</option>
+            <option value="illustration">일러스트</option>
+            <option value="painting">명화</option>
+            <option value="photography">포토그래피</option>
+            <option value="typography">타이포그래피</option>
           </Select>
         </FormListBox>
 
@@ -269,10 +292,10 @@ function ProductForm({
         <FormFileListBox>
           <div className="title">이미지1</div>
           <FileInput
-            name="imgFile1"
+            name="file"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile1 || []}
+            value={values.file || []}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -342,8 +365,8 @@ function ProductForm({
             error={error.saleStatus}
           >
             <option value="">선택</option>
-            <option value="판매중">판매중</option>
-            <option value="판매완료">판매완료</option>
+            <option value="SELL">판매중</option>
+            <option value="END">판매완료</option>
           </Select>
         </FormListBox>
 
@@ -351,11 +374,11 @@ function ProductForm({
           <DetailTextArea error={error.content}>
             <label>상세설명</label>
             <textarea
-              name="content"
+              name="productContents"
               rows={4}
               cols={40}
               multiple="multiple"
-              value={values.content}
+              value={values.productContents}
               onChange={handleInputChange}
               error={error.content}
             />
