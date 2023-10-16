@@ -6,13 +6,14 @@ export const COLUMNS = [
     Header: "카테고리",
     accessor: "category",
   },
-  {
-    Header: "이미지",
-    accessor: "productImages[0].imagePath",
-    Cell: ({ value }) => (
-      <img src={value} alt="preview" width="30" height="30" />
-    ),
-  },
+  // {
+  //   Header: "이미지",
+  //   accessor: "productImages",
+  //   Cell: ({ value }) => {
+  //     const imagePath = value && value.length > 0 ? value[0].imagePath : null;
+  //     return <img src={imagePath} alt="preview" />;
+  //   },
+  // },
   {
     Header: "상품명",
     accessor: "productName",

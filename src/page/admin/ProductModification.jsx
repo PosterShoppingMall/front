@@ -20,7 +20,7 @@ function ProductModification({ history }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://52.78.184.121:8080/369/product/" + id
+        "http://52.78.184.121:8080/369/admin/" + id
       );
       setProduct(response.data);
     } catch (error) {
@@ -34,7 +34,7 @@ function ProductModification({ history }) {
   const handleSubmit = async (formData) => {
     try {
       setLoading(true);
-      await axios.put("http://52.78.184.121:8080/369/product/" + id, formData, {
+      await axios.put(`http://52.78.184.121:8080/369/admin/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       return <Navigate to="/ProductManagement" replace />;
