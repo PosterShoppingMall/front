@@ -1,8 +1,12 @@
 import { useState } from "react";
+
 import styled from "styled-components";
+
 import iconSearch from "../../images/iconSearch.png";
 import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
+
+import { NavLink } from "react-router-dom";
 
 const Utill = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,9 +22,8 @@ const Utill = () => {
   return (
     <UtillWrap>
       <Search>
-        <a href="#n" onClick={showModal}>
-          검색
-        </a>
+        {/* Link 꼭 걸어야하는지? */}
+        <a onClick={showModal}>검색</a>
         {modalOpen && (
           <Modal setModalOpen={setModalOpen}>
             <form>
@@ -32,11 +35,11 @@ const Utill = () => {
       </Search>
 
       <Mypage>
-        <a href="#n">마이페이지</a>
+        <NavLink to="/user">마이페이지</NavLink>
       </Mypage>
 
       <Cart>
-        <a href="#n">장바구니</a>
+        <NavLink to="/cart">장바구니</NavLink>
         <Amount>0</Amount>
       </Cart>
     </UtillWrap>
@@ -62,6 +65,7 @@ const Search = styled.div`
     color: #333;
     text-indent: -9999px;
     display: block;
+    cursor: pointer;
   }
 `;
 
@@ -69,18 +73,21 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   background: rgb(2, 0, 36, 0.8);
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
+  z-index: 100;
 
   input[type="search"] {
-    width: 100%;
+    width: 95%;
     border-top: none;
     border-left: none;
     border-right: none;
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: none;
     border-bottom: solid 1px #fff;
     text-align: center;
@@ -90,6 +97,7 @@ const Modal = styled.div`
     font-size: 20px;
     color: #fff;
   }
+
   input[type="search"]::placeholder {
     font-family: "NanumSquare";
     font-weight: 700;

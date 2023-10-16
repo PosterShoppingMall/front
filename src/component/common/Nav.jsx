@@ -1,32 +1,32 @@
-import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
   return (
     <NavWrap>
       <ul>
         <li>
-          <a href="#n">베스트</a>
+          <NavLink to="/best">베스트</NavLink>
         </li>
 
         <li>
-          <a href="#n">전체상품</a>
+          <NavLink to="/all">전체상품</NavLink>
         </li>
 
         <li>
-          <a href="#n">일러스트</a>
+          <NavLink to="/illustrator">일러스트</NavLink>
         </li>
 
         <li>
-          <a href="#n">명화</a>
+          <NavLink to="/famous-painting">명화</NavLink>
         </li>
 
         <li>
-          <a href="#n">포토그래피</a>
+          <NavLink to="/photography">포토그래피</NavLink>
         </li>
 
         <li>
-          <a href="#n">타이포그래피</a>
+          <NavLink to="/typography">타이포그래피</NavLink>
         </li>
       </ul>
     </NavWrap>
