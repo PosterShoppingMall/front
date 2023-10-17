@@ -171,7 +171,7 @@ function ProductForm({
         saleStatus: values.saleStatus,
         stockDTO: {
           stockAmount: parseInt(values.stockAmount),
-          sellAmount: 0, // 판매 수량 정보가 없으므로 초기값으로 설정합니다.
+          sellAmount: 0,
         },
       };
 
@@ -185,11 +185,11 @@ function ProductForm({
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert("Data submitted successfully");
+      alert("완료되었습니다.");
       setValues(INITIAL_VALUES);
     } catch (error) {
       console.error(error); // 에러 출력
-      alert("An error occurred while submitting the form."); // 사용자에게 알림 전달
+      alert("폼 제출 중에 에러가 발생했습니다."); // 사용자에게 알림 전달
     }
   };
 
