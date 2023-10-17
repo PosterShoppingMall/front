@@ -13,7 +13,7 @@ import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
 import { Link } from "react-router-dom";
 
-const AllProductItem = () => {
+const AllProductItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
       Next
@@ -65,29 +65,14 @@ const AllProductItem = () => {
       </H2Title>
 
       <AllProductSlider {...settings}>
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn01} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn02} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn03} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn01} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn02} />
-        </BnList>
-
-        <BnList data-aos="fade-up">
-          <Images imgSrc={listbn03} />
-        </BnList>
+        {props.Allitems &&
+          props.Allitems.map((item, key) => (
+            <BnList data-aos="fade-up" key={key}>
+              <Link to={`product/${item.productId}`}>
+                <Images imgSrc={item.imageUrl} />
+              </Link>
+            </BnList>
+          ))}
       </AllProductSlider>
 
       <MoreBtn data-aos="fade-up">

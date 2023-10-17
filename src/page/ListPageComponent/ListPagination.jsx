@@ -1,118 +1,82 @@
 import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 import bnArrow from "../../images/bnArrow.png";
+import styled from "styled-components";
 import "aos/dist/aos.css";
 
-const ListPagination = () => {
+const ListPagination = (props) => {
   return (
     <PagenationWrap data-aos="fade-up">
-      <Link to="/" className="PrevBtn"></Link>
-      <Number>
-        <Link to="/" className="NumberLink active">
-          1
-        </Link>
-      </Number>
+      <button className="PrevBtn btn" onClick={props.goToPrevPage}></button>
 
-      <Number>
-        <Link to="/" className="NumberLink">
-          2
-        </Link>
-      </Number>
+      {pageNumbers.map((pageNumber) => (
+        <Number key={props.pageNumber}>
+          <button
+            className={`NumberLink ${
+              props.currentPage === pageNumber ? "active" : ""
+            }`}
+            onClick={() => handlePageChange(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        </Number>
+      ))}
 
-      <Number>
-        <Link to="/" className="NumberLink">
-          3
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          4
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          5
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          6
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          7
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          8
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          9
-        </Link>
-      </Number>
-
-      <Number>
-        <Link to="/" className="NumberLink">
-          10
-        </Link>
-      </Number>
-
-      <Link to="/" className="NextBtn"></Link>
+      <button className="NextBtn btn" onClick={props.goToNextPage}></button>
     </PagenationWrap>
   );
 };
 
 export default ListPagination;
+
 const PagenationWrap = styled.div`
   padding: 0px 0 100px 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
 
-  .PrevBtn {
-    width: 30px;
+  button.btn {
+    border: none;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+
+  button.PrevBtn {
+    width: 50px;
     height: 16px;
-    background: url(${bnArrow}) no-repeat 10px 0px;
+    background: url(${bnArrow}) no-repeat 22px 0px;
     background-size: 16px;
     transform: rotate(180deg);
   }
 
-  .NextBtn {
+  button.NextBtn {
     width: 50px;
     height: 16px;
-    background: url(${bnArrow}) no-repeat 25px 0px;
+    background: url(${bnArrow}) no-repeat 22px 0px;
     background-size: 16px;
     transform: rotate(360deg);
   }
 `;
-const Number = styled.div`
-  padding: 1px 0 0 20px;
-  box-sizing: border-box;
 
-  .NumberLink {
+const Number = styled.div`
+  button.NumberLink {
     font-family: "NanumSquare";
     font-size: 16px;
     font-weight: 400;
     color: #333;
     text-decoration: none;
+    padding: 5px 10px 0 10px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    cursor: pointer;
   }
 
-  .NumberLink.active {
+  button.NumberLink.active {
     background: #333;
     border-radius: 100%;
     color: #fff;
     padding: 5px 9px;
+    box-sizing: border-box;
     vertical-align: middle;
   }
 `;

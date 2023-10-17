@@ -2,18 +2,16 @@ import React from "react";
 import BestItemSlider from "react-slick";
 import Images from "../../../component/Images";
 import "aos/dist/aos.css";
-import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import ItemContent from "./mainStyledComponent/ItemContent";
 import ContnetLine from "./mainStyledComponent/ContnetLine";
 import H2Title from "./mainStyledComponent/H2Title";
 import H2SubText from "./mainStyledComponent/H2SubText";
 import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
-
-const MainBestItem = () => {
+import { useNavigate, Link } from "react-router-dom";
+const MainBestItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
       Next
@@ -55,29 +53,28 @@ const MainBestItem = () => {
     ],
   };
 
-  const [items, setItems] = useState(null);
+  // const [items, setItems] = useState(null);
 
-  useEffect(() => {
-    // Axios를 사용하여 데이터를 가져옵니다.
-    axios
-      .get(
-        "https://shoppingmall-9c992-default-rtdb.firebaseio.com/mainitem.json"
-      )
-      .then((response) => {
-        // API에서 받아온 데이터를 객체에서 배열로 변환
-        const data = response.data;
+  // useEffect(() => {
+  //   // Axios를 사용하여 데이터를 가져옵니다.
+  //   axios
+  //     .get("http://52.78.184.121:8080/369/")
+  //     .then((response) => {
+  //       // API에서 받아온 데이터를 객체에서 배열로 변환
+  //       const data = response.data;
 
-        const testData = Object.values(data);
+  //       const testData = data.best;
 
-        // 변환한 데이터를 상태(state)에 저장
-        setItems(testData);
-        console.log("매핑된 데이터", testData);
-      })
-      .catch((error) => {
-        console.error("데이터를 가져오는데 실패했습니다.", error);
-      });
-  }, []);
-
+  //       // 변환한 데이터를 상태(state)에 저장
+  //       setItems(testData);
+  //       console.log("매핑된 데이터", testData);
+  //     })
+  //     .catch((error) => {
+  //       console.error("데이터를 가져오는데 실패했습니다.", error);
+  //     });
+  // }, []);
+  const navigate = useNavigate();
+  console.log(1);
   return (
     <ItemContent>
       <ContnetLine></ContnetLine>
@@ -88,10 +85,12 @@ const MainBestItem = () => {
       </H2Title>
 
       <BestItemSlider {...settings}>
-        {items &&
-          items.map((item, key) => (
+        {props.Bestitems &&
+          props.Bestitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imgSrc} />
+              <Link to={`product/${item.productId}`}>
+                <Images imgSrc={item.imageUrl} />
+              </Link>
             </BnList>
           ))}
       </BestItemSlider>

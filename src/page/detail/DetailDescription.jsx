@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const DetailDescription = () => {
+  const [productTitle, setProductTitle] = useState(null);
+  const [productSize, setProductSize] = useState(null);
+  const [productContent, setproductContent] = useState(null);
+
+  let { productId } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://52.78.184.121:8080/369/product/${productId}`)
+      .then((response) => {
+        const data = response.data;
+        const title = data.productName;
+        setProductTitle(title);
+
+        const size = data.productSize;
+        setProductSize(size);
+
+        const content = data.productContents;
+        setproductContent(content);
+
+        console.log("매핑된 데이터", data);
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오는데 실패했습니다.", error);
+      });
+  }, [productId]);
+
   return (
     <DescriptionWrap>
-      <DescriptionText>
-        도톰한 재질의 프리미얼 독일산 수입지에 인쇄된 포스터는 포스터만의 선명한
-        <br />
-        색감과 생동감을 선사합니다.
-      </DescriptionText>
+      {productContent && <DescriptionText>{productContent}</DescriptionText>}
 
       <InforText>
-        <List>Title: Monday</List>
-        <List>Size: A1(59.4 x 84.1cm), A2(42 x 59.4cm)</List>
+        {productTitle && <List>Title:{productTitle}</List>}
+        {productSize && <List>Size:{productSize}</List>}
         <List>Print: Giclee Print</List>
         <List>Paper: German Premium Matte Paper 240g</List>
       </InforText>

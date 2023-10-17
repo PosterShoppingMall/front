@@ -14,7 +14,7 @@ import H2SubText from "./mainStyledComponent/H2SubText";
 import BnList from "./mainStyledComponent/BnList";
 import MoreBtn from "./mainStyledComponent/MoreBtn";
 
-const PhotoGraphyItem = () => {
+const PhotoGraphyItem = (props) => {
   const NextArrow = (props) => (
     <div className="custom-next-arrow" onClick={props.onClick}>
       Next
@@ -89,10 +89,12 @@ const PhotoGraphyItem = () => {
       </H2Title>
 
       <PhotoGraphySlider {...settings}>
-        {items &&
-          items.map((item, key) => (
+        {props.PhotoGraphyitems &&
+          props.PhotoGraphyitems.map((item, key) => (
             <BnList data-aos="fade-up" key={key}>
-              <Images imgSrc={item.imgSrc} />
+              <Link to={`product/${item.productId}`}>
+                <Images imgSrc={item.imageUrl} />
+              </Link>
             </BnList>
           ))}
       </PhotoGraphySlider>
