@@ -306,7 +306,7 @@ function ProductForm({
             name="imgFile2"
             multiple="multiple"
             initialPreview={initialPreview}
-            value={values.imgFile2 || []}
+            value={values.file || []}
             onChange={handleChange}
           />
         </FormFileListBox>
