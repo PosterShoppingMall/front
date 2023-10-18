@@ -83,27 +83,12 @@ const DetailTextArea = styled.div`
   }
 `;
 
-// 입력 필드의 값에 따라 값을 변환해줌
-// function sanitize(type, value) {
-//   switch (type) {
-//     case "number":
-//       return Number(value) || 0; // 문자열을 숫자로 변환하거나, 변환이 실패하면 0을 반환
-
-//     default:
-//       return value; // 그 외 타입은 원래 값을 그대로 반환
-//   }
-// }
-
 const INITIAL_VALUES = {
   category: "",
   productName: "",
   productSize: "",
   productPrice: "",
   file: null,
-  // imgFile2: null,
-  // imgFile3: null,
-  // imgFile4: null,
-  // imgFile5: null,
   stockAmount: "",
   saleStatus: "",
   productContents: "",
@@ -158,7 +143,7 @@ function ProductForm({
 
       if (values.file) {
         for (let i = 0; i < values.file.length; i++) {
-          formData.append(`file`, values.file[i]);
+          formData.append("file", values.file[i]);
         }
       }
 
@@ -174,8 +159,6 @@ function ProductForm({
           sellAmount: 0,
         },
       };
-
-      // formData.append("data", JSON.stringify(productData));
 
       const json = JSON.stringify(productData);
       const blob = new Blob([json], { type: "application/json" });
@@ -193,33 +176,6 @@ function ProductForm({
     }
   };
 
-  // try {
-  //   // 엑시오스
-  //   await axios.post("http://52.78.184.121:8080/369/admin", formData, {
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //   });
-
-  //   alert("Data submitted successfully");
-  //   setValues(INITIAL_VALUES);
-  //   // 에러 처리
-  //   setSubmittingError(null);
-  //   setIsSubmitting(true);
-  //   // result = await onSubmit(formData);
-  // } catch (error) {
-  //   setSubmittingError(error);
-  //   return;
-  // } finally {
-  //   setIsSubmitting(false);
-  // }
-
-  //   const { item } = result;
-
-  //   // 폼 값을 초기값으로 설정
-  //   setValues(initialValues);
-
-  //   onSubmitSuccess(item);
-  // };
-
   const handleChange = (name, value) => {
     setValues((prevValues) => ({
       ...prevValues,
@@ -229,8 +185,6 @@ function ProductForm({
 
   // 이벤트 처리하여 상태 업뎃
   const handleInputChange = (e) => {
-    //     const { name, value, type } = e.target;
-    //     handleChange(name, sanitize(type, value));
     const { name, value } = e.target;
     handleChange(name, value);
   };
@@ -243,7 +197,6 @@ function ProductForm({
             title="카테고리"
             name="category"
             value={values.category}
-            multiple="multiple"
             onChange={handleInputChange}
             error={error.category}
           >
@@ -259,7 +212,6 @@ function ProductForm({
           <Input
             title="상품명"
             name="productName"
-            multiple="multiple"
             value={values.productName}
             onChange={handleInputChange}
             error={error.productName}
@@ -282,7 +234,6 @@ function ProductForm({
             title="가격"
             type="number"
             name="productPrice"
-            multiple="multiple"
             value={values.productPrice}
             onChange={handleInputChange}
             error={error.productPrice}
@@ -290,56 +241,12 @@ function ProductForm({
         </FormListBox>
 
         <FormFileListBox>
-          <div className="title">이미지1</div>
+          <div className="title">이미지</div>
           <FileInput
             name="file"
             multiple="multiple"
             initialPreview={initialPreview}
             value={values.file || []}
-            onChange={handleChange}
-          />
-        </FormFileListBox>
-
-        <FormFileListBox>
-          <div className="title">이미지2</div>
-          <FileInput
-            name="imgFile2"
-            multiple="multiple"
-            initialPreview={initialPreview}
-            value={values.file || []}
-            onChange={handleChange}
-          />
-        </FormFileListBox>
-
-        <FormFileListBox>
-          <div className="title">이미지3</div>
-          <FileInput
-            name="imgFile3"
-            multiple="multiple"
-            initialPreview={initialPreview}
-            value={values.imgFile3 || []}
-            onChange={handleChange}
-          />
-        </FormFileListBox>
-
-        <FormFileListBox>
-          <div className="title">이미지4</div>
-          <FileInput
-            name="imgFile4"
-            multiple="multiple"
-            initialPreview={initialPreview}
-            value={values.imgFile4 || []}
-            onChange={handleChange}
-          />
-        </FormFileListBox>
-
-        <FormFileListBox>
-          <div className="title">이미지5</div>
-          <FileInput
-            name="imgFile5"
-            multiple="multiple"
-            initialPreview={initialPreview}
-            value={values.imgFile5 || []}
             onChange={handleChange}
           />
         </FormFileListBox>
@@ -359,7 +266,6 @@ function ProductForm({
           <Select
             title="판매상태"
             name="saleStatus"
-            multiple="multiple"
             value={values.saleStatus}
             onChange={handleInputChange}
             error={error.saleStatus}
@@ -377,7 +283,6 @@ function ProductForm({
               name="productContents"
               rows={4}
               cols={40}
-              multiple="multiple"
               value={values.productContents}
               onChange={handleInputChange}
               error={error.content}
