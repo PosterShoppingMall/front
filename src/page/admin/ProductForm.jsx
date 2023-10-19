@@ -172,10 +172,10 @@ function ProductForm({
       setValues(INITIAL_VALUES);
     } catch (error) {
       console.error(error); // 에러 출력
-      alert("폼 제출 중에 에러가 발생했습니다."); // 사용자에게 알림 전달
+      alert("폼 제출 중에 에러가 발생했습니다.");
     }
   };
-
+  
   const handleChange = (name, value) => {
     setValues((prevValues) => ({
       ...prevValues,
