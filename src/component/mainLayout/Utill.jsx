@@ -3,14 +3,13 @@ import { useState } from "react";
 // import { useSelector } from "react-redux";
 
 import styled from "styled-components";
-
-import iconSearch from "../../images/iconSearch.png";
 import iconProfile from "../../images/iconProfile.png";
 import iconShoppingCart from "../../images/iconShoppingCart.png";
 
 import { NavLink } from "react-router-dom";
 
 import { useFetchCartQuery } from "../../store/cartApi";
+import Search from "./Search";
 
 const Utill = () => {
   const { data, error, isLoading } = useFetchCartQuery();
@@ -24,29 +23,10 @@ const Utill = () => {
   } else if (!isLoading) {
     totalQuantity = data.length;
   }
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const showModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
   return (
     <UtillWrap>
-      <Search>
-        <a onClick={showModal}>검색</a>
-        {modalOpen && (
-          <Modal setModalOpen={setModalOpen}>
-            <form>
-              <input type="search" placeholder="검색어를 입력해주세요." />
-            </form>
-            <CloseBtn onClick={closeModal}>X</CloseBtn>
-          </Modal>
-        )}
-      </Search>
+      <Search />
 
       <Mypage>
         {/* <NavLink to={user.role === 'admin' ? '/admin' : '/user'}>마이페이지</NavLink> */}
@@ -78,76 +58,6 @@ const UtillWrap = styled.div`
   @media all and (max-width: 680px) {
     right: 205px;
   }
-`;
-
-const Search = styled.div`
-  a {
-    width: 30px;
-    height: 30px;
-    background: url(${iconSearch}) no-repeat;
-    background-size: 30px;
-    text-decoration: none;
-    color: #333;
-    text-indent: -9999px;
-    display: block;
-    cursor: pointer;
-  }
-
-  @media all and (max-width: 1000px) {
-    a {
-      height: 100%;
-      padding: 0 30px;
-      box-sizing: border-box;
-    }
-  }
-`;
-
-const Modal = styled.div`
-  width: 100%;
-  height: 100%;
-  background: rgb(2, 0, 36, 0.8);
-  position: fixed;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  z-index: 100;
-
-  input[type="search"] {
-    width: 95%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: none;
-    border-bottom: solid 1px #fff;
-    text-align: center;
-    padding: 20px 20px;
-    font-family: "NanumSquare";
-    font-weight: 700;
-    font-size: 20px;
-    color: #fff;
-  }
-
-  input[type="search"]::placeholder {
-    font-family: "NanumSquare";
-    font-weight: 700;
-    font-size: 20px;
-    color: #fff;
-  }
-`;
-
-const CloseBtn = styled.div`
-  font-family: "NanumSquare";
-  font-weight: 700;
-  font-size: 50px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #fff;
-  cursor: pointer;
 `;
 
 const Mypage = styled.div`
