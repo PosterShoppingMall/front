@@ -15,7 +15,28 @@ export const ProductTable = () => {
   // columns 배열 중 일부 수정(id값으로 받아오기)
   const columns = useMemo(
     () => [
-      ...COLUMNS,
+      COLUMNS[0], // 첫 번째 열을 가져오고 두 번째 열에 이미지 미리보기를 넣음
+      {
+        Header: "이미지",
+        accessor: "productImages",
+        Cell: ({ value }) => (
+          <div>
+            {value.map((imgStr, index) => {
+              /** match(/imagePath=(.*),/)[1]은 imagePath=와 , 사이에 있는 부분을 추출 */
+              const imagePath = imgStr.match(/imagePath=(.*),/)[1];
+              return (
+                <img
+                  key={index}
+                  src={imagePath}
+                  alt="Product Preview"
+                  style={{ width: "50px", height: "50px" }}
+                />
+              );
+            })}
+          </div>
+        ),
+      },
+      ...COLUMNS.slice(1), // 첫 번째 요소를 제외한 나머지 모든 요소를 새배열로 생성
       {
         id: "edit",
         accessor: "id",
